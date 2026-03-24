@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cuentas>
+  <Cuentas id="188">
+    <Nombre>Soledad</Nombre>
+    <Apellidos>Diez Orejas</Apellidos>
+    <NIFNIE>09632539R</NIFNIE>
+    <CCCErroneo>2158497690215465548</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuentas>
+  <Cuentas id="7">
+    <Nombre>Genaro</Nombre>
+    <Apellidos>Moncada Morala</Apellidos>
+    <NIFNIE>09570285P</NIFNIE>
+    <CCCErroneo>6457894674005151640</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuentas>
+  <Cuentas id="254">
+    <Nombre>Herminia</Nombre>
+    <Apellidos>Almanzar Robles</Apellidos>
+    <NIFNIE>09785530L</NIFNIE>
+    <CCCErroneo>A4587946032003165464</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuentas>
+  <Cuentas id="115">
+    <Nombre>Demetrio</Nombre>
+    <Apellidos>Fernández García</Apellidos>
+    <NIFNIE>09611100K</NIFNIE>
+    <CCCErroneo>E6552211148855332200</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuentas>
+</Cuentas>
