@@ -1,118 +1,130 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyecto_si2;
 
 import java.math.BigInteger;
+import java.util.Locale;
 
-/**
- *
- * @author Sahira
- */
-public class CCCUtils {
+public final class CCCUtils {
 
-    public static boolean isValid(String ccc) throws IllegalArgumentException {
-        if (ccc == null || ccc.length() != 20) {
-            throw new IllegalArgumentException("ccc invalido");
-        } else {
-            for (char letra : ccc.toCharArray()) {
-                if (!Character.isDigit(letra)) {
-                    throw new IllegalArgumentException("ccc invalido");
+    private static final int[] PESOS = {1, 2, 4, 8, 5, 10, 9, 7, 3, 6};
 
-                }
-            }
-        }
-
-        String first = ccc.substring(0, 8);
-        String control = ccc.substring(8, 10);
-        String last = ccc.substring(10, 20);
-
-        return control.equals(calcDigit(first) + calcDigit(last));
+    private CCCUtils() {
     }
 
-    private static String calcDigit(String subSecuence) {
-        String cadena = String.format("%10s", subSecuence).replace(' ', '0');
-
-        int suma
-                = Character.getNumericValue(cadena.charAt(0)) * 1
-                + Character.getNumericValue(cadena.charAt(1)) * 2
-                + Character.getNumericValue(cadena.charAt(2)) * 4
-                + Character.getNumericValue(cadena.charAt(3)) * 8
-                + Character.getNumericValue(cadena.charAt(4)) * 5
-                + Character.getNumericValue(cadena.charAt(5)) * 10
-                + Character.getNumericValue(cadena.charAt(6)) * 9
-                + Character.getNumericValue(cadena.charAt(7)) * 7
-                + Character.getNumericValue(cadena.charAt(8)) * 3
-                + Character.getNumericValue(cadena.charAt(9)) * 6;
-
-        int result = 11 - (suma % 11);
-
-        if (result == 10) {
-            result = 1;
-        } else if (result == 11) {
-            result = 0;
-        }
-
-        return String.valueOf(result);
+    public enum Estado {
+        VALIDO, SUBSANADO, ERRONEO
     }
 
-    public static String fix(String ccc) {
-        if (ccc == null || ccc.length() != 20) {
-            throw new IllegalArgumentException("ccc invalido");
+    public static final class Resultado {
+        private final Estado estado;
+        private final String cccOriginal;
+        private final String cccFinal;
+        private final String iban;
+        private final String tipoError;
+
+        public Resultado(Estado estado, String cccOriginal, String cccFinal, String iban, String tipoError) {
+            this.estado = estado;
+            this.cccOriginal = cccOriginal;
+            this.cccFinal = cccFinal;
+            this.iban = iban;
+            this.tipoError = tipoError;
         }
 
-        String first = ccc.substring(0, 8);
-        String last = ccc.substring(10, 20);
+        public Estado getEstado() {
+            return estado;
+        }
 
-        return first + calcDigit(first) + calcDigit(last) + last;
+        public String getCccOriginal() {
+            return cccOriginal;
+        }
+
+        public String getCccFinal() {
+            return cccFinal;
+        }
+
+        public String getIban() {
+            return iban;
+        }
+
+        public String getTipoError() {
+            return tipoError;
+        }
+
+        public boolean esValidoOSubsanado() {
+            return estado == Estado.VALIDO || estado == Estado.SUBSANADO;
+        }
     }
 
-    public static String calcularIBAN(String ccc, String paisCCC) {
-        if (ccc == null || paisCCC == null) {
-            throw new IllegalArgumentException("CCC o país nulo");
+    public static Resultado validarYCorregir(String rawCcc, String rawPais) {
+        String ccc = normalizarCCC(rawCcc);
+        String pais = normalizarPais(rawPais);
+
+        if (ccc == null || !ccc.matches("\\d{20}") || pais == null || !pais.matches("[A-Z]{2}")) {
+            return new Resultado(Estado.ERRONEO, rawCcc, null, null, "IMPOSIBLE GENERAR IBAN");
         }
 
-        ccc = ccc.trim().replace(" ", "");
-        paisCCC = paisCCC.trim().toUpperCase();
+        String corregido = corregirCCC(ccc);
+        String iban = calcularIBAN(corregido, pais);
 
-        if (ccc.length() != 20) {
-            throw new IllegalArgumentException("El CCC debe tener 20 dígitos");
+        if (ccc.equals(corregido)) {
+            return new Resultado(Estado.VALIDO, ccc, corregido, iban, null);
         }
 
-        if (paisCCC.length() != 2 || !Character.isLetter(paisCCC.charAt(0)) || !Character.isLetter(paisCCC.charAt(1))) {
-            throw new IllegalArgumentException("El país debe tener 2 letras");
-        }
-
-        String reordenado = ccc + paisCCC + "00";
-
-        String numerico = convertirLetrasANumeros(reordenado);
-
-        BigInteger numero = new BigInteger(numerico);
-        int resto = numero.mod(BigInteger.valueOf(97)).intValue();
-        int control = 98 - resto;
-
-        String digitosControl = String.format("%02d", control);
-
-        return paisCCC + digitosControl + ccc;
+        return new Resultado(Estado.SUBSANADO, ccc, corregido, iban, null);
     }
 
-    private static String convertirLetrasANumeros(String texto) {
+    public static String corregirCCC(String ccc) {
+        String entidadOficina = ccc.substring(0, 8);
+        String cuenta = ccc.substring(10, 20);
+        char dc1 = calcularDigitoControl("00" + entidadOficina);
+        char dc2 = calcularDigitoControl(cuenta);
+        return entidadOficina + dc1 + dc2 + cuenta;
+    }
+
+    public static String calcularIBAN(String ccc, String pais) {
+        String paisNumerico = letrasANumeros(pais);
+        String cadena = ccc + paisNumerico + "00";
+        BigInteger numero = new BigInteger(cadena);
+        int control = 98 - numero.mod(BigInteger.valueOf(97)).intValue();
+        return pais + String.format("%02d", control) + ccc;
+    }
+
+    private static char calcularDigitoControl(String diezDigitos) {
+        int suma = 0;
+        for (int i = 0; i < 10; i++) {
+            suma += Character.getNumericValue(diezDigitos.charAt(i)) * PESOS[i];
+        }
+
+        int resultado = 11 - (suma % 11);
+        if (resultado == 11) {
+            resultado = 0;
+        } else if (resultado == 10) {
+            resultado = 1;
+        }
+
+        return (char) ('0' + resultado);
+    }
+
+    private static String letrasANumeros(String text) {
         StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < texto.length(); i++) {
-            char ch = Character.toUpperCase(texto.charAt(i));
-
-            if (Character.isDigit(ch)) {
-                sb.append(ch);
-            } else if (Character.isLetter(ch)) {
-                sb.append((ch - 'A') + 10);
-            } else {
-                throw new IllegalArgumentException("Caracter no válido: " + ch);
-            }
+        for (char c : text.toCharArray()) {
+            sb.append((c - 'A') + 10);
         }
-
         return sb.toString();
     }
 
+    private static String normalizarCCC(String raw) {
+        if (raw == null) {
+            return null;
+        }
+        String value = raw.trim().replaceAll("\\s+", "");
+        return value.isEmpty() ? null : value;
+    }
+
+    private static String normalizarPais(String raw) {
+        if (raw == null) {
+            return null;
+        }
+        String value = raw.trim().toUpperCase(Locale.ROOT);
+        return value.isEmpty() ? null : value;
+    }
 }

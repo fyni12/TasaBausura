@@ -1,312 +1,199 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyecto_si2;
 
-import POJOS.Contribuyente;
-import com.mycompany.proyecto_si2.builder.BuilderInterface;
-import com.mycompany.proyecto_si2.builder.CCCBuilder;
-import com.mycompany.proyecto_si2.builder.Director;
-import com.mycompany.proyecto_si2.builder.NifNieBuilder;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.Normalizer;
-import java.util.*;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+public final class ExcelManager implements AutoCloseable {
 
-import org.jdom2.Document;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
+    private final Workbook workbook;
+    private final Sheet sheet;
+    private final Map<String, Integer> headers;
+    private final DataFormatter formatter = new DataFormatter(Locale.ROOT);
 
-/**
- *
- * @author Sahira
- */
-public class ExcelManager {
-
-    private static ExcelManager instance;
-
-    // Usamos una sola lista para todas las incidencias de NIF (errores, blancos o duplicados)
-    private ArrayList<NifIncidencia> nifIncidencias = new ArrayList<>();
-
-    private ArrayList<CCCIncidencia> badCCC = new ArrayList<>();
-    private final DataFormatter formatter = new DataFormatter();
-    private final Set<String> emailsUsados = new HashSet<>();
-    private final Map<String, Integer> repeticionesEmail = new HashMap<>();
-
-    private ExcelManager() {
-    }
-
-    public static ExcelManager getInstance() {
-        if (instance == null) {
-            instance = new ExcelManager();
-        } 
-        return instance;
-    }
-
-    public void processExcel(String excelRoute, String xmlRoute) throws IOException, InvalidFormatException {
-        XSSFWorkbook libro = new XSSFWorkbook(new File(excelRoute));
-        XSSFSheet hojaContribuyentes = libro.getSheetAt(0);
-
-        Director direc = new Director();
-        CCCBuilder cccbuilder = new CCCBuilder("Cuentas");
-        NifNieBuilder nifnibuilder = new NifNieBuilder("Contribuyentes");
-
-        purgarContribuyentes(hojaContribuyentes);
-        //abrimos libro XSSFWorkBook
-        //abrimos las hojas XSSFsheet
-
-        //vamos recorriendo las filas XSSFRow
-        try (FileOutputStream fos = new FileOutputStream("src/main/resources/SistemasBasuramod.xlsx")) {
-            libro.write(fos);
+    public ExcelManager(Path excelPath, String sheetName) throws IOException {
+        try (InputStream in = Files.newInputStream(excelPath)) {
+            this.workbook = WorkbookFactory.create(in);
+        } catch (Exception e) {
+            throw new IOException("No se pudo abrir el libro Excel", e);
         }
 
-        Document docNif = GenerateNifnieDoc(direc, nifnibuilder);
-
-        try (FileOutputStream fos = new FileOutputStream(xmlRoute + "ErroresNifNiew.xml")) {
-            XMLOutputter xmlOutputter = new XMLOutputter();
-            xmlOutputter.setFormat(Format.getPrettyFormat());
-            xmlOutputter.output(docNif, fos);
+        this.sheet = workbook.getSheet(sheetName);
+        if (this.sheet == null) {
+            throw new IllegalArgumentException("No existe la hoja: " + sheetName);
         }
 
-        Document docCCC = GenerateCCCDoc(direc, cccbuilder);
-
-        try (FileOutputStream fos = new FileOutputStream(xmlRoute + "ErroresCCC.xml")) {
-            XMLOutputter xmlOutputter = new XMLOutputter();
-            xmlOutputter.setFormat(Format.getPrettyFormat());
-            xmlOutputter.output(docCCC, fos);
-        }
-
-        libro.close();
+        this.headers = readHeaders(sheet.getRow(0));
     }
 
-    private boolean isRowEmpty(XSSFRow fila) {
-        if (fila == null) {
+    private Map<String, Integer> readHeaders(Row headerRow) {
+        if (headerRow == null) {
+            throw new IllegalStateException("La hoja no tiene fila de cabeceras");
+        }
+
+        Map<String, Integer> map = new LinkedHashMap<>();
+        for (Cell cell : headerRow) {
+            String value = formatter.formatCellValue(cell);
+            if (value != null && !value.trim().isEmpty()) {
+                map.put(normalizeHeader(value), cell.getColumnIndex());
+            }
+        }
+        return map;
+    }
+
+    private String normalizeHeader(String text) {
+        return text == null ? null : text.trim().toLowerCase(Locale.ROOT).replaceAll("\\s+", "");
+    }
+
+    private int columnIndex(ExcelColumn column) {
+        Integer idx = headers.get(normalizeHeader(column.getHeader()));
+        if (idx == null) {
+            throw new IllegalArgumentException("No existe la columna: " + column.getHeader());
+        }
+        return idx;
+    }
+
+    public List<Row> getDataRows() {
+        List<Row> rows = new ArrayList<>();
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+            if (row != null) {
+                rows.add(row);
+            }
+        }
+        return rows;
+    }
+
+    public boolean isEmpty(Row row) {
+        if (row == null) {
             return true;
         }
 
-        for (int c = fila.getFirstCellNum(); c < fila.getLastCellNum(); c++) {
-            Cell celda = fila.getCell(c, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
-            if (celda != null) {
+        for (int i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
+            if (i < 0) {
+                continue;
+            }
+            Cell cell = row.getCell(i, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+            if (cell != null && !formatter.formatCellValue(cell).trim().isEmpty()) {
                 return false;
             }
         }
-
         return true;
-
     }
 
-    private void purgarContribuyentes(XSSFSheet hoja) {
-    System.out.println("------ INICIANDO LIMPIEZA OPTIMIZADA ------------");
-
-    int rowNumber = hoja.getLastRowNum();
-    emailsUsados.clear();
-    repeticionesEmail.clear();
-    Set<String> nifsVistos = new HashSet<>();
-    nifIncidencias.clear(); // Limpiamos la nueva lista unificada
-    badCCC.clear();
-
-    for (int i = 1; i <= rowNumber; i++) {
-        XSSFRow fila = hoja.getRow(i);
-        if (isRowEmpty(fila)) continue;
-
-        // 1. Extracción de datos básicos
-        Integer id = getIntCell(fila, 1);
-        String nombre = getStringCell(fila, 3);
-        String apellido1 = getStringCell(fila, 4);
-        String apellido2 = getStringCell(fila, 5);
-        String nifnie = getStringCell(fila, 6);
-        String paisCCC = getStringCell(fila, 2);
-        String ccc = getStringCell(fila, 7);
-        String direccion = getStringCell(fila, 0);
-        Date fechaAlta = getDateCell(fila, 13);
-
-        // Creamos el objeto base para los XML de errores
-        Contribuyente individuo = new Contribuyente(id, nombre, apellido1, apellido2, nifnie, direccion, fechaAlta);
-
-        // 2. VALIDACIÓN DE NIF/NIE
-        if (nifnie == null || nifnie.isBlank()) {
-            nifIncidencias.add(new NifIncidencia(individuo, "NIF BLANCO"));
-            continue; // No se genera nada más para este contribuyente
-        }
-
-        try {
-            if (!NifUtils.isValidNIF(nifnie)) {
-                // Intentamos subsanar
-                int numbers = NifUtils.getNumericPart(nifnie);
-                String newNifnie = String.format("%d%c", numbers, NifUtils.getLetter(numbers));
-                modifyCell(fila, 6, newNifnie);
-                nifnie = newNifnie; // Actualizamos para el resto del bucle
-                individuo.setNifnie(newNifnie);
-            }
-        } catch (IllegalArgumentException e) {
-            nifIncidencias.add(new NifIncidencia(individuo, "NIF ERRONEO"));
-            continue; // Error no subsanable: fin de proceso para esta fila
-        }
-
-        // Comprobación de duplicados
-        if (nifsVistos.contains(nifnie)) {
-            nifIncidencias.add(new NifIncidencia(individuo, "NIF DUPLICADO"));
-            continue;
-        }
-        nifsVistos.add(nifnie);
-
-        // 3. VALIDACIÓN DE CCC e IBAN
-        try {
-            if (!CCCUtils.isValid(ccc)) {
-                String cccCorregido = CCCUtils.fix(ccc);
-                String ibanGenerado = CCCUtils.calcularIBAN(cccCorregido, paisCCC);
-                
-                // Registramos la incidencia (subsanada)
-                badCCC.add(new CCCIncidencia(individuo, ccc, ibanGenerado, null));
-                
-                // Actualizamos Excel y variables
-                ccc = cccCorregido;
-                modifyCell(fila, 7, ccc);
-                modifyCell(fila, 8, ibanGenerado);
-            } else {
-                String ibanGenerado = CCCUtils.calcularIBAN(ccc, paisCCC);
-                modifyCell(fila, 8, ibanGenerado);
-            }
-        } catch (IllegalArgumentException e) {
-            // Error de CCC no subsanable
-            badCCC.add(new CCCIncidencia(individuo, ccc, null, "IMPOSIBLE GENERAR IBAN"));
-            continue; // Según el guion, si el CCC falla, no se genera el correo
-        }
-
-        // 4. GENERACIÓN DE EMAIL (Solo si NIF y CCC son correctos/subsanados)
-        String emailActual = getStringCell(fila, 9);
-        if (emailActual == null || emailActual.isBlank()) {
-            try {
-                String nuevoEmail = generarEmail(nombre, apellido1, apellido2);
-                modifyCell(fila, 9, nuevoEmail);
-            } catch (IllegalArgumentException e) {
-                // Error silencioso o log si no se pueden obtener iniciales
-            }
-        } else {
-            // Si ya tiene email, lo registramos para evitar duplicados en los generados
-            emailsUsados.add(emailActual.trim().toLowerCase());
-        }
-    }
-}
-
-    private void modifyCell(XSSFRow fila, int columna, String valor) {
-
-        if (fila == null) {
-            return;
-        }
-
-        Cell celda = fila.getCell(columna, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-        celda.setCellValue(valor);
+    public int getExcelRowId(Row row) {
+        return row.getRowNum() + 1;
     }
 
-    private String getStringCell(XSSFRow fila, int col) {
-        Cell celda = fila.getCell(col, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
-        if (celda == null) {
+    public String getString(Row row, ExcelColumn column) {
+        Cell cell = row.getCell(columnIndex(column), Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+        if (cell == null) {
+            return null;
+        }
+        String value = formatter.formatCellValue(cell);
+        if (value == null) {
+            return null;
+        }
+        value = value.trim();
+        return value.isEmpty() ? null : value;
+    }
+
+    public LocalDate getDate(Row row, ExcelColumn column) {
+        Cell cell = row.getCell(columnIndex(column), Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+        if (cell == null) {
             return null;
         }
 
-        String valor = formatter.formatCellValue(celda);
-        return valor == null || valor.trim().isEmpty() ? null : valor.trim();
-    }
+        if (cell.getCellType() == CellType.NUMERIC && DateUtil.isCellDateFormatted(cell)) {
+            return cell.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
 
-    private Integer getIntCell(XSSFRow fila, int col) {
-        String valor = getStringCell(fila, col);
-        return (valor == null) ? null : Integer.valueOf(valor);
-    }
-
-    private Double getDoubleCell(XSSFRow fila, int col) {
-        String valor = getStringCell(fila, col);
-        if (valor == null) {
+        String text = formatter.formatCellValue(cell);
+        if (text == null || text.trim().isEmpty()) {
             return null;
         }
-        valor = valor.replace(",", ".");
-        return Double.valueOf(valor);
+
+        return LocalDate.parse(text.trim());
     }
 
-    private Date getDateCell(XSSFRow fila, int col) {
-        Cell celda = fila.getCell(col, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
-        if (celda == null) {
+    public Integer getInt(Row row, ExcelColumn column) {
+        Cell cell = row.getCell(columnIndex(column), Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+        if (cell == null) {
             return null;
         }
-        if (celda.getCellType() == CellType.NUMERIC) {
-            return celda.getDateCellValue();
+
+        if (cell.getCellType() == CellType.NUMERIC) {
+            return (int) cell.getNumericCellValue();
         }
+
+        String text = formatter.formatCellValue(cell);
+        if (text == null) {
+            return null;
+        }
+
+        text = text.trim();
+        if (text.isEmpty()) {
+            return null;
+        }
+
+        return Integer.parseInt(text);
+    }
+    public Double getDouble(Row row, ExcelColumn column) {
+    Cell cell = row.getCell(columnIndex(column), Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+    if (cell == null) {
         return null;
     }
 
-    private String generarEmail(String nombre, String apellido1, String apellido2) {
-    // 1. Obtener iniciales y normalizar (quitar tildes, eñes y pasar a minúsculas)
-    String base = (inicial(nombre) + inicial(apellido1) + inicial(apellido2))
-                  .toLowerCase(Locale.ROOT);
-    
-    base = normalizar(base);
-
-    if (base.isEmpty()) {
-        throw new IllegalArgumentException("No hay datos suficientes para generar iniciales de email");
+    if (cell.getCellType() == CellType.NUMERIC) {
+        return cell.getNumericCellValue();
     }
 
-    // 2. Control de repeticiones para el sufijo numérico
-    // Si la base no existe, empieza en 0. Si existe, recupera el siguiente número.
-    int contador = repeticionesEmail.getOrDefault(base, 0);
-    String emailGenerado;
+    String text = formatter.formatCellValue(cell);
+    if (text == null) {
+        return null;
+    }
 
-    // 3. Bucle para asegurar que el email sea único
-    do {
-        // Formato: %02d asegura que el número tenga siempre 2 dígitos (00, 01, 02...)
-        emailGenerado = String.format("%s%02d@tasabasura2026.com", base, contador);
-        contador++;
-    } while (emailsUsados.contains(emailGenerado));
+    text = text.trim();
+    if (text.isEmpty()) {
+        return null;
+    }
 
-    // 4. Actualizar los mapas para la siguiente vez que aparezca esta base
-    repeticionesEmail.put(base, contador);
-    emailsUsados.add(emailGenerado);
-
-    return emailGenerado;
+    return Double.parseDouble(text);
 }
 
-    private String inicial(String s) {
-        if (s == null || s.isBlank()) {
-            return "";
+    public void setString(Row row, ExcelColumn column, String value) {
+        Cell cell = row.getCell(columnIndex(column), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+        cell.setCellValue(value == null ? "" : value);
+    }
+
+    public void save(Path outputPath) throws IOException {
+        if (outputPath.getParent() != null) {
+            Files.createDirectories(outputPath.getParent());
         }
-        return String.valueOf(s.trim().charAt(0));
-    }
-
-    private String normalizar(String s) {
-        String limpia = Normalizer.normalize(s, Normalizer.Form.NFD)
-                .replaceAll("\\p{M}+", "")
-                .replaceAll("[^A-Za-z]", "");
-        return limpia;
-    }
-
-    private Document GenerateNifnieDoc(Director direc, BuilderInterface builder) {
-    direc.setBuilder(builder);
-
-    // Recorremos la lista única que centraliza todos los tipos de errores de DNI
-    for (NifIncidencia inc : nifIncidencias) {
-        // Usamos el tipo de error almacenado individualmente en cada incidencia
-        direc.buildNifNieRegister(inc.getContribuyente(), inc.getTipoError());
-    }
-
-    return builder.getDoc();
-}
-
-    private Document GenerateCCCDoc(Director direc, BuilderInterface builder) {
-        direc.setBuilder(builder);
-
-        for (CCCIncidencia inc : badCCC) {
-            //System.out.println(inc.getContribuyente().getIdContribuyente());
-            direc.buildCCCRegister(inc);
+        try (OutputStream out = Files.newOutputStream(outputPath)) {
+            workbook.write(out);
         }
-
-        return builder.getDoc();
     }
 
+    @Override
+    public void close() throws IOException {
+        workbook.close();
+    }
 }

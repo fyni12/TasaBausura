@@ -5,6 +5,8 @@ package com.mycompany.proyecto_si2;
 
 import POJOS.Contribuyente;
 import POJOS.Recibos;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 import javax.persistence.EntityManager;
@@ -93,11 +95,17 @@ public class Proyecto_Si2 {
         
         //INICIO PRÁCTICA 2
         
-        ExcelManager excel = ExcelManager.getInstance();
         try {
-            excel.processExcel("src/main/resources/SistemasBasura.xlsx", "src/main/resources/");
+            Path resources = Paths.get("src", "main", "resources");
+            Path excel = resources.resolve("SistemasBasura.xlsx");
+
+            PracticaBasuraService service = new PracticaBasuraService(excel, resources);
+            service.procesar();
+
+            System.out.println("Practica completada correctamente.");
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
+        
     }
 }

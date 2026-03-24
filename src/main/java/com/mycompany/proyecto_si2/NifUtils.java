@@ -1,68 +1,87 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyecto_si2;
 
-/**
- *
- * @author Sahira
- */
-public class NifUtils {
+import java.util.Locale;
+
+public final class NifUtils {
 
     private static final String LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    public static boolean isValidNIF(String nif) throws IllegalArgumentException {
-        if (nif == null || nif.isBlank()) {
-            throw new IllegalArgumentException("NIF en blanco");
-        }
-
-        nif = nif.trim().toUpperCase();
-
-        if (nif.length() == 8) {
-            return false; // parece un DNI sin letra
-        }
-
-        if (nif.length() != 9) {
-            throw new IllegalArgumentException("NIF erróneo");
-        }
-
-        char primero = nif.charAt(0);
-        char ultimo = nif.charAt(8);
-
-        if (!Character.isDigit(primero) && primero != 'X' && primero != 'Y' && primero != 'Z') {
-            throw new IllegalArgumentException("La primera posicion debe ser un numero o X, Y, Z");
-        }
-
-        for (int i = 1; i < 8; i++) {
-            if (!Character.isDigit(nif.charAt(i))) {
-                throw new IllegalArgumentException("Debe haber digitos en las posiciones intermedias");
-            }
-        }
-
-        if (!Character.isLetter(ultimo)) {
-            throw new IllegalArgumentException("La ultima posicion debe ser una letra");
-        }
-
-        return ultimo == getLetter(getNumericPart(nif));
+    private NifUtils() {
     }
 
-    public static char getLetter(int nifNumber) {
-        return LETTERS.charAt(nifNumber % 23);
+    public enum Estado {
+        VALIDO, SUBSANADO, ERRONEO, BLANCO
     }
 
-    public static int getNumericPart(String nif) {
-        String numericPart = nif.substring(0, nif.length() - 1).toUpperCase()
-                .replace("X", "0")
-                .replace("Y", "1")
-                .replace("Z", "2");
+    public static final class Resultado {
+        private final Estado estado;
+        private final String valorFinal;
 
-        int numeric = Integer.parseInt(numericPart);
-        return numeric;
+        public Resultado(Estado estado, String valorFinal) {
+            this.estado = estado;
+            this.valorFinal = valorFinal;
+        }
+
+        public Estado getEstado() {
+            return estado;
+        }
+
+        public String getValorFinal() {
+            return valorFinal;
+        }
+
+        public boolean esValidoOSubsanado() {
+            return estado == Estado.VALIDO || estado == Estado.SUBSANADO;
+        }
     }
 
-    public static char getLetterPart(String nif) {
-        return nif.charAt(nif.length() - 1);
+    public static Resultado validar(String raw) {
+        String value = normalizar(raw);
+
+        if (value == null) {
+            return new Resultado(Estado.BLANCO, null);
+        }
+
+        if (value.matches("\\d{8}")) {
+            return new Resultado(Estado.SUBSANADO, value + calcularLetra(value));
+        }
+
+        if (value.matches("[XYZ]\\d{7}")) {
+            return new Resultado(Estado.SUBSANADO, value + calcularLetra(value));
+        }
+
+        if (value.matches("\\d{8}[A-Z]") || value.matches("[XYZ]\\d{7}[A-Z]")) {
+            String cuerpo = value.substring(0, value.length() - 1);
+            char actual = value.charAt(value.length() - 1);
+            char calculada = calcularLetra(cuerpo);
+            String corregido = cuerpo + calculada;
+            return actual == calculada
+                    ? new Resultado(Estado.VALIDO, corregido)
+                    : new Resultado(Estado.SUBSANADO, corregido);
+        }
+
+        return new Resultado(Estado.ERRONEO, value);
     }
 
+    public static char calcularLetra(String cuerpo) {
+        String numeric = cuerpo.toUpperCase(Locale.ROOT)
+                .replace('X', '0')
+                .replace('Y', '1')
+                .replace('Z', '2');
+
+        int numero = Integer.parseInt(numeric);
+        return LETTERS.charAt(numero % 23);
+    }
+
+    private static String normalizar(String raw) {
+        if (raw == null) {
+            return null;
+        }
+
+        String value = raw.trim()
+                .toUpperCase(Locale.ROOT)
+                .replaceAll("[\\s-]+", "");
+
+        return value.isEmpty() ? null : value;
+    }
 }

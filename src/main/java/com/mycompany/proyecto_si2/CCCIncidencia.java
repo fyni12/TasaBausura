@@ -1,30 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyecto_si2;
 
-import POJOS.Contribuyente;
-/**
- *
- * @author Sahira
- */
+public final class CCCIncidencia {
 
-public class CCCIncidencia {
-    private final Contribuyente contribuyente;
+    private final int idFilaExcel;
+    private final String nombre;
+    private final String apellidos;
+    private final String nifNie;
     private final String cccErroneo;
     private final String ibanCorrecto;
     private final String tipoError;
 
-    public CCCIncidencia(Contribuyente contribuyente, String cccErroneo, String ibanCorrecto, String tipoError) {
-        this.contribuyente = contribuyente;
+    public CCCIncidencia(int idFilaExcel, String nombre, String apellidos, String nifNie,
+                         String cccErroneo, String ibanCorrecto, String tipoError) {
+        this.idFilaExcel = idFilaExcel;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.nifNie = nifNie;
         this.cccErroneo = cccErroneo;
         this.ibanCorrecto = ibanCorrecto;
         this.tipoError = tipoError;
     }
 
-    public Contribuyente getContribuyente() {
-        return contribuyente;
+    public int getIdFilaExcel() {
+        return idFilaExcel;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getNifNie() {
+        return nifNie;
     }
 
     public String getCccErroneo() {

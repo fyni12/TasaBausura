@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contribuyentes>
+  <contribuyente id="4">
+    <nif_nie>07815963256</nif_nie>
+    <nombre>Alencar</nombre>
+    <primer_apellido>Lidiane</primer_apellido>
+    <segundo_apellido>Morala</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="11">
+    <nif_nie>09632539R</nif_nie>
+    <nombre>Mauro</nombre>
+    <primer_apellido>Aparicio</primer_apellido>
+    <segundo_apellido>Pérez</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="13">
+    <nif_nie>09632539R</nif_nie>
+    <nombre>Luis</nombre>
+    <primer_apellido>Benito</primer_apellido>
+    <segundo_apellido>Prieto</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="14">
+    <nif_nie>1523685</nif_nie>
+    <nombre>Armando</nombre>
+    <primer_apellido>García</primer_apellido>
+    <segundo_apellido>Prieto</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="16">
+    <nif_nie>25415</nif_nie>
+    <nombre>Latifa Epfouad Erre</nombre>
+    <primer_apellido>Boughaza</primer_apellido>
+    <segundo_apellido>Robles</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="17">
+    <nif_nie>x71563258p</nif_nie>
+    <nombre>Saaida</nombre>
+    <primer_apellido>Boughaza</primer_apellido>
+    <segundo_apellido>Robles</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="18">
+    <nif_nie>1234567890</nif_nie>
+    <nombre>Antonio</nombre>
+    <primer_apellido>García</primer_apellido>
+    <segundo_apellido>Rodríguez</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="19">
+    <nif_nie>10150</nif_nie>
+    <nombre>Dorina</nombre>
+    <primer_apellido>González</primer_apellido>
+    <segundo_apellido>Rodríguez</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="20">
+    <nif_nie>a56783</nif_nie>
+    <nombre>Pilar</nombre>
+    <primer_apellido>González</primer_apellido>
+    <segundo_apellido>Salas</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="39">
+    <nif_nie>01234567L</nif_nie>
+    <nombre>Sara</nombre>
+    <primer_apellido>Flórez</primer_apellido>
+    <segundo_apellido>Prieto</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="54">
+    <nif_nie>ss738010V</nif_nie>
+    <nombre>Alencar</nombre>
+    <primer_apellido>Pasado</primer_apellido>
+    <segundo_apellido>Guerra</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="67">
+    <nif_nie>09548827D</nif_nie>
+    <nombre>Saaida</nombre>
+    <primer_apellido>Blanco</primer_apellido>
+    <segundo_apellido>García</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="70">
+    <nif_nie>09548295Y</nif_nie>
+    <nombre>Rocío</nombre>
+    <primer_apellido>Otero</primer_apellido>
+    <segundo_apellido>Gomara</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="76">
+    <nif_nie>24304263W</nif_nie>
+    <nombre>María</nombre>
+    <primer_apellido>Sutil</primer_apellido>
+    <segundo_apellido>Herreras</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="77">
+    <nif_nie>X3387K</nif_nie>
+    <nombre>Federico</nombre>
+    <primer_apellido>Díez</primer_apellido>
+    <segundo_apellido>Laiz</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="83">
+    <nif_nie>w9314602Q</nif_nie>
+    <nombre>Melisa</nombre>
+    <primer_apellido>Marín</primer_apellido>
+    <segundo_apellido>Melcón</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="90">
+    <nif_nie>Y1337652D</nif_nie>
+    <nombre>Marta</nombre>
+    <primer_apellido>Herrero</primer_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="94">
+    <nif_nie>0.0</nif_nie>
+    <nombre>Hugo</nombre>
+    <primer_apellido>Sánchez</primer_apellido>
+    <segundo_apellido>Castro</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="105">
+    <nif_nie>0945</nif_nie>
+    <nombre>Federico</nombre>
+    <primer_apellido>Gomez</primer_apellido>
+    <segundo_apellido>Diez</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+  <contribuyente id="127">
+    <nif_nie>X1673150S</nif_nie>
+    <nombre>Ismael</nombre>
+    <primer_apellido>Vara</primer_apellido>
+    <segundo_apellido>Cembranos</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="130">
+    <nif_nie>Y0806930N</nif_nie>
+    <nombre>Nelida</nombre>
+    <primer_apellido>Blanco</primer_apellido>
+    <segundo_apellido>Chamorro</segundo_apellido>
+    <tipo_error>NIF DUPLICADO</tipo_error>
+  </contribuyente>
+  <contribuyente id="135">
+    <nif_nie>0.0</nif_nie>
+    <nombre>Carmen</nombre>
+    <primer_apellido>García</primer_apellido>
+    <segundo_apellido>Del amo</segundo_apellido>
+    <tipo_error>NIF ERRONEO</tipo_error>
+  </contribuyente>
+</contribuyentes>
