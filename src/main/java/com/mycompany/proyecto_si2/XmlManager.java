@@ -64,14 +64,14 @@ public final class XmlManager {
     public static void escribirRecibos(
             Path path,
             String fechaPadron,
-            String totalPadron,
+            double totalPadron,
             int numeroTotalRecibos,
             List<Recibo> recibos
     ) throws IOException {
 
         Element raiz = new Element("Recibos");
         raiz.setAttribute("fechaPadron", nullToEmpty(fechaPadron));
-        raiz.setAttribute("totalPadron", nullToEmpty(totalPadron));
+        raiz.setAttribute("totalPadron", String.format(java.util.Locale.US, "%.2f", totalPadron));
         raiz.setAttribute("numeroTotalRecibos", String.valueOf(numeroTotalRecibos));
 
         Document doc = new Document(raiz);
