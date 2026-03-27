@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Recibos fechaPadron="2025-10-01" totalPadron="330292.58" numeroTotalRecibos="54">
+<Recibos fechaPadron="2026-01-01" totalPadron="399839.46" numeroTotalRecibos="64">
   <Recibo idRecibo="0">
     <Exencion>n</Exencion>
     <idFilaExcel>12</idFilaExcel>
@@ -132,6 +132,58 @@
   </Recibo>
   <Recibo idRecibo="10">
     <Exencion>n</Exencion>
+    <idFilaExcel>27</idFilaExcel>
+    <nombre>Gerardo</nombre>
+    <primerApellido>Martinez</primerApellido>
+    <segundoApellido>Molina</segundoApellido>
+    <NIF>09724050H</NIF>
+    <IBAN>ES2956187775315550000651</IBAN>
+    <kgGenerados>88</kgGenerados>
+    <baseImponibleRecibo>217.56</baseImponibleRecibo>
+    <ivaRecibo>4272.8</ivaRecibo>
+    <totalRecibo>4490.360000000001</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="11">
+    <Exencion>n</Exencion>
+    <idFilaExcel>28</idFilaExcel>
+    <nombre>Cecilia</nombre>
+    <primerApellido>García</primerApellido>
+    <segundoApellido>Montiel</segundoApellido>
+    <NIF>09689676Y</NIF>
+    <IBAN>ES0425516848021156151054</IBAN>
+    <kgGenerados>101</kgGenerados>
+    <baseImponibleRecibo>437.0625</baseImponibleRecibo>
+    <ivaRecibo>8583.75</ivaRecibo>
+    <totalRecibo>9020.8125</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="12">
+    <Exencion>n</Exencion>
+    <idFilaExcel>30</idFilaExcel>
+    <nombre>Clara</nombre>
+    <primerApellido>Sánchez</primerApellido>
+    <segundoApellido>Nuñez</segundoApellido>
+    <NIF>09570262P</NIF>
+    <IBAN>ES4534698752714600549403</IBAN>
+    <kgGenerados>78</kgGenerados>
+    <baseImponibleRecibo>195.36</baseImponibleRecibo>
+    <ivaRecibo>3836.8</ivaRecibo>
+    <totalRecibo>4032.1600000000003</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="13">
+    <Exencion>n</Exencion>
+    <idFilaExcel>32</idFilaExcel>
+    <nombre>Generoso</nombre>
+    <primerApellido>Martin</primerApellido>
+    <segundoApellido>Martin</segundoApellido>
+    <NIF>25147854E</NIF>
+    <IBAN>FR8423185484415641685908</IBAN>
+    <kgGenerados>113</kgGenerados>
+    <baseImponibleRecibo>649.35</baseImponibleRecibo>
+    <ivaRecibo>12753.0</ivaRecibo>
+    <totalRecibo>13402.35</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="14">
+    <Exencion>n</Exencion>
     <idFilaExcel>36</idFilaExcel>
     <nombre>Tomás</nombre>
     <primerApellido>Cedron</primerApellido>
@@ -143,7 +195,7 @@
     <ivaRecibo>369.51000000000005</ivaRecibo>
     <totalRecibo>388.32450000000006</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="11">
+  <Recibo idRecibo="15">
     <Exencion>n</Exencion>
     <idFilaExcel>37</idFilaExcel>
     <nombre>Clotilde</nombre>
@@ -156,7 +208,7 @@
     <ivaRecibo>475.24</ivaRecibo>
     <totalRecibo>499.438</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="12">
+  <Recibo idRecibo="16">
     <Exencion>n</Exencion>
     <idFilaExcel>38</idFilaExcel>
     <nombre>Cristina</nombre>
@@ -169,7 +221,7 @@
     <ivaRecibo>13516.0</ivaRecibo>
     <totalRecibo>14204.2</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="13">
+  <Recibo idRecibo="17">
     <Exencion>n</Exencion>
     <idFilaExcel>40</idFilaExcel>
     <nombre>Encarnación</nombre>
@@ -182,7 +234,7 @@
     <ivaRecibo>19184.0</ivaRecibo>
     <totalRecibo>20160.8</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="14">
+  <Recibo idRecibo="18">
     <Exencion>n</Exencion>
     <idFilaExcel>41</idFilaExcel>
     <nombre>Dolores</nombre>
@@ -195,7 +247,7 @@
     <ivaRecibo>3880.4</ivaRecibo>
     <totalRecibo>4077.98</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="15">
+  <Recibo idRecibo="19">
     <Exencion>n</Exencion>
     <idFilaExcel>42</idFilaExcel>
     <nombre>Herminia</nombre>
@@ -208,7 +260,7 @@
     <ivaRecibo>13298.0</ivaRecibo>
     <totalRecibo>13975.1</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="16">
+  <Recibo idRecibo="20">
     <Exencion>n</Exencion>
     <idFilaExcel>43</idFilaExcel>
     <nombre>Sonia</nombre>
@@ -221,7 +273,7 @@
     <ivaRecibo>17222.0</ivaRecibo>
     <totalRecibo>18098.9</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="17">
+  <Recibo idRecibo="21">
     <Exencion>n</Exencion>
     <idFilaExcel>45</idFilaExcel>
     <nombre>Sergio</nombre>
@@ -234,7 +286,7 @@
     <ivaRecibo>4752.4</ivaRecibo>
     <totalRecibo>4994.379999999999</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="18">
+  <Recibo idRecibo="22">
     <Exencion>n</Exencion>
     <idFilaExcel>46</idFilaExcel>
     <nombre>Bonifacio</nombre>
@@ -247,7 +299,7 @@
     <ivaRecibo>3270.0</ivaRecibo>
     <totalRecibo>3436.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="19">
+  <Recibo idRecibo="23">
     <Exencion>n</Exencion>
     <idFilaExcel>47</idFilaExcel>
     <nombre>Demetrio</nombre>
@@ -260,7 +312,7 @@
     <ivaRecibo>4534.4</ivaRecibo>
     <totalRecibo>4765.28</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="20">
+  <Recibo idRecibo="24">
     <Exencion>n</Exencion>
     <idFilaExcel>48</idFilaExcel>
     <nombre>Germán</nombre>
@@ -273,7 +325,7 @@
     <ivaRecibo>528.105</ivaRecibo>
     <totalRecibo>554.9947500000001</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="21">
+  <Recibo idRecibo="25">
     <Exencion>n</Exencion>
     <idFilaExcel>51</idFilaExcel>
     <nombre>Israel</nombre>
@@ -286,7 +338,7 @@
     <ivaRecibo>13161.75</ivaRecibo>
     <totalRecibo>13831.9125</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="22">
+  <Recibo idRecibo="26">
     <Exencion>n</Exencion>
     <idFilaExcel>52</idFilaExcel>
     <nombre>Gabriel</nombre>
@@ -299,7 +351,7 @@
     <ivaRecibo>14170.0</ivaRecibo>
     <totalRecibo>14891.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="23">
+  <Recibo idRecibo="27">
     <Exencion>n</Exencion>
     <idFilaExcel>53</idFilaExcel>
     <nombre>Rubén Darío</nombre>
@@ -312,7 +364,7 @@
     <ivaRecibo>20492.0</ivaRecibo>
     <totalRecibo>21535.4</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="24">
+  <Recibo idRecibo="28">
     <Exencion>n</Exencion>
     <idFilaExcel>55</idFilaExcel>
     <nombre>Alencar</nombre>
@@ -325,7 +377,85 @@
     <ivaRecibo>723.76</ivaRecibo>
     <totalRecibo>760.612</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="25">
+  <Recibo idRecibo="29">
+    <Exencion>n</Exencion>
+    <idFilaExcel>62</idFilaExcel>
+    <nombre>Agustín</nombre>
+    <primerApellido>López</primerApellido>
+    <segundoApellido>Martínez</segundoApellido>
+    <NIF>24571671N</NIF>
+    <IBAN>ES0912548523445214585218</IBAN>
+    <kgGenerados>82</kgGenerados>
+    <baseImponibleRecibo>206.25</baseImponibleRecibo>
+    <ivaRecibo>3807.0</ivaRecibo>
+    <totalRecibo>4013.25</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="30">
+    <Exencion>n</Exencion>
+    <idFilaExcel>64</idFilaExcel>
+    <nombre>Armando</nombre>
+    <primerApellido>Domínguez</primerApellido>
+    <segundoApellido />
+    <NIF>09548495E</NIF>
+    <IBAN>ES1436154231712500312566</IBAN>
+    <kgGenerados>92</kgGenerados>
+    <baseImponibleRecibo>330.0</baseImponibleRecibo>
+    <ivaRecibo>6176.0</ivaRecibo>
+    <totalRecibo>6506.0</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="31">
+    <Exencion>n</Exencion>
+    <idFilaExcel>65</idFilaExcel>
+    <nombre>Latifa</nombre>
+    <primerApellido>Ramos</primerApellido>
+    <segundoApellido />
+    <NIF>71404623L</NIF>
+    <IBAN>ES8244875664127231645789</IBAN>
+    <kgGenerados>28</kgGenerados>
+    <baseImponibleRecibo>116.6</baseImponibleRecibo>
+    <ivaRecibo>1908.0</ivaRecibo>
+    <totalRecibo>2024.6</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="32">
+    <Exencion>n</Exencion>
+    <idFilaExcel>66</idFilaExcel>
+    <nombre>Latifa Epfouad Erre</nombre>
+    <primerApellido>Cadenas</primerApellido>
+    <segundoApellido />
+    <NIF>09810142K</NIF>
+    <IBAN>ES2420960031482124800018</IBAN>
+    <kgGenerados>6</kgGenerados>
+    <baseImponibleRecibo>77.0</baseImponibleRecibo>
+    <ivaRecibo>1116.0</ivaRecibo>
+    <totalRecibo>1193.0</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="33">
+    <Exencion>n</Exencion>
+    <idFilaExcel>68</idFilaExcel>
+    <nombre>Antonio</nombre>
+    <primerApellido>Fernandez</primerApellido>
+    <segundoApellido>García</segundoApellido>
+    <NIF>X8996448K</NIF>
+    <IBAN>ES1933218885441445121022</IBAN>
+    <kgGenerados>23</kgGenerados>
+    <baseImponibleRecibo>105.6</baseImponibleRecibo>
+    <ivaRecibo>1688.0</ivaRecibo>
+    <totalRecibo>1793.6</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="34">
+    <Exencion>n</Exencion>
+    <idFilaExcel>69</idFilaExcel>
+    <nombre>Dorina</nombre>
+    <primerApellido>García</primerApellido>
+    <segundoApellido>Getino</segundoApellido>
+    <NIF>09685088H</NIF>
+    <IBAN>ES8462581542713690044508</IBAN>
+    <kgGenerados>183</kgGenerados>
+    <baseImponibleRecibo>1113.75</baseImponibleRecibo>
+    <ivaRecibo>21957.0</ivaRecibo>
+    <totalRecibo>23070.75</totalRecibo>
+  </Recibo>
+  <Recibo idRecibo="35">
     <Exencion>n</Exencion>
     <idFilaExcel>70</idFilaExcel>
     <nombre>Rocío</nombre>
@@ -338,7 +468,7 @@
     <ivaRecibo>4086.0</ivaRecibo>
     <totalRecibo>4311.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="26">
+  <Recibo idRecibo="36">
     <Exencion>n</Exencion>
     <idFilaExcel>71</idFilaExcel>
     <nombre>Soledad</nombre>
@@ -351,7 +481,7 @@
     <ivaRecibo>27956.0</ivaRecibo>
     <totalRecibo>29375.0</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="27">
+  <Recibo idRecibo="37">
     <Exencion>n</Exencion>
     <idFilaExcel>73</idFilaExcel>
     <nombre>Vittorio</nombre>
@@ -364,7 +494,7 @@
     <ivaRecibo>1468.0</ivaRecibo>
     <totalRecibo>1562.6</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="28">
+  <Recibo idRecibo="38">
     <Exencion>n</Exencion>
     <idFilaExcel>74</idFilaExcel>
     <nombre>Mario</nombre>
@@ -377,7 +507,7 @@
     <ivaRecibo>6034.5</ivaRecibo>
     <totalRecibo>6352.125</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="29">
+  <Recibo idRecibo="39">
     <Exencion>n</Exencion>
     <idFilaExcel>75</idFilaExcel>
     <nombre>Concepción</nombre>
@@ -390,7 +520,7 @@
     <ivaRecibo>1204.0</ivaRecibo>
     <totalRecibo>1285.4</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="30">
+  <Recibo idRecibo="40">
     <Exencion>n</Exencion>
     <idFilaExcel>76</idFilaExcel>
     <nombre>María</nombre>
@@ -403,7 +533,7 @@
     <ivaRecibo>25316.0</ivaRecibo>
     <totalRecibo>26603.0</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="31">
+  <Recibo idRecibo="41">
     <Exencion>n</Exencion>
     <idFilaExcel>77</idFilaExcel>
     <nombre>Federico</nombre>
@@ -416,7 +546,7 @@
     <ivaRecibo>8596.0</ivaRecibo>
     <totalRecibo>9047.0</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="32">
+  <Recibo idRecibo="42">
     <Exencion>n</Exencion>
     <idFilaExcel>79</idFilaExcel>
     <nombre>Serafín</nombre>
@@ -429,7 +559,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="33">
+  <Recibo idRecibo="43">
     <Exencion>n</Exencion>
     <idFilaExcel>80</idFilaExcel>
     <nombre>Eulalia</nombre>
@@ -442,7 +572,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="34">
+  <Recibo idRecibo="44">
     <Exencion>n</Exencion>
     <idFilaExcel>81</idFilaExcel>
     <nombre>Gonzalo</nombre>
@@ -455,7 +585,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="35">
+  <Recibo idRecibo="45">
     <Exencion>n</Exencion>
     <idFilaExcel>82</idFilaExcel>
     <nombre>Emiliano</nombre>
@@ -468,7 +598,7 @@
     <ivaRecibo>772.8</ivaRecibo>
     <totalRecibo>840.9</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="36">
+  <Recibo idRecibo="46">
     <Exencion>n</Exencion>
     <idFilaExcel>84</idFilaExcel>
     <nombre>Montserrat</nombre>
@@ -481,7 +611,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="37">
+  <Recibo idRecibo="47">
     <Exencion>n</Exencion>
     <idFilaExcel>86</idFilaExcel>
     <nombre>José Antonio</nombre>
@@ -494,7 +624,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="38">
+  <Recibo idRecibo="48">
     <Exencion>n</Exencion>
     <idFilaExcel>87</idFilaExcel>
     <nombre>Bernardo</nombre>
@@ -507,7 +637,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="39">
+  <Recibo idRecibo="49">
     <Exencion>n</Exencion>
     <idFilaExcel>88</idFilaExcel>
     <nombre>Nelida</nombre>
@@ -520,7 +650,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="40">
+  <Recibo idRecibo="50">
     <Exencion>n</Exencion>
     <idFilaExcel>89</idFilaExcel>
     <nombre>Marisa</nombre>
@@ -533,7 +663,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="41">
+  <Recibo idRecibo="51">
     <Exencion>n</Exencion>
     <idFilaExcel>91</idFilaExcel>
     <nombre>Miguel</nombre>
@@ -546,7 +676,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="42">
+  <Recibo idRecibo="52">
     <Exencion>n</Exencion>
     <idFilaExcel>93</idFilaExcel>
     <nombre>Carmen</nombre>
@@ -559,7 +689,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="43">
+  <Recibo idRecibo="53">
     <Exencion>n</Exencion>
     <idFilaExcel>102</idFilaExcel>
     <nombre>Mario</nombre>
@@ -572,7 +702,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="44">
+  <Recibo idRecibo="54">
     <Exencion>n</Exencion>
     <idFilaExcel>103</idFilaExcel>
     <nombre>Concepción</nombre>
@@ -585,7 +715,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="45">
+  <Recibo idRecibo="55">
     <Exencion>n</Exencion>
     <idFilaExcel>104</idFilaExcel>
     <nombre>María</nombre>
@@ -598,7 +728,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="46">
+  <Recibo idRecibo="56">
     <Exencion>n</Exencion>
     <idFilaExcel>106</idFilaExcel>
     <nombre>Gabriel</nombre>
@@ -611,7 +741,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="47">
+  <Recibo idRecibo="57">
     <Exencion>n</Exencion>
     <idFilaExcel>128</idFilaExcel>
     <nombre>Diana</nombre>
@@ -624,7 +754,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="48">
+  <Recibo idRecibo="58">
     <Exencion>n</Exencion>
     <idFilaExcel>129</idFilaExcel>
     <nombre>Elisa</nombre>
@@ -637,7 +767,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="49">
+  <Recibo idRecibo="59">
     <Exencion>n</Exencion>
     <idFilaExcel>131</idFilaExcel>
     <nombre>Marisa</nombre>
@@ -650,7 +780,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="50">
+  <Recibo idRecibo="60">
     <Exencion>s</Exencion>
     <idFilaExcel>132</idFilaExcel>
     <nombre>Marta</nombre>
@@ -663,7 +793,7 @@
     <ivaRecibo>0.0</ivaRecibo>
     <totalRecibo>0.0</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="51">
+  <Recibo idRecibo="61">
     <Exencion>n</Exencion>
     <idFilaExcel>133</idFilaExcel>
     <nombre>Miguel</nombre>
@@ -676,7 +806,7 @@
     <ivaRecibo>642.0</ivaRecibo>
     <totalRecibo>703.5</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="52">
+  <Recibo idRecibo="62">
     <Exencion>n</Exencion>
     <idFilaExcel>134</idFilaExcel>
     <nombre>Cruz</nombre>
@@ -689,7 +819,7 @@
     <ivaRecibo>481.5</ivaRecibo>
     <totalRecibo>527.625</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="53">
+  <Recibo idRecibo="63">
     <Exencion>n</Exencion>
     <idFilaExcel>136</idFilaExcel>
     <nombre>Hugo</nombre>
