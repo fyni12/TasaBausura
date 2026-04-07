@@ -145,13 +145,16 @@ public class Prac3 {
                         System.out.println("================================================================================");
                         System.out.printf("Contribuyente: %s %s %s, NIF: %s, IBAN: %s, Fecha alta: %s, Exención: %c\n",
                                 nombre, apellido1, apellido2, nif, iban, fechaAlta, exento);
-                        System.out.printf("Fecha del recibo: %s | Fecha del padrón: %s\n", LocalDate.now(), inicioPeriodo);
+                        System.out.printf("Fecha del recibo: %s | Fecha del padron: %s\n", LocalDate.now(), inicioPeriodo);
                         System.out.printf("Lectura de los kg de basura generados: %d\n", kgGenerados);
                         System.out.println("Líneas del recibo:");
 
                         if (exento == 'n') {
-                            bonificacion = excel.getInt(row, ExcelColumn.BONIFICACION);
-                            String[] conceptos = excel.getString(row, ExcelColumn.CONCEPTOS_A_COBRAR).trim().split("\\s+");
+                            String conceptosRaw = excel.getString(row, ExcelColumn.CONCEPTOS_A_COBRAR);
+                            if (conceptosRaw == null || conceptosRaw.isBlank()) {
+                                continue;
+                            }
+                            String[] conceptos = conceptosRaw.trim().split("\\s+");
 
                             for (String conceptoStr : conceptos) {
                                 int idConcepto = Integer.parseInt(conceptoStr);
@@ -159,13 +162,13 @@ public class Prac3 {
                                 // Cálculo individual por línea de concepto
                                 double baseLinea = ordmanager.calculate(bonificacion, kgGenerados, idConcepto);
                                 double porcentajeIva = ordmanager.getIva(idConcepto);
-                                double ivaLinea = baseLinea * porcentajeIva;
+                                double ivaLinea = ordmanager.calculateIva(bonificacion, kgGenerados, idConcepto);
 
                                 baseImponible += baseLinea;
                                 iva += ivaLinea;
 
-                                System.out.printf("  -> Concepto ID: %d | Base imp: %.2f€ | IVA: %.0f%% | Imp. IVA: %.2f€ | Bonific: %d%%\n",
-                                        idConcepto, baseLinea, (porcentajeIva * 100), ivaLinea, bonificacion);
+                                System.out.printf(" -> Concepto ID: %d | Base imp: %.2f € | IVA: %.2f%% | Imp. IVA: %.2f € | Bonific: %d%%\n",
+                                        idConcepto, baseLinea, porcentajeIva, ivaLinea, bonificacion);
                             }
                         } else {
                             System.out.println("  -> Contribuyente EXENTO de pago.");
@@ -174,7 +177,7 @@ public class Prac3 {
                         double totalRecibo = baseImponible + iva;
                         totalPadron += totalRecibo;
 
-                        System.out.printf("Tipo cálculo: Ordinario | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€\n",
+                        System.out.printf("Tipo calculo: Ordinario | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€\n",
                                 baseImponible, iva, totalRecibo);
                         System.out.println("================================================================================\n");
 

@@ -80,7 +80,7 @@ public final class XmlManager {
             Element recibo = new Element("Recibo");
             recibo.setAttribute("idRecibo", String.valueOf(rec.getIdRecibo()));
 
-            recibo.addContent(new Element("Exencion").setText(nullToEmpty(rec.getExencion())));
+            recibo.addContent(new Element("Exencion").setText(nullToEmpty(rec.getExencion().toUpperCase())));
             recibo.addContent(new Element("idFilaExcel").setText(String.valueOf(rec.getIdFilaExcel())));
             recibo.addContent(new Element("nombre").setText(nullToEmpty(rec.getNombre())));
             recibo.addContent(new Element("primerApellido").setText(nullToEmpty(rec.getPrimerApellido())));
