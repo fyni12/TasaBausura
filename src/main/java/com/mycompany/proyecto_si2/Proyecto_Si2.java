@@ -77,8 +77,10 @@ public class Proyecto_Si2 {
          *
          */
         //INICIO PRÁCTICA 2
+        
+        
         try {
-            Path resources = Paths.get("src", "main", "resources");
+            Path resources = Paths.get("resources");
             Path excel = resources.resolve("SistemasBasura.xlsx");
 
             PracticaBasuraService service = new PracticaBasuraService(excel, resources);
@@ -88,6 +90,7 @@ public class Proyecto_Si2 {
             Scanner sc = new Scanner(System.in);
             System.out.print("Introduzca el periodo impositivo (Ej. 1T 2026): ");
             String periodo = sc.nextLine();
+            
 
             Prac3 prac3 = new Prac3(excel, resources);
             prac3.procesar(periodo);

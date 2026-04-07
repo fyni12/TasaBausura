@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+
 public class OrdenanzaManager {
 
     private final List<Ordenanza> ordenanzas = new ArrayList<>();
@@ -30,15 +31,14 @@ public class OrdenanzaManager {
 
     public double calculateIva(int bonificacion, int kgGen, int id) {
         BigDecimal base = calcularBaseBonificada(id, kgGen, bonificacion);
-        System.out.println(base.toString());
+        
         BigDecimal iva = porcentaje(getIva(id));
         return redondear(base.multiply(iva)).doubleValue();
     }
 
     public double calculateTotal(int bonificacion, int kgGen, int id) {
         BigDecimal base = calcularBaseBonificada(id, kgGen, bonificacion);
-        System.out.println("hola buenos dias");
-        System.out.println(id+"- "+base);
+       
         BigDecimal iva = redondear(base.multiply(porcentaje(getIva(id))));
         return redondear(base.add(iva)).doubleValue();
     }
@@ -76,16 +76,16 @@ public class OrdenanzaManager {
         BigDecimal base = obtenerPrecioFijo(aplicables);
 
         if (cabecera.getConceptoRelacionado() != 0) {
+            
             BigDecimal baseRelacionado = calcularBaseSinBonificar(cabecera.getConceptoRelacionado(), kgOriginal);
             BigDecimal porcentajeRelacionado = porcentaje(cabecera.getPorcentaje());
             return redondear(base.add(baseRelacionado.multiply(porcentajeRelacionado)));
         }
-
         base = base.add(calcularImportePorKg(aplicables, kgOriginal));
         return redondear(base);
     }
 
-    private BigDecimal calcularImportePorKg(List<Ordenanza> aplicables, int kgGenerados) {
+   private BigDecimal calcularImportePorKg(List<Ordenanza> aplicables, int kgGenerados) {
     List<Ordenanza> tramos = getTramos(aplicables);
 
     if (tramos.isEmpty()) {
@@ -98,17 +98,18 @@ public class OrdenanzaManager {
     }
 
     boolean acumulable = esProgresivo(aplicables);
-    int exceso = kgGenerados - kgMinimoIncluido;
+    int exceso = kgGenerados - kgMinimoIncluido; // ← CORRECCIÓN: restar siempre
 
     if (acumulable) {
         return calcularTramoUnico(tramos, kgGenerados, exceso);
     } else {
-        return calcularTramosProgresivos(tramos, exceso);
+        return calcularTramosProgresivos(tramos, exceso); // ahora recibe 111, no 121
     }
 }
 
     private BigDecimal calcularTramosProgresivos(List<Ordenanza> tramos, int exceso) {
         int restante = exceso;
+        BigDecimal lastPrice=BigDecimal.ZERO;
         BigDecimal total = BigDecimal.ZERO;
 
         for (Ordenanza tramo : tramos) {
@@ -128,28 +129,42 @@ public class OrdenanzaManager {
 
             total = total.add(precioKg.multiply(BigDecimal.valueOf(kgEnTramo)));
             restante -= kgEnTramo;
+            lastPrice=precioKg;
         }
+        
+        
+        if(restante>0){
+           total= total.add(lastPrice.multiply(new BigDecimal(restante)));
+        }
+        
+        
 
         return redondear(total);
     }
 
-    private BigDecimal calcularTramoUnico(List<Ordenanza> tramos, int kgGenerados, int exceso) {
-        int pendiente = exceso;
-        BigDecimal precioSeleccionado = bd(tramos.get(tramos.size() - 1).getPreciokg());
+   private BigDecimal calcularTramoUnico(List<Ordenanza> tramos, int kgGenerados, int exceso) {
+    int pendiente = exceso;
+    BigDecimal precioSeleccionado = BigDecimal.ZERO;
 
-        for (Ordenanza tramo : tramos) {
-            int ancho = normalizarKgTramo(tramo.getKgincluidos());
+    for (Ordenanza tramo : tramos) {
+        int ancho = normalizarKgTramo(tramo.getKgincluidos());
+
+        if (ancho == Integer.MAX_VALUE || pendiente <= ancho) {
             precioSeleccionado = bd(tramo.getPreciokg());
-
-            if (ancho == Integer.MAX_VALUE || pendiente <= ancho) {
-                break;
-            }
-
-            pendiente -= ancho;
+            break;
         }
 
-        return redondear(precioSeleccionado.multiply(BigDecimal.valueOf(kgGenerados)));
+        pendiente -= ancho;
     }
+
+    if (precioSeleccionado.compareTo(BigDecimal.ZERO) == 0) {
+        precioSeleccionado = bd(tramos.get(tramos.size() - 1).getPreciokg());
+    }
+
+    return redondear(precioSeleccionado.multiply(BigDecimal.valueOf(kgGenerados)));
+}
+    
+
 
     private List<Ordenanza> getOrdenanzasById(int id) {
         if (!indexed) {
@@ -159,35 +174,30 @@ public class OrdenanzaManager {
     }
 
     private void reindexar() {
-        indexadas.clear();
+    indexadas.clear();
 
-        for (Ordenanza ord : ordenanzas) {
-            indexadas.computeIfAbsent(ord.getIdOrdenanza(), k -> new ArrayList<>()).add(ord);
-        }
-
-        for (List<Ordenanza> lista : indexadas.values()) {
-            lista.sort(
-                Comparator
-                    .comparing((Ordenanza o) -> o.getPrecioFijo() > 0 ? 0 : 1)
-                    .thenComparing(o -> normalizarKgOrdenacion(o.getKgincluidos()))
-            );
-        }
-
-        indexed = true;
+    for (Ordenanza ord : ordenanzas) {
+        indexadas.computeIfAbsent(ord.getIdOrdenanza(), k -> new ArrayList<>()).add(ord);
     }
+
+    for (List<Ordenanza> lista : indexadas.values()) {
+        lista.sort(Comparator.comparing((Ordenanza o) -> o.getPrecioFijo() > 0 ? 0 : 1));
+    }
+
+    indexed = true;
+}
 
     private List<Ordenanza> getTramos(List<Ordenanza> aplicables) {
-        List<Ordenanza> tramos = new ArrayList<>();
+    List<Ordenanza> tramos = new ArrayList<>();
 
-        for (Ordenanza ord : aplicables) {
-            if (ord.getPreciokg() > 0) {
-                tramos.add(ord);
-            }
+    for (Ordenanza ord : aplicables) {
+        if (ord.getPreciokg() > 0) {
+            tramos.add(ord);
         }
-
-        tramos.sort(Comparator.comparing(o -> normalizarKgOrdenacion(o.getKgincluidos())));
-        return tramos;
     }
+
+    return tramos;
+}
 
     private int getKgMinimoIncluido(List<Ordenanza> aplicables) {
         for (Ordenanza ord : aplicables) {

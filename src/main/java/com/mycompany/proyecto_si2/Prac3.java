@@ -18,7 +18,7 @@ public class Prac3 {
 
     private final Path excelPath;
     private final Path resourcesDir;
-    private OrdenanzaManager ordmanager = new OrdenanzaManager();
+    private final OrdenanzaManager ordmanager = new OrdenanzaManager();
 
     public Prac3(Path excelPath, Path resourcesDir) {
 
@@ -150,13 +150,17 @@ public class Prac3 {
                         System.out.println("Líneas del recibo:");
 
                         if (exento == 'n') {
+                            
                             String conceptosRaw = excel.getString(row, ExcelColumn.CONCEPTOS_A_COBRAR);
                             if (conceptosRaw == null || conceptosRaw.isBlank()) {
+                                                            
+
                                 continue;
                             }
                             String[] conceptos = conceptosRaw.trim().split("\\s+");
 
                             for (String conceptoStr : conceptos) {
+
                                 int idConcepto = Integer.parseInt(conceptoStr);
 
                                 // Cálculo individual por línea de concepto
@@ -206,7 +210,7 @@ public class Prac3 {
             //Generacion del XML
             String fechaPadron = inicioPeriodo.toString();
             Path xmlPath = resourcesDir.resolve("Recibos.xml");
-            XmlManager.escribirRecibos(xmlPath, fechaPadron, totalPadron, numeroTotalRecibos, recibos);
+            XmlManager.escribirRecibos(xmlPath, periodo, totalPadron, numeroTotalRecibos, recibos);
 
             System.out.println("Fichero Recibos.xml generado correctamente con " + recibos.size() + " recibos.");
         }
