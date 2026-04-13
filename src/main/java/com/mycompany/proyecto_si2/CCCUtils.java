@@ -54,23 +54,23 @@ public final class CCCUtils {
         }
     }
 
-    public static Resultado validarYCorregir(String rawCcc, String rawPais) {
-        String ccc = normalizarCCC(rawCcc);
-        String pais = normalizarPais(rawPais);
+   public static Resultado validarYCorregir(String rawCcc, String rawPais) {
+    String ccc = normalizarCCC(rawCcc);
+    String pais = normalizarPais(rawPais);
 
-        if (ccc == null || !ccc.matches("\\d{20}") || pais == null || !pais.matches("[A-Z]{2}")) {
-            return new Resultado(Estado.ERRONEO, rawCcc, null, null, "IMPOSIBLE GENERAR IBAN");
-        }
-
-        String corregido = corregirCCC(ccc);
-        String iban = calcularIBAN(corregido, pais);
-
-        if (ccc.equals(corregido)) {
-            return new Resultado(Estado.VALIDO, ccc, corregido, iban, null);
-        }
-
-        return new Resultado(Estado.SUBSANADO, ccc, corregido, iban, null);
+    if (ccc == null || !ccc.matches("\\d{20}") || pais == null || !pais.matches("[A-Z]{2}")) {
+        return new Resultado(Estado.ERRONEO, rawCcc, null, null, "IMPOSIBLE GENERAR IBAN");
     }
+
+    String corregido = corregirCCC(ccc);
+    String iban = calcularIBAN(corregido, pais);
+
+    if (ccc.equals(corregido)) {
+        return new Resultado(Estado.VALIDO, ccc, corregido, iban, null);
+    }
+
+    return new Resultado(Estado.SUBSANADO, ccc, corregido, iban, null);
+}
 
     public static String corregirCCC(String ccc) {
         String entidadOficina = ccc.substring(0, 8);

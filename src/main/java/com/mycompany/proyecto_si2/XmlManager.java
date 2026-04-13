@@ -16,19 +16,19 @@ public final class XmlManager {
     }
 
     public static void escribirErroresNifNie(Path path, List<NifIncidencia> incidencias) throws IOException {
-        Element raiz = new Element("contribuyentes");
+        Element raiz = new Element("Contribuyentes");
         Document doc = new Document(raiz);
 
         for (NifIncidencia inc : incidencias) {
-            Element contribuyente = new Element("contribuyente");
+            Element contribuyente = new Element("Contribuyente");
             contribuyente.setAttribute("id", String.valueOf(inc.getIdFilaExcel()));
-            contribuyente.addContent(new Element("nif_nie").setText(nullToEmpty(inc.getNifNie())));
-            contribuyente.addContent(new Element("nombre").setText(nullToEmpty(inc.getNombre())));
-            contribuyente.addContent(new Element("primer_apellido").setText(nullToEmpty(inc.getApellido1())));
+            contribuyente.addContent(new Element("NIF_NIE").setText(nullToEmpty(inc.getNifNie())));
+            contribuyente.addContent(new Element("Nombre").setText(nullToEmpty(inc.getNombre())));
+            contribuyente.addContent(new Element("PrimerApellido").setText(nullToEmpty(inc.getApellido1())));
             if (inc.getApellido2() != null && !inc.getApellido2().trim().isEmpty()) {
-                contribuyente.addContent(new Element("segundo_apellido").setText(inc.getApellido2().trim()));
+                contribuyente.addContent(new Element("SegundoApellido").setText(inc.getApellido2().trim()));
             }
-            contribuyente.addContent(new Element("tipo_error").setText(inc.getTipoError()));
+            contribuyente.addContent(new Element("TipoDeError").setText(inc.getTipoError()));
             raiz.addContent(contribuyente);
         }
 
