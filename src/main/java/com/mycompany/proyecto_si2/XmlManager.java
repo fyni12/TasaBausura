@@ -37,7 +37,7 @@ public final class XmlManager {
     }
 
     public static void escribirErroresCCC(Path path, List<CCCIncidencia> incidencias) throws IOException {
-        Element raiz = new Element("cuentas");
+        Element raiz = new Element("Cuentas");
         Document doc = new Document(raiz);
         
 
@@ -50,13 +50,13 @@ public final class XmlManager {
             cuenta.addContent(new Element("NIFNIE").setText(nullToEmpty(inc.getNifNie())));
             cuenta.addContent(new Element("CCCErroneo").setText(nullToEmpty(inc.getCccErroneo())));
 
-            if (inc.getIbanCorrecto() != null ) {
+            if (inc.getIbanCorrecto() != null &&! inc.getIbanCorrecto().trim().isEmpty() ) {
                 cuenta.addContent(new Element("IBANCorrecto").setText(inc.getIbanCorrecto()));
             }
 
             if (inc.getTipoError() != null && !inc.getTipoError().trim().isEmpty()) {
 
-                cuenta.addContent(new Element("TipoError").setText(inc.getTipoError()));
+                cuenta.addContent(new Element("TipoError").setText(inc.getTipoError())); 
             }
 
             raiz.addContent(cuenta);

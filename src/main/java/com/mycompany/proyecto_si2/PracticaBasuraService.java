@@ -90,7 +90,7 @@ public final class PracticaBasuraService {
 
                     if (cccResultado.getEstado() == CCCUtils.Estado.SUBSANADO) {
                         
-                        //excel.setString(row, ExcelColumn.CCC, cccResultado.getCccFinal());
+                        excel.setString(row, ExcelColumn.CCC, cccResultado.getCccFinal());
 
                         cccIncidencias.add(new CCCIncidencia(
                                 filaExcel,
@@ -124,6 +124,9 @@ public final class PracticaBasuraService {
         XmlManager.escribirErroresNifNie(resourcesDir.resolve("ErroresNifNie.xml"), nifIncidencias);
 
         XmlManager.escribirErroresCCC(resourcesDir.resolve("ErroresCCC.xml"), cccIncidencias);
+        
+        /*System.out.println("--------------------------------------------------------");
+        System.out.println("errores nifnie: " + nifIncidencias.size()+ "\nerrores ccc: "+ cccIncidencias.size());*/
                         
 
     }
