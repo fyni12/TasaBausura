@@ -89,7 +89,8 @@ public final class PracticaBasuraService {
                     cccApto = true;
 
                     if (cccResultado.getEstado() == CCCUtils.Estado.SUBSANADO) {
-                        excel.setString(row, ExcelColumn.CCC, cccResultado.getCccFinal());
+                        
+                        //excel.setString(row, ExcelColumn.CCC, cccResultado.getCccFinal());
 
                         cccIncidencias.add(new CCCIncidencia(
                                 filaExcel,
@@ -115,10 +116,16 @@ public final class PracticaBasuraService {
             }
 
             excel.save(resourcesDir.resolve("SistemasBasura.xlsx"));
+        }catch(Exception e){
+            System.out.println(e);
         }
+        
 
         XmlManager.escribirErroresNifNie(resourcesDir.resolve("ErroresNifNie.xml"), nifIncidencias);
+
         XmlManager.escribirErroresCCC(resourcesDir.resolve("ErroresCCC.xml"), cccIncidencias);
+                        
+
     }
 
     private String unirApellidos(String apellido1, String apellido2) {

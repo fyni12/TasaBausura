@@ -61,7 +61,6 @@ public final class CCCUtils {
     if (ccc == null || !ccc.matches("\\d{20}") || pais == null || !pais.matches("[A-Z]{2}")) {
         return new Resultado(Estado.ERRONEO, rawCcc, null, null, "IMPOSIBLE GENERAR IBAN");
     }
-
     String corregido = corregirCCC(ccc);
     String iban = calcularIBAN(corregido, pais);
 

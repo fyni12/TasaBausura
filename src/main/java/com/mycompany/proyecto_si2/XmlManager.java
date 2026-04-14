@@ -28,7 +28,8 @@ public final class XmlManager {
             if (inc.getApellido2() != null && !inc.getApellido2().trim().isEmpty()) {
                 contribuyente.addContent(new Element("SegundoApellido").setText(inc.getApellido2().trim()));
             }
-            contribuyente.addContent(new Element("TipoDeError").setText(inc.getTipoError()));
+            if(inc.getTipoError()!=null){
+            contribuyente.addContent(new Element("TipoDeError").setText(inc.getTipoError()));}
             raiz.addContent(contribuyente);
         }
 
@@ -38,21 +39,24 @@ public final class XmlManager {
     public static void escribirErroresCCC(Path path, List<CCCIncidencia> incidencias) throws IOException {
         Element raiz = new Element("cuentas");
         Document doc = new Document(raiz);
+        
 
         for (CCCIncidencia inc : incidencias) {
-            Element cuenta = new Element("cuenta");
+            
+            Element cuenta = new Element("Cuenta");
             cuenta.setAttribute("id", String.valueOf(inc.getIdFilaExcel()));
-            cuenta.addContent(new Element("nombre").setText(nullToEmpty(inc.getNombre())));
-            cuenta.addContent(new Element("apellidos").setText(nullToEmpty(inc.getApellidos())));
-            cuenta.addContent(new Element("nif_nie").setText(nullToEmpty(inc.getNifNie())));
-            cuenta.addContent(new Element("ccc_erroneo").setText(nullToEmpty(inc.getCccErroneo())));
+            cuenta.addContent(new Element("Nombre").setText(nullToEmpty(inc.getNombre())));
+            cuenta.addContent(new Element("Apellidos").setText(nullToEmpty(inc.getApellidos())));
+            cuenta.addContent(new Element("NIFNIE").setText(nullToEmpty(inc.getNifNie())));
+            cuenta.addContent(new Element("CCCErroneo").setText(nullToEmpty(inc.getCccErroneo())));
 
-            if (inc.getIbanCorrecto() != null && !inc.getIbanCorrecto().trim().isEmpty()) {
-                cuenta.addContent(new Element("iban_correcto").setText(inc.getIbanCorrecto()));
+            if (inc.getIbanCorrecto() != null ) {
+                cuenta.addContent(new Element("IBANCorrecto").setText(inc.getIbanCorrecto()));
             }
 
             if (inc.getTipoError() != null && !inc.getTipoError().trim().isEmpty()) {
-                cuenta.addContent(new Element("tipo_error").setText(inc.getTipoError()));
+
+                cuenta.addContent(new Element("TipoError").setText(inc.getTipoError()));
             }
 
             raiz.addContent(cuenta);
