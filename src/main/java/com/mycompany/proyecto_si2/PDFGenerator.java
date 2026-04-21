@@ -28,9 +28,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class PDFGenerator {
-    
-    
-    private static final String imgPath=Paths.get("resources").resolve("logo.png").toString();
+
+    private static final String imgPath = Paths.get("resources").resolve("logo.png").toString();
     private static final DecimalFormat DF;
 
     static {
@@ -124,12 +123,10 @@ public class PDFGenerator {
                 .setMinHeight(110)
                 .setVerticalAlignment(com.itextpdf.layout.properties.VerticalAlignment.MIDDLE);
 
-        
-            Image image = new Image(ImageDataFactory.create(imgPath));
-            image.scaleToFit(90, 90);
-            image.setHorizontalAlignment(HorizontalAlignment.LEFT);
-            logoCell.add(image);
-        
+        Image image = new Image(ImageDataFactory.create(imgPath));
+        image.scaleToFit(90, 90);
+        image.setHorizontalAlignment(HorizontalAlignment.LEFT);
+        logoCell.add(image);
 
         Cell destinatario = new Cell()
                 .setBorder(new SolidBorder(1))
@@ -207,9 +204,9 @@ public class PDFGenerator {
         }
 
         BigDecimal totalBase = data.totalBase != null ? data.totalBase : calculateTotalBase(data.lineas);
-BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(data.lineas);
+        BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(data.lineas);
 
-        tabla.addCell(new Cell(1, 4)
+        tabla.addCell(new Cell(1, 3)
                 .add(new Paragraph("TOTALES").setTextAlignment(TextAlignment.CENTER).setFontSize(10))
                 .setBorderTop(new SolidBorder(1.2f))
                 .setBorderBottom(Border.NO_BORDER)
@@ -228,11 +225,13 @@ BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(
                 .setPaddingBottom(8));
 
         tabla.addCell(new Cell()
-                .add(new Paragraph(""))
+                .add(new Paragraph("").setTextAlignment(TextAlignment.CENTER).setFontSize(10))
                 .setBorderTop(new SolidBorder(1.2f))
                 .setBorderBottom(Border.NO_BORDER)
                 .setBorderLeft(Border.NO_BORDER)
-                .setBorderRight(Border.NO_BORDER));
+                .setBorderRight(Border.NO_BORDER)
+                .setPaddingTop(8)
+                .setPaddingBottom(8));
 
         tabla.addCell(new Cell()
                 .add(new Paragraph(format(totalIva)).setTextAlignment(TextAlignment.RIGHT).setFontSize(10))
@@ -242,14 +241,13 @@ BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(
                 .setBorderRight(Border.NO_BORDER)
                 .setPaddingTop(8)
                 .setPaddingBottom(8));
-
         document.add(tabla);
     }
 
     private static void addResumenTotales(Document document, ReciboData data) {
-    BigDecimal totalBase = data.totalBase != null ? data.totalBase : calculateTotalBase(data.lineas);
-    BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(data.lineas);
-    BigDecimal totalRecibo = data.totalRecibo != null ? data.totalRecibo : totalBase.add(totalIva);
+        BigDecimal totalBase = data.totalBase != null ? data.totalBase : calculateTotalBase(data.lineas);
+        BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(data.lineas);
+        BigDecimal totalRecibo = data.totalRecibo != null ? data.totalRecibo : totalBase.add(totalIva);
 
         Table resumen = new Table(UnitValue.createPercentArray(new float[]{70, 30}))
                 .useAllAvailableWidth()
@@ -401,10 +399,10 @@ BigDecimal totalIva = data.totalIva != null ? data.totalIva : calculateTotalIva(
 
         public String tituloRecibo;
         public String logoPath;
-        
+
         public BigDecimal totalBase;
-public BigDecimal totalIva;
-public BigDecimal totalRecibo;
+        public BigDecimal totalIva;
+        public BigDecimal totalRecibo;
 
         public List<LineaConcepto> lineas = new ArrayList<>();
     }

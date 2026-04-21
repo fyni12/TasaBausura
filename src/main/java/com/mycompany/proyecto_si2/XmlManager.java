@@ -25,9 +25,8 @@ public final class XmlManager {
             contribuyente.addContent(new Element("NIF_NIE").setText(nullToEmpty(inc.getNifNie())));
             contribuyente.addContent(new Element("Nombre").setText(nullToEmpty(inc.getNombre())));
             contribuyente.addContent(new Element("PrimerApellido").setText(nullToEmpty(inc.getApellido1())));
-            if (inc.getApellido2() != null && !inc.getApellido2().trim().isEmpty()) {
-                contribuyente.addContent(new Element("SegundoApellido").setText(inc.getApellido2().trim()));
-            }
+            contribuyente.addContent(new Element("SegundoApellido").setText(inc.getApellido2() == null ? "" : inc.getApellido2().trim()));
+            
             if(inc.getTipoError()!=null){
             contribuyente.addContent(new Element("TipoDeError").setText(inc.getTipoError()));}
             raiz.addContent(contribuyente);

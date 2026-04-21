@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Contribuyentes>
+  <Contribuyente id="2">
+    <NIF_NIE>23432</NIF_NIE>
+    <Nombre>Juan</Nombre>
+    <PrimerApellido>Martinez</PrimerApellido>
+    <SegundoApellido>Dominguez</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
+  <Contribuyente id="3">
+    <NIF_NIE>345344</NIF_NIE>
+    <Nombre>Rubén Darío</Nombre>
+    <PrimerApellido>Fuertes</PrimerApellido>
+    <SegundoApellido>Montiel</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
   <Contribuyente id="4">
-    <NIF_NIE>07815963256</NIF_NIE>
+    <NIF_NIE>43532</NIF_NIE>
     <Nombre>Alencar</Nombre>
     <PrimerApellido>Lidiane</PrimerApellido>
     <SegundoApellido>Morala</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
+  <Contribuyente id="5">
+    <NIF_NIE>445454</NIF_NIE>
+    <Nombre>Alencar</Nombre>
+    <PrimerApellido>Lidiane</PrimerApellido>
+    <SegundoApellido>Nuñez</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
+  <Contribuyente id="9">
+    <NIF_NIE>54332</NIF_NIE>
+    <Nombre>Vittorio</Nombre>
+    <PrimerApellido>Baglione</PrimerApellido>
+    <SegundoApellido>Pardo</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
   <Contribuyente id="11">
-    <NIF_NIE>09632539R</NIF_NIE>
+    <NIF_NIE>234322</NIF_NIE>
     <Nombre>Mauro</Nombre>
     <PrimerApellido>Aparicio</PrimerApellido>
     <SegundoApellido>Pérez</SegundoApellido>
-    <TipoDeError>NIF DUPLICADO</TipoDeError>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
   <Contribuyente id="13">
     <NIF_NIE>09632539R</NIF_NIE>
@@ -28,46 +56,60 @@
     <SegundoApellido>Prieto</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
-  <Contribuyente id="16">
-    <NIF_NIE>25415</NIF_NIE>
-    <Nombre>Latifa Epfouad Erre</Nombre>
-    <PrimerApellido>Boughaza</PrimerApellido>
-    <SegundoApellido>Robles</SegundoApellido>
+  <Contribuyente id="21">
+    <NIF_NIE>a8276465</NIF_NIE>
+    <Nombre>Clementina</Nombre>
+    <PrimerApellido>Iglesias</PrimerApellido>
+    <SegundoApellido>Sánchez</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
-  <Contribuyente id="17">
-    <NIF_NIE>x71563258p</NIF_NIE>
-    <Nombre>Saaida</Nombre>
-    <PrimerApellido>Boughaza</PrimerApellido>
-    <SegundoApellido>Robles</SegundoApellido>
+  <Contribuyente id="29">
+    <NIF_NIE>J7364567B</NIF_NIE>
+    <Nombre>Genaro</Nombre>
+    <PrimerApellido>Moncada</PrimerApellido>
+    <SegundoApellido>Morala</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
-  <Contribuyente id="18">
-    <NIF_NIE>1234567890</NIF_NIE>
-    <Nombre>Antonio</Nombre>
-    <PrimerApellido>García</PrimerApellido>
+  <Contribuyente id="39">
+    <NIF_NIE>01234567L</NIF_NIE>
+    <Nombre>Sara</Nombre>
+    <PrimerApellido>Flórez</PrimerApellido>
+    <SegundoApellido>Prieto</SegundoApellido>
+    <TipoDeError>NIF DUPLICADO</TipoDeError>
+  </Contribuyente>
+  <Contribuyente id="44">
+    <NIF_NIE>12345678Z</NIF_NIE>
+    <Nombre>Generoso</Nombre>
+    <PrimerApellido>Pisabarro</PrimerApellido>
     <SegundoApellido>Rodríguez</SegundoApellido>
-    <TipoDeError>NIF ERRONEO</TipoDeError>
+    <TipoDeError>NIF DUPLICADO</TipoDeError>
   </Contribuyente>
-  <Contribuyente id="19">
-    <NIF_NIE>10150</NIF_NIE>
-    <Nombre>Dorina</Nombre>
-    <PrimerApellido>González</PrimerApellido>
-    <SegundoApellido>Rodríguez</SegundoApellido>
-    <TipoDeError>NIF ERRONEO</TipoDeError>
-  </Contribuyente>
-  <Contribuyente id="20">
-    <NIF_NIE>a56783</NIF_NIE>
-    <Nombre>Pilar</Nombre>
-    <PrimerApellido>González</PrimerApellido>
-    <SegundoApellido>Salas</SegundoApellido>
-    <TipoDeError>NIF ERRONEO</TipoDeError>
+  <Contribuyente id="50">
+    <NIF_NIE>12345678Z</NIF_NIE>
+    <Nombre>Israel</Nombre>
+    <PrimerApellido>Amo</PrimerApellido>
+    <SegundoApellido>Gomara</SegundoApellido>
+    <TipoDeError>NIF DUPLICADO</TipoDeError>
   </Contribuyente>
   <Contribuyente id="54">
     <NIF_NIE>ss738010V</NIF_NIE>
     <Nombre>Alencar</Nombre>
     <PrimerApellido>Pasado</PrimerApellido>
     <SegundoApellido>Guerra</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
+  <Contribuyente id="60">
+    <NIF_NIE>25632</NIF_NIE>
+    <Nombre>Adolfo</Nombre>
+    <PrimerApellido>Puerto</PrimerApellido>
+    <SegundoApellido>Márquez</SegundoApellido>
+    <TipoDeError>NIF ERRONEO</TipoDeError>
+  </Contribuyente>
+  <Contribuyente id="61">
+    <NIF_NIE>1234567890</NIF_NIE>
+    <Nombre>Giovani</Nombre>
+    <PrimerApellido>Morán</PrimerApellido>
+    <SegundoApellido>Martinez</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
   <Contribuyente id="67">
@@ -77,11 +119,11 @@
     <SegundoApellido>García</SegundoApellido>
     <TipoDeError>NIF DUPLICADO</TipoDeError>
   </Contribuyente>
-  <Contribuyente id="77">
-    <NIF_NIE>X3387K</NIF_NIE>
-    <Nombre>Federico</Nombre>
-    <PrimerApellido>Díez</PrimerApellido>
-    <SegundoApellido>Laiz</SegundoApellido>
+  <Contribuyente id="72">
+    <NIF_NIE>2563254178</NIF_NIE>
+    <Nombre>Vittorio</Nombre>
+    <PrimerApellido>Vara</PrimerApellido>
+    <SegundoApellido>González</SegundoApellido>
     <TipoDeError>NIF ERRONEO</TipoDeError>
   </Contribuyente>
   <Contribuyente id="83">
@@ -95,6 +137,7 @@
     <NIF_NIE>Y1337652D</NIF_NIE>
     <Nombre>Marta</Nombre>
     <PrimerApellido>Herrero</PrimerApellido>
+    <SegundoApellido />
     <TipoDeError>NIF DUPLICADO</TipoDeError>
   </Contribuyente>
   <Contribuyente id="94">

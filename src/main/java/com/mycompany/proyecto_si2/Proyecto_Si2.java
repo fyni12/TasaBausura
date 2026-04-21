@@ -77,9 +77,8 @@ public class Proyecto_Si2 {
          *
          */
         //INICIO PRÁCTICA 2
-        
-        
         try {
+            vaciarTablas(em);
             Path resources = Paths.get("resources");
             Path excel = resources.resolve("SistemasBasura.xlsx");
 
@@ -90,9 +89,8 @@ public class Proyecto_Si2 {
             Scanner sc = new Scanner(System.in);
             System.out.print("Introduzca el periodo impositivo (Ej. 1T 2026): ");
             String periodo = sc.nextLine();
-            
 
-            Prac3 prac3 = new Prac3(excel, resources);
+            Prac3 prac3 = new Prac3(excel, resources, em);
             prac3.procesar(periodo);
 
             System.out.println("Practica completada correctamente.");
@@ -100,5 +98,26 @@ public class Proyecto_Si2 {
             e.printStackTrace();
         }
 
+    }
+
+    private static void vaciarTablas(EntityManager em) {
+        try {
+            em.getTransaction().begin();
+
+            em.createNativeQuery("DELETE FROM lineasrecibo").executeUpdate();
+            em.createNativeQuery("DELETE FROM lecturas").executeUpdate();
+            em.createNativeQuery("DELETE FROM recibos").executeUpdate();
+            em.createNativeQuery("DELETE FROM ordenanza").executeUpdate();
+                        em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
+
+
+            em.getTransaction().commit();
+            System.out.println("Tablas vaciadas correctamente.");
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }
