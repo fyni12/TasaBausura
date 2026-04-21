@@ -108,7 +108,7 @@ public class Proyecto_Si2 {
             em.createNativeQuery("DELETE FROM lecturas").executeUpdate();
             em.createNativeQuery("DELETE FROM recibos").executeUpdate();
             em.createNativeQuery("DELETE FROM ordenanza").executeUpdate();
-                        em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
+            em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
 
 
             em.getTransaction().commit();

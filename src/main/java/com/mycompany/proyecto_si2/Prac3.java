@@ -76,10 +76,6 @@ public class Prac3 {
                     continue;
                 }
 
-                
-
-                
-
                 int id = idObj;
                 String concepto = ordenanzas.getString(row, ExcelColumn.CONCEPTO);
                 String subconcepto = ordenanzas.getString(row, ExcelColumn.SUBCONCEPTO);
@@ -161,6 +157,9 @@ public class Prac3 {
                 String iban = resolveIban(excel, row);
                 String direccion = safe(excel.getString(row, ExcelColumn.DIRECCION));
                 String email = safe(excel.getString(row, ExcelColumn.EMAIL));
+                String numero = safe(excel.getString(row, ExcelColumn.NUMERO));
+                String paisCCC = safe(excel.getString(row, ExcelColumn.PAIS_CCC));
+                String ccc = safe(excel.getString(row, ExcelColumn.CCC));
 
                 System.out.println("================================================================================");
                 System.out.printf("Contribuyente: %s %s %s, NIF: %s, IBAN: %s, Fecha alta: %s, Exención: %c%n",
@@ -251,27 +250,27 @@ public class Prac3 {
                 pdfData.poblacionDestinatario = puebloPdf;
                 if (esAptoParaBD(excel, row, nifVistosBd)) {
 
-                BigDecimal totalRecibo = baseImponible.add(iva);
-                totalBasePadron = totalBasePadron.add(baseImponible);
-                totalIvaPadron = totalIvaPadron.add(iva);
+                    BigDecimal totalRecibo = baseImponible.add(iva);
+                    totalBasePadron = totalBasePadron.add(baseImponible);
+                    totalIvaPadron = totalIvaPadron.add(iva);
 
-                pdfData.totalBase = baseImponible;
-                pdfData.totalIva = iva;
-                pdfData.totalRecibo = totalRecibo;
+                    pdfData.totalBase = baseImponible;
+                    pdfData.totalIva = iva;
+                    pdfData.totalRecibo = totalRecibo;
 
-                System.out.printf("Tipo calculo: %s | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€%n",
-                        tipoCalculoPdf,
-                        baseImponible.doubleValue(),
-                        iva.doubleValue(),
-                        totalRecibo.doubleValue());
-                System.out.println("================================================================================\n");
+                    System.out.printf("Tipo calculo: %s | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€%n",
+                            tipoCalculoPdf,
+                            baseImponible.doubleValue(),
+                            iva.doubleValue(),
+                            totalRecibo.doubleValue());
+                    System.out.println("================================================================================\n");
 
-                String nifParaNombre = nif.isBlank() ? "SIN_NIF" : nif;
-                String nombrePdf = sanitizeFileName(
-                        nifParaNombre + "_" + nombre + "_" + apellido1 + "_" + apellido2 + "_T" + trimestre + "_" + year + ".pdf"
-                );
+                    String nifParaNombre = nif.isBlank() ? "SIN_NIF" : nif;
+                    String nombrePdf = sanitizeFileName(
+                            nifParaNombre + "_" + nombre + "_" + apellido1 + "_" + apellido2 + "_T" + trimestre + "_" + year + ".pdf"
+                    );
 
-                PDFGenerator.generatePdf(recibosDir.resolve(nombrePdf).toString(), pdfData);
+                    PDFGenerator.generatePdf(recibosDir.resolve(nombrePdf).toString(), pdfData);
 
                     Recibo recibo = new Recibo();
                     recibo.setBaseImponibleRecibo(baseImponible.doubleValue());
@@ -318,6 +317,10 @@ public class Prac3 {
 
                     reg.idsConcepto.addAll(idsConceptoRecibo);
                     reg.lineas.addAll(copiarLineas(pdfData.lineas));
+                    reg.numero = numero;
+                    reg.paisCCC = paisCCC;
+                    reg.ccc = ccc;
+                    reg.fechaBaja = fechaBaja;
 
                     registrosBD.add(reg);
 
@@ -423,9 +426,16 @@ public class Prac3 {
         try {
             Set<String> ordenanzasPersistidas = new HashSet<>();
 
+            Set<String> contribuyentesProcesados = new HashSet<>();
+
             for (RegistroBD r : registros) {
-                upsertContribuyente(r);
-                r.idContribuyente = obtenerIdContribuyenteBD(r.nif, r.fechaAlta);
+                String keyContribuyente = safe(r.nombre) + "|" + safe(r.nif) + "|" + r.fechaAlta;
+
+                if (contribuyentesProcesados.add(keyContribuyente)) {
+                    upsertContribuyente(r);
+                }
+
+                r.idContribuyente = obtenerIdContribuyenteBD(r.nombre, r.nif, r.fechaAlta);
                 upsertLectura(r);
 
                 for (Integer idConcepto : r.idsConcepto) {
@@ -453,47 +463,80 @@ public class Prac3 {
 
     private void upsertContribuyente(RegistroBD r) {
         Query q = em.createNativeQuery(
-                "SELECT COUNT(*) FROM contribuyente WHERE nombre = ? AND nifnie = ? AND fechaAlta = ?"
+                "SELECT idContribuyente "
+                + "FROM contribuyente "
+                + "WHERE nombre = ? AND NIFNIE = ? AND fechaAlta = ?"
         );
-        q.setParameter(1, r.nombre);
-        q.setParameter(2, r.nif);
+        q.setParameter(1, safe(r.nombre));
+        q.setParameter(2, safe(r.nif));
         q.setParameter(3, Date.valueOf(r.fechaAlta));
 
-        Number n = (Number) q.getSingleResult();
+        List<?> res = q.getResultList();
 
-        if (n.intValue() > 0) {
+        if (!res.isEmpty()) {
+            Object id = res.get(0);
+
             Query update = em.createNativeQuery(
                     "UPDATE contribuyente "
-                    + "SET apellido1 = ?, apellido2 = ?, direccion = ?, iban = ?, exencion = ?, bonificacion = ? "
-                    + "WHERE nombre = ? AND nifnie = ? AND fechaAlta = ?"
+                    + "SET apellido1 = ?, "
+                    + "apellido2 = ?, "
+                    + "direccion = ?, "
+                    + "numero = ?, "
+                    + "paisCCC = ?, "
+                    + "CCC = ?, "
+                    + "IBAN = ?, "
+                    + "eEmail = ?, "
+                    + "exencion = ?, "
+                    + "bonificacion = ?, "
+                    + "fechaBaja = ? "
+                    + "WHERE idContribuyente = ?"
             );
-            update.setParameter(1, r.apellido1);
-            update.setParameter(2, r.apellido2);
-            update.setParameter(3, r.direccion);
-            update.setParameter(4, r.iban);
-            update.setParameter(5, r.exencion);
-            update.setParameter(6, r.bonificacion);
-            update.setParameter(7, r.nombre);
-            update.setParameter(8, r.nif);
-            update.setParameter(9, Date.valueOf(r.fechaAlta));
+            update.setParameter(1, emptyToNull(r.apellido1));
+            update.setParameter(2, emptyToNull(r.apellido2));
+            update.setParameter(3, emptyToNull(r.direccion));
+            update.setParameter(4, emptyToNull(r.numero));
+            update.setParameter(5, emptyToNull(r.paisCCC));
+            update.setParameter(6, emptyToNull(r.ccc));
+            update.setParameter(7, emptyToNull(r.iban));
+            update.setParameter(8, emptyToNull(r.email));
+            update.setParameter(9, charOrNull(r.exencion));
+            update.setParameter(10, bonificacionOrNull(r.bonificacion));
+            update.setParameter(11, r.fechaBaja != null ? Date.valueOf(r.fechaBaja) : null);
+            update.setParameter(12, id);
+
             update.executeUpdate();
         } else {
             Query insert = em.createNativeQuery(
                     "INSERT INTO contribuyente "
-                    + "(nombre, apellido1, apellido2, nifnie, direccion, iban, fechaAlta, exencion, bonificacion) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    + "(nombre, apellido1, apellido2, NIFNIE, direccion, numero, paisCCC, CCC, IBAN, eEmail, fechaAlta, fechaBaja, exencion, bonificacion) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
-            insert.setParameter(1, r.nombre);
-            insert.setParameter(2, r.apellido1);
-            insert.setParameter(3, r.apellido2);
-            insert.setParameter(4, r.nif);
-            insert.setParameter(5, r.direccion);
-            insert.setParameter(6, r.iban);
-            insert.setParameter(7, Date.valueOf(r.fechaAlta));
-            insert.setParameter(8, r.exencion);
-            insert.setParameter(9, r.bonificacion);
+            insert.setParameter(1, safe(r.nombre));
+            insert.setParameter(2, emptyToNull(r.apellido1));
+            insert.setParameter(3, emptyToNull(r.apellido2));
+            insert.setParameter(4, safe(r.nif));
+            insert.setParameter(5, emptyToNull(r.direccion));
+            insert.setParameter(6, emptyToNull(r.numero));
+            insert.setParameter(7, emptyToNull(r.paisCCC));
+            insert.setParameter(8, emptyToNull(r.ccc));
+            insert.setParameter(9, emptyToNull(r.iban));
+            insert.setParameter(10, emptyToNull(r.email));
+            insert.setParameter(11, Date.valueOf(r.fechaAlta));
+            insert.setParameter(12, r.fechaBaja != null ? Date.valueOf(r.fechaBaja) : null);
+            insert.setParameter(13, charOrNull(r.exencion));
+            insert.setParameter(14, bonificacionOrNull(r.bonificacion));
+
             insert.executeUpdate();
         }
+    }
+
+    private Character charOrNull(String s) {
+        String v = safe(s);
+        return v.isBlank() ? null : v.charAt(0);
+    }
+
+    private Double bonificacionOrNull(int bonificacion) {
+        return bonificacion > 0 ? Double.valueOf(bonificacion) : null;
     }
 
     private void upsertLectura(RegistroBD r) {
@@ -927,8 +970,11 @@ public class Prac3 {
         String apellido1;
         String apellido2;
         String direccion;
+        String numero;       // AÑADIR
         String ayuntamiento;
         String iban;
+        String paisCCC;      // AÑADIR
+        String ccc;          // AÑADIR
         String exencion;
         String email;
         String idContribuyente;
@@ -937,6 +983,7 @@ public class Prac3 {
         int kgGenerados;
 
         LocalDate fechaAlta;
+        LocalDate fechaBaja; // AÑADIR
         LocalDate fechaPadron;
         LocalDate fechaRecibo;
 
@@ -953,12 +1000,13 @@ public class Prac3 {
         return v.isBlank() ? null : v;
     }
 
-    private String obtenerIdContribuyenteBD(String nif, LocalDate fechaAlta) {
+    private String obtenerIdContribuyenteBD(String nombre, String nif, LocalDate fechaAlta) {
         Query q = em.createNativeQuery(
-                "SELECT idContribuyente FROM contribuyente WHERE nifnie = ? AND fechaAlta = ?"
+                "SELECT idContribuyente FROM contribuyente WHERE nombre = ? AND nifnie = ? AND fechaAlta = ?"
         );
-        q.setParameter(1, nif);
-        q.setParameter(2, Date.valueOf(fechaAlta));
+        q.setParameter(1, safe(nombre));
+        q.setParameter(2, safe(nif));
+        q.setParameter(3, Date.valueOf(fechaAlta));
 
         List<?> res = q.getResultList();
         if (res.isEmpty()) {
