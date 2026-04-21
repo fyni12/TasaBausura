@@ -11,6 +11,7 @@ target/
 *.zip
 *.tar.gz
 *.rar
+*.pdf
 hs_err_pid*
 replay_pid*
 

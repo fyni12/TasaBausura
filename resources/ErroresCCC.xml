@@ -1,346 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Cuentas>
-  <Cuenta id="2">
-    <Nombre>Juan</Nombre>
-    <Apellidos>Martinez Dominguez</Apellidos>
-    <NIFNIE>23432</NIFNIE>
-    <CCCErroneo>31645124443461205100</CCCErroneo>
-    <IBANCorrecto>DK8231645124453461205100</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="3">
-    <Nombre>Rubén Darío</Nombre>
-    <Apellidos>Fuertes Montiel</Apellidos>
-    <NIFNIE>345344</NIFNIE>
-    <CCCErroneo>65614874165615445600</CCCErroneo>
-    <IBANCorrecto>ES4865614874115615445600</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="4">
-    <Nombre>Alencar</Nombre>
-    <Apellidos>Lidiane Morala</Apellidos>
-    <NIFNIE>43532</NIFNIE>
-    <CCCErroneo>32569523016220165100</CCCErroneo>
-    <IBANCorrecto>RO0232569523086220165100</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="5">
-    <Nombre>Alencar</Nombre>
-    <Apellidos>Lidiane Nuñez</Apellidos>
-    <NIFNIE>445454</NIFNIE>
-    <CCCErroneo>245619375215464975</CCCErroneo>
+  <Cuenta id="9">
+    <Nombre>Vittorio</Nombre>
+    <Apellidos>Baglione Pardo</Apellidos>
+    <NIFNIE>96523658H</NIFNIE>
+    <CCCErroneo>216514846909800111</CCCErroneo>
     <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
-  </Cuenta>
-  <Cuenta id="7">
-    <Nombre>Soledad</Nombre>
-    <Apellidos>Diez Orejas</Apellidos>
-    <NIFNIE>09632539R</NIFNIE>
-    <CCCErroneo>21584976902154655485</CCCErroneo>
-    <IBANCorrecto>ES9621584976912154655485</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="11">
-    <Nombre>Mauro</Nombre>
-    <Apellidos>Aparicio Pérez</Apellidos>
-    <NIFNIE>234322</NIFNIE>
-    <CCCErroneo>21564975243245467900</CCCErroneo>
-    <IBANCorrecto>ES9521564975263245467900</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="13">
-    <Nombre>Luis</Nombre>
-    <Apellidos>Benito Prieto</Apellidos>
-    <NIFNIE>09632539R</NIFNIE>
-    <CCCErroneo>2321546531545641151567</CCCErroneo>
-    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
-  </Cuenta>
-  <Cuenta id="14">
-    <Nombre>Armando</Nombre>
-    <Apellidos>García Prieto</Apellidos>
-    <NIFNIE>1523685</NIFNIE>
-    <CCCErroneo>00750184310702510003</CCCErroneo>
-    <IBANCorrecto>BE5600750184350702510003</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="18">
-    <Nombre>Antonio</Nombre>
-    <Apellidos>García Rodríguez</Apellidos>
-    <NIFNIE>83647564Z</NIFNIE>
-    <CCCErroneo>25030000104574745400</CCCErroneo>
-    <IBANCorrecto>AT7125030000194574745400</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="20">
-    <Nombre>Pilar</Nombre>
-    <Apellidos>González Salas</Apellidos>
-    <NIFNIE>92736981S</NIFNIE>
-    <CCCErroneo>20960043043096200013</CCCErroneo>
-    <IBANCorrecto>ES6520960043033096200013</IBANCorrecto>
   </Cuenta>
   <Cuenta id="23">
     <Nombre>Blas</Nombre>
     <Apellidos>Vega</Apellidos>
     <NIFNIE>09611087P</NIFNIE>
-    <CCCErroneo>20910936513000000000</CCCErroneo>
-    <IBANCorrecto>GR4920910936583000000000</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="25">
-    <Nombre>Paulina</Nombre>
-    <Apellidos>Cepin</Apellidos>
-    <NIFNIE>01234567L</NIFNIE>
-    <CCCErroneo>12669681145112121200</CCCErroneo>
-    <IBANCorrecto>DE6912669681125112121200</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="29">
-    <Nombre>Genaro</Nombre>
-    <Apellidos>Moncada Morala</Apellidos>
-    <NIFNIE>J7364567B</NIFNIE>
-    <CCCErroneo>64578946740051516403</CCCErroneo>
-    <IBANCorrecto>PT0864578946720051516403</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="31">
-    <Nombre>Ana Belén</Nombre>
-    <Apellidos>Lombás Olle</Apellidos>
-    <NIFNIE>09548827D</NIFNIE>
-    <CCCErroneo>E6664944416231000025</CCCErroneo>
+    <CCCErroneo>209109365130000111</CCCErroneo>
     <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
-  <Cuenta id="32">
-    <Nombre>Generoso</Nombre>
-    <Apellidos>Martin Martin</Apellidos>
-    <NIFNIE>25147854E</NIFNIE>
-    <CCCErroneo>23185484465641685908</CCCErroneo>
-    <IBANCorrecto>FR8423185484415641685908</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="42">
-    <Nombre>Herminia</Nombre>
-    <Apellidos>Almanzar Robles</Apellidos>
-    <NIFNIE>09785530L</NIFNIE>
-    <CCCErroneo>75647586987564758698</CCCErroneo>
-    <IBANCorrecto>FI6775647586157564758698</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="47">
-    <Nombre>Demetrio</Nombre>
-    <Apellidos>Fernández García</Apellidos>
-    <NIFNIE>09611100K</NIFNIE>
-    <CCCErroneo>75647586987564758698</CCCErroneo>
-    <IBANCorrecto>ES4675647586157564758698</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="52">
-    <Nombre>Gabriel</Nombre>
-    <Apellidos>Prieto González</Apellidos>
-    <NIFNIE>02614035Q</NIFNIE>
-    <CCCErroneo>25635478321002541233</CCCErroneo>
-    <IBANCorrecto>SM7825635478301002541233</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="53">
-    <Nombre>Rubén Darío</Nombre>
-    <Apellidos>García Gracia</Apellidos>
-    <NIFNIE>09570242B</NIFNIE>
-    <CCCErroneo>32154697195423121012</CCCErroneo>
-    <IBANCorrecto>ES8932154697155423121012</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="55">
-    <Nombre>Alencar</Nombre>
-    <Apellidos>Fresco Gutierrez</Apellidos>
-    <NIFNIE>09548501M</NIFNIE>
-    <CCCErroneo>20008521528775113327</CCCErroneo>
-    <IBANCorrecto>GB5720008521588775113327</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="60">
-    <Nombre>Adolfo</Nombre>
-    <Apellidos>Puerto Márquez</Apellidos>
-    <NIFNIE>25632</NIFNIE>
-    <CCCErroneo>20960043033000100018</CCCErroneo>
-    <IBANCorrecto>ES2520960043073000100018</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="62">
-    <Nombre>Agustín</Nombre>
-    <Apellidos>López Martínez</Apellidos>
-    <NIFNIE>24571671N</NIFNIE>
-    <CCCErroneo>12548523465214585218</CCCErroneo>
-    <IBANCorrecto>ES0912548523445214585218</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="63">
-    <Nombre>Luis</Nombre>
-    <Apellidos>Domingo Melcón</Apellidos>
-    <NIFNIE>09784112G</NIFNIE>
-    <CCCErroneo>3162456104254692000A</CCCErroneo>
+  <Cuenta id="38">
+    <Nombre>Cristina</Nombre>
+    <Apellidos>Alonso Prieto</Apellidos>
+    <NIFNIE>91532410T</NIFNIE>
+    <CCCErroneo>251877863112254111</CCCErroneo>
     <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
-  <Cuenta id="66">
-    <Nombre>Latifa Epfouad Erre</Nombre>
-    <Apellidos>Cadenas</Apellidos>
-    <NIFNIE>09810142K</NIFNIE>
-    <CCCErroneo>20960031442124800018</CCCErroneo>
-    <IBANCorrecto>ES2420960031482124800018</IBANCorrecto>
+  <Cuenta id="50">
+    <Nombre>Israel</Nombre>
+    <Apellidos>Amo Gomara</Apellidos>
+    <NIFNIE>12649208J</NIFNIE>
+    <CCCErroneo>226312455269164111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
-  <Cuenta id="71">
-    <Nombre>Soledad</Nombre>
-    <Apellidos>Otero González</Apellidos>
-    <NIFNIE>09545570H</NIFNIE>
-    <CCCErroneo>20960043033000100021</CCCErroneo>
-    <IBANCorrecto>ES6020960043023000100021</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="73">
-    <Nombre>Vittorio</Nombre>
-    <Apellidos>Martínes Gracia</Apellidos>
-    <NIFNIE>71393352H</NIFNIE>
-    <CCCErroneo>65168874641561561522</CCCErroneo>
-    <IBANCorrecto>ES2965168874681561561522</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="75">
-    <Nombre>Concepción</Nombre>
-    <Apellidos>Blanco Gutierrez</Apellidos>
-    <NIFNIE>71878948S</NIFNIE>
-    <CCCErroneo>21416325811510005527</CCCErroneo>
-    <IBANCorrecto>ES7421416325801510005527</IBANCorrecto>
+  <Cuenta id="68">
+    <Nombre>Antonio</Nombre>
+    <Apellidos>Fernandez García</Apellidos>
+    <NIFNIE>X8996448K</NIFNIE>
+    <CCCErroneo>332188854414451111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
   <Cuenta id="77">
     <Nombre>Federico</Nombre>
     <Apellidos>Díez Laiz</Apellidos>
-    <NIFNIE>12345679S</NIFNIE>
-    <CCCErroneo>20960056133231500032</CCCErroneo>
-    <IBANCorrecto>ES6620960056143231500032</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="79">
-    <Nombre>Serafín</Nombre>
-    <Apellidos>De la fuente Manzanares</Apellidos>
-    <NIFNIE>09634700T</NIFNIE>
-    <CCCErroneo>63516541828944000993</CCCErroneo>
-    <IBANCorrecto>ES4063516541858944000993</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="80">
-    <Nombre>Eulalia</Nombre>
-    <Apellidos>García Márquez</Apellidos>
-    <NIFNIE>12684218V</NIFNIE>
-    <CCCErroneo>23658965274585223213</CCCErroneo>
-    <IBANCorrecto>ES2923658965294585223213</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="82">
-    <Nombre>Emiliano</Nombre>
-    <Apellidos>Alvarez Martínez</Apellidos>
-    <NIFNIE>09611071S</NIFNIE>
-    <CCCErroneo>23652365142254222021</CCCErroneo>
-    <IBANCorrecto>ES5223652365132254222021</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="83">
-    <Nombre>Melisa</Nombre>
-    <Apellidos>Marín Melcón</Apellidos>
-    <NIFNIE>W9314602Q</NIFNIE>
-    <CCCErroneo>20012541150023365296</CCCErroneo>
-    <IBANCorrecto>FR7520012541120023365296</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="88">
-    <Nombre>Nelida</Nombre>
-    <Apellidos>García Calleja</Apellidos>
-    <NIFNIE>09548287K</NIFNIE>
-    <CCCErroneo>36245978133245679018</CCCErroneo>
-    <IBANCorrecto>ES4836245978123245679018</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="89">
-    <Nombre>Marisa</Nombre>
-    <Apellidos>Labarga Candanedo</Apellidos>
-    <NIFNIE>Y1337652D</NIFNIE>
-    <CCCErroneo>87635467891625345671</CCCErroneo>
-    <IBANCorrecto>ES2987635467511625345671</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="92">
-    <Nombre>Cruz</Nombre>
-    <Apellidos>Fernández Cascallana</Apellidos>
-    <NIFNIE>09786363R</NIFNIE>
-    <CCCErroneo>20960043013468900021</CCCErroneo>
-    <IBANCorrecto>ES4820960043093468900021</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="93">
-    <Nombre>Carmen</Nombre>
-    <Apellidos>Gomez Castañeda</Apellidos>
-    <NIFNIE>X1673150S</NIFNIE>
-    <CCCErroneo>84729478104857627845</CCCErroneo>
-    <IBANCorrecto>ES7884729478014857627845</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="94">
-    <Nombre>Hugo</Nombre>
-    <Apellidos>Sánchez Castro</Apellidos>
-    <NIFNIE />
-    <CCCErroneo>85550564726165145618</CCCErroneo>
-    <IBANCorrecto>AT6185550564796165145618</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="102">
-    <Nombre>Mario</Nombre>
-    <Apellidos>Herrero Coello</Apellidos>
-    <NIFNIE>X5106131Q</NIFNIE>
-    <CCCErroneo>65645150865168448846</CCCErroneo>
-    <IBANCorrecto>AT9465645150815168448846</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="106">
-    <Nombre>Gabriel</Nombre>
-    <Apellidos>Moncada Martinez</Apellidos>
-    <NIFNIE>09458455G</NIFNIE>
-    <CCCErroneo>51556584221251000242</CCCErroneo>
-    <IBANCorrecto>IE4751556584261251000242</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="127">
-    <Nombre>Ismael</Nombre>
-    <Apellidos>Vara Cembranos</Apellidos>
-    <NIFNIE>X1673150S</NIFNIE>
-    <CCCErroneo>87457619027384957654</CCCErroneo>
-    <IBANCorrecto>DK6987457619137384957654</IBANCorrecto>
+    <NIFNIE>X3387K</NIFNIE>
+    <CCCErroneo>209600561632315111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
   <Cuenta id="128">
     <Nombre>Diana</Nombre>
     <Apellidos>Martínes Centeno</Apellidos>
     <NIFNIE>09611076C</NIFNIE>
-    <CCCErroneo>87457619024384957654</CCCErroneo>
-    <IBANCorrecto>LT1687457619164384957654</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="129">
-    <Nombre>Elisa</Nombre>
-    <Apellidos>Bernal Cerro</Apellidos>
-    <NIFNIE>Y0806930N</NIFNIE>
-    <CCCErroneo>87457619027384957657</CCCErroneo>
-    <IBANCorrecto>ES9587457619177384957657</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="130">
-    <Nombre>Nelida</Nombre>
-    <Apellidos>Blanco Chamorro</Apellidos>
-    <NIFNIE>Y0806930N</NIFNIE>
-    <CCCErroneo>87457619027384957658</CCCErroneo>
-    <IBANCorrecto>ES5287457619117384957658</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="131">
-    <Nombre>Marisa</Nombre>
-    <Apellidos>Sutil Charro</Apellidos>
-    <NIFNIE>09714235R</NIFNIE>
-    <CCCErroneo>87457619027384957659</CCCErroneo>
-    <IBANCorrecto>ES0687457619167384957659</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="132">
-    <Nombre>Marta</Nombre>
-    <Apellidos>Díez Chen</Apellidos>
-    <NIFNIE>09806572Q</NIFNIE>
-    <CCCErroneo>87457619027384957651</CCCErroneo>
-    <IBANCorrecto>ES4787457619117384957651</IBANCorrecto>
+    <CCCErroneo>6254112200111011111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
   <Cuenta id="133">
     <Nombre>Miguel</Nombre>
     <Apellidos>Fernández Coello</Apellidos>
     <NIFNIE>02031127C</NIFNIE>
-    <CCCErroneo>87457619027384957653</CCCErroneo>
-    <IBANCorrecto>ES7987457619197384957653</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="134">
-    <Nombre>Cruz</Nombre>
-    <Apellidos>De la fuente De la puente</Apellidos>
-    <NIFNIE>09548215H</NIFNIE>
-    <CCCErroneo>87457619027384957617</CCCErroneo>
-    <IBANCorrecto>ES4687457619187384957617</IBANCorrecto>
-  </Cuenta>
-  <Cuenta id="135">
-    <Nombre>Carmen</Nombre>
-    <Apellidos>García Del amo</Apellidos>
-    <NIFNIE />
-    <CCCErroneo>87457619027384957619</CCCErroneo>
-    <IBANCorrecto>CZ5187457619177384957619</IBANCorrecto>
+    <CCCErroneo>2165165181251111111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
   <Cuenta id="136">
     <Nombre>Hugo</Nombre>
     <Apellidos>Pérez Diez</Apellidos>
     <NIFNIE>09548505D</NIFNIE>
-    <CCCErroneo>87457619027384957621</CCCErroneo>
-    <IBANCorrecto>AT6887457619187384957621</IBANCorrecto>
+    <CCCErroneo>2251565191564001111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="152">
+    <Nombre>Agustín</Nombre>
+    <Apellidos>Presa Castro</Apellidos>
+    <NIFNIE>71256425X</NIFNIE>
+    <CCCErroneo>3256622153258771111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="154">
+    <Nombre>Armando</Nombre>
+    <Apellidos>Prieto García</Apellidos>
+    <NIFNIE>71256445F</NIFNIE>
+    <CCCErroneo>0075018431070251111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="157">
+    <Nombre>Saaida</Nombre>
+    <Apellidos>Robles Boughaza</Apellidos>
+    <NIFNIE>71256475Z</NIFNIE>
+    <CCCErroneo>9643124518815001111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="163">
+    <Nombre>Blas</Nombre>
+    <Apellidos>Rey Vega</Apellidos>
+    <NIFNIE>71256535M</NIFNIE>
+    <CCCErroneo>2091093651300001111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="186">
+    <Nombre>Bonifacio</Nombre>
+    <Apellidos>Sánchez Fresco</Apellidos>
+    <NIFNIE>71256765M</NIFNIE>
+    <CCCErroneo>5165168196121061111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="193">
+    <Nombre>Rubén Darío</Nombre>
+    <Apellidos>Gracia García</Apellidos>
+    <NIFNIE>71256835Y</NIFNIE>
+    <CCCErroneo>3215469719542311111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="194">
+    <Nombre>Alencar</Nombre>
+    <Apellidos>Guerra Pasado</Apellidos>
+    <NIFNIE>71256845Q</NIFNIE>
+    <CCCErroneo>3652145273650061111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="220">
+    <Nombre>Eulalia</Nombre>
+    <Apellidos>Márquez García</Apellidos>
+    <NIFNIE>71257105T</NIFNIE>
+    <CCCErroneo>2365896521458521111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="222">
+    <Nombre>Emiliano</Nombre>
+    <Apellidos>Martínez Alvarez</Apellidos>
+    <NIFNIE>71257125C</NIFNIE>
+    <CCCErroneo>2365236514225421111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="270">
+    <Nombre>Nelida</Nombre>
+    <Apellidos>Cepin Blanco</Apellidos>
+    <NIFNIE>71257605V</NIFNIE>
+    <CCCErroneo>2622101162804871111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="275">
+    <Nombre>Carmen</Nombre>
+    <Apellidos>Sánchez García</Apellidos>
+    <NIFNIE>71257655K</NIFNIE>
+    <CCCErroneo>3625001280478551111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="294">
+    <Nombre>Lidiane</Nombre>
+    <Apellidos>Alencar Nuñez</Apellidos>
+    <NIFNIE>71257845G</NIFNIE>
+    <CCCErroneo>2456193752154641111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="301">
+    <Nombre>Castro</Nombre>
+    <Apellidos>Agustín Presa</Apellidos>
+    <NIFNIE>71257915M</NIFNIE>
+    <CCCErroneo>32566221532587711</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="341">
+    <Nombre>Prieto</Nombre>
+    <Apellidos>Gabriel González</Apellidos>
+    <NIFNIE>71258315Z</NIFNIE>
+    <CCCErroneo>25635478321002511</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="344">
+    <Nombre>Fresco</Nombre>
+    <Apellidos>Alencar Gutierrez</Apellidos>
+    <NIFNIE>71258345K</NIFNIE>
+    <CCCErroneo>20008521528775111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="366">
+    <Nombre>Díez</Nombre>
+    <Apellidos>Federico Laiz</Apellidos>
+    <NIFNIE>71258565B</NIFNIE>
+    <CCCErroneo>209600561632315111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="369">
+    <Nombre>García</Nombre>
+    <Apellidos>Eulalia Márquez</Apellidos>
+    <NIFNIE>71258595H</NIFNIE>
+    <CCCErroneo>2365896521458521111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="373">
+    <Nombre>García</Nombre>
+    <Apellidos>Montserrat</Apellidos>
+    <NIFNIE>71258635N</NIFNIE>
+    <CCCErroneo>3258421697168401111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="392">
+    <Nombre>López</Nombre>
+    <Apellidos>Concepción De la puente</Apellidos>
+    <NIFNIE>71258825H</NIFNIE>
+    <CCCErroneo>2655168187765141111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="395">
+    <Nombre>Moncada</Nombre>
+    <Apellidos>Gabriel Martinez</Apellidos>
+    <NIFNIE>71258855W</NIFNIE>
+    <CCCErroneo>5155658412125101111</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
 </Cuentas>

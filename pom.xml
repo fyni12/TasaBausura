@@ -107,6 +107,23 @@
             <artifactId>log4j-core</artifactId>
             <version>2.18.0</version>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>kernel</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>io</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>9.5.0</version>
+        </dependency>
     </dependencies>
     
     <properties>
