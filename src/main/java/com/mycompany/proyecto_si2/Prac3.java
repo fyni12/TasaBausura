@@ -450,6 +450,22 @@ public class Prac3 {
 
                 int numeroReciboReal = upsertRecibo(r);
                 upsertLineasRecibo(numeroReciboReal, r.lineas, r.bonificacion);
+                if (r.idContribuyente != null && !r.idContribuyente.isBlank()) {
+                    //Integer idContribuyente = Integer.valueOf(r.idContribuyente);
+
+                    if (r.idContribuyente != null && !r.idContribuyente.isBlank()) {
+                        Integer idContribuyente = Integer.valueOf(r.idContribuyente);
+
+                        for (Integer idConcepto : r.idsConcepto) {
+                            List<Ordenanza> lista = ordenanzasPorId.getOrDefault(idConcepto, List.of());
+
+                            for (Ordenanza ord : lista) {
+                                Integer idOrdenanzaBd = obtenerIdOrdenanzaBD(ord);
+                                upsertRelContribuyenteOrdenanza(idContribuyente, idOrdenanzaBd);
+                            }
+                        }
+                    }
+                }
             }
 
             em.getTransaction().commit();
@@ -1013,5 +1029,46 @@ public class Prac3 {
             return null;
         }
         return String.valueOf(res.get(0));
+    }
+
+    private void upsertRelContribuyenteOrdenanza(Integer idContribuyente, Integer idOrdenanzaBd) {
+        if (idContribuyente == null || idOrdenanzaBd == null) {
+            return;
+        }
+
+        Query q = em.createNativeQuery(
+                "SELECT COUNT(*) FROM rel_contribuyente_ordenanza "
+                + "WHERE idContribuyente = ? AND idOrdenanza = ?"
+        );
+        q.setParameter(1, idContribuyente);
+        q.setParameter(2, idOrdenanzaBd);
+
+        Number n = (Number) q.getSingleResult();
+
+        if (n.intValue() == 0) {
+            Query insert = em.createNativeQuery(
+                    "INSERT INTO rel_contribuyente_ordenanza (idContribuyente, idOrdenanza) "
+                    + "VALUES (?, ?)"
+            );
+            insert.setParameter(1, idContribuyente);
+            insert.setParameter(2, idOrdenanzaBd);
+            insert.executeUpdate();
+        }
+    }
+
+    private Integer obtenerIdOrdenanzaBD(Ordenanza ord) {
+        Query q = em.createNativeQuery(
+                "SELECT id FROM ordenanza "
+                + "WHERE idOrdenanza = ? AND concepto = ? AND subconcepto = ?"
+        );
+        q.setParameter(1, ord.getIdOrdenanza());
+        q.setParameter(2, ord.getConcepto());
+        q.setParameter(3, ord.getSubconcepto());
+
+        List<?> res = q.getResultList();
+        if (res.isEmpty()) {
+            return null;
+        }
+        return ((Number) res.get(0)).intValue();
     }
 }
