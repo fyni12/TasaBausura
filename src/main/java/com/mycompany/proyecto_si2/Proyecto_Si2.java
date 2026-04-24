@@ -78,7 +78,7 @@ public class Proyecto_Si2 {
          */
         //INICIO PRÁCTICA 2
         try {
-            vaciarTablas(em);
+            //vaciarTablas(em);
             Path resources = Paths.get("resources");
             Path excel = resources.resolve("SistemasBasura.xlsx");
 
@@ -109,6 +109,7 @@ public class Proyecto_Si2 {
             em.createNativeQuery("DELETE FROM recibos").executeUpdate();
             em.createNativeQuery("DELETE FROM ordenanza").executeUpdate();
             em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
+            em.createNativeQuery("DELETE FROM rel_contribuyente_ordenanza").executeUpdate();
 
 
             em.getTransaction().commit();
