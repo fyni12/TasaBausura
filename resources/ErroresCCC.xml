@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <Cuentas>
   <Cuenta id="9">
@@ -204,3 +205,36 @@
     <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
   </Cuenta>
 </Cuentas>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<Cuentas>
+  <Cuenta id="5">
+    <Nombre>Alencar</Nombre>
+    <Apellidos>Lidiane Nuñez</Apellidos>
+    <NIFNIE>445454</NIFNIE>
+    <CCCErroneo>245619375215464975</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="13">
+    <Nombre>Luis</Nombre>
+    <Apellidos>Benito Prieto</Apellidos>
+    <NIFNIE>09632539R</NIFNIE>
+    <CCCErroneo>2321546531545641151567</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="31">
+    <Nombre>Ana Belén</Nombre>
+    <Apellidos>Lombás Olle</Apellidos>
+    <NIFNIE>09548827D</NIFNIE>
+    <CCCErroneo>E6664944416231000025</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+  <Cuenta id="63">
+    <Nombre>Luis</Nombre>
+    <Apellidos>Domingo Melcón</Apellidos>
+    <NIFNIE>09784112G</NIFNIE>
+    <CCCErroneo>3162456104254692000A</CCCErroneo>
+    <TipoError>IMPOSIBLE GENERAR IBAN</TipoError>
+  </Cuenta>
+</Cuentas>
+>>>>>>> de627b140c8b946d5ab404310fc1ac9c487af334
