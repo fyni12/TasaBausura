@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -33,11 +32,52 @@ public class Prac3 {
         this.em = em;
     }
 
-    public void procesar(String periodo) throws Exception {
+    private boolean esAptoParaXML(ExcelManager excel, Row row, Set<String> nifVistosXml) {
+        String nifOriginal = safe(excel.getString(row, ExcelColumn.NIFNIE));
+        if (nifOriginal.isBlank()) {
+            return false;
+        }
 
-        ArrayList<Recibo> recibos = new ArrayList<>();
+        String nifNormalizado = normalizeNif(nifOriginal).toUpperCase();
+        if (nifNormalizado.isBlank()) {
+            nifNormalizado = nifOriginal.toUpperCase();
+        }
+
+        if (nifVistosXml.contains(nifNormalizado)) {
+            return false;
+        }
+
+        nifVistosXml.add(nifNormalizado);
+        return true;
+    }
+
+    private boolean debeGenerarReciboXml(
+            Row row,
+            ExcelManager excel,
+            LocalDate inicioPeriodo,
+            LocalDate finPeriodo
+    ) {
+        if (row == null || excel.isEmpty(row)) {
+            return false;
+        }
+
+        LocalDate fechaAlta = excel.getDate(row, ExcelColumn.FECHA_ALTA);
+        LocalDate fechaBaja = excel.getDate(row, ExcelColumn.FECHA_BAJA);
+
+        if (!estaActivoEnPeriodo(fechaAlta, fechaBaja, inicioPeriodo, finPeriodo)) {
+            return false;
+        }
+
+        String email = safe(excel.getString(row, ExcelColumn.EMAIL));
+        return !email.isBlank();
+    }
+
+    public void procesar(PeriodoImpositivo periodo) throws Exception {
+
+        List<Recibo> recibos = new ArrayList<>();
         List<RegistroBD> registrosBD = new ArrayList<>();
         Set<String> nifVistosBd = new HashSet<>();
+        Set<String> nifVistosXml = new HashSet<>();
 
         int idrecibo = 0;
         int numeroTotalRecibos = 0;
@@ -47,102 +87,33 @@ public class Prac3 {
 
         Map<Integer, List<Ordenanza>> ordenanzasPorId = new HashMap<>();
 
-        String[] partes = periodo.trim().split(" ");
-
-        String limpio = periodo.trim().toUpperCase();
-
-// Extraer trimestre
-        int trimestre = Integer.parseInt(limpio.substring(0, limpio.indexOf('T')));
-
-// Extraer año
-        int year = Integer.parseInt(limpio.substring(limpio.indexOf('T') + 1).trim());
-
-        int mesInicio = (trimestre - 1) * 3 + 1;
-        LocalDate inicioPeriodo = LocalDate.of(year, mesInicio, 1);
-        LocalDate finPeriodo = inicioPeriodo.plusMonths(3).minusDays(1);
+        int trimestre = periodo.getTrimestre();
+        int year = periodo.getYear();
+        LocalDate inicioPeriodo = periodo.getFechaInicio();
+        LocalDate finPeriodo = periodo.getFechaFin();
+        String fechaPadronXml = trimestre + "T " + year;
 
         Path recibosDir = resourcesDir.resolve("recibos");
         Files.createDirectories(recibosDir);
 
         try (ExcelManager excel = new ExcelManager(excelPath, "Contribuyente"); ExcelManager ordenanzas = new ExcelManager(excelPath, "Ordenanza")) {
 
-            for (Row row : ordenanzas.getDataRows()) {
-                if (ordenanzas.isEmpty(row)) {
-                    continue;
-                }
-
-                Integer idObj = ordenanzas.getInt(row, ExcelColumn.ID_ORDENANZA);
-                if (idObj == null) {
-                    continue;
-                }
-
-                int id = idObj;
-                String concepto = ordenanzas.getString(row, ExcelColumn.CONCEPTO);
-                String subconcepto = ordenanzas.getString(row, ExcelColumn.SUBCONCEPTO);
-                String descripcion = ordenanzas.getString(row, ExcelColumn.DESCRIPCION);
-                String pueblo = ordenanzas.getString(row, ExcelColumn.PUEBLO);
-                String tipoCalculo = ordenanzas.getString(row, ExcelColumn.TIPO_CALCULO);
-                String acumulable = ordenanzas.getString(row, ExcelColumn.ACUMULABLE);
-
-                Integer pfObj = ordenanzas.getInt(row, ExcelColumn.PRECIO_FIJO);
-                int precioFijo = pfObj != null ? pfObj : 0;
-
-                Integer kgIncObj = ordenanzas.getInt(row, ExcelColumn.KG_INCLUIDOS);
-                int kgIncluidos = kgIncObj != null ? kgIncObj : 0;
-
-                Double pKgObj = ordenanzas.getDouble(row, ExcelColumn.PRECIO_KG);
-                double precioKg = pKgObj != null ? pKgObj : 0.0;
-
-                Double porcObj = ordenanzas.getDouble(row, ExcelColumn.PORCENTAJE_SOBRE_OTRO_CONCEPTO);
-                double porcentajeSobreOtroConcepto = porcObj != null ? porcObj : 0.0;
-
-                Integer sqcObj = ordenanzas.getInt(row, ExcelColumn.SOBRE_QUE_CONCEPTO);
-                int sobreQueConcepto = sqcObj != null ? sqcObj : 0;
-
-                Double ivaObj = ordenanzas.getDouble(row, ExcelColumn.IVA);
-                double iva = ivaObj != null ? ivaObj : 0.0;
-
-                Ordenanza ord = new Ordenanza();
-                ord.setIdOrdenanza(id);
-                ord.setConcepto(concepto);
-                ord.setSubconcepto(subconcepto);
-                ord.setDescripcion(descripcion);
-                ord.setPueblo(pueblo);
-                ord.setTipoCalculo(tipoCalculo);
-                ord.setAcumulable(acumulable);
-                ord.setPrecioFijo(precioFijo);
-                ord.setKgincluidos(kgIncluidos);
-                ord.setPreciokg(precioKg);
-                ord.setPorcentaje(porcentajeSobreOtroConcepto);
-                ord.setConceptoRelacionado(sobreQueConcepto);
-                ord.setIva(iva);
-
-                ordmanager.add(ord);
-                ordenanzasPorId.computeIfAbsent(id, k -> new ArrayList<>()).add(ord);
-            }
+            cargarOrdenanzas(ordenanzas, ordenanzasPorId);
 
             for (Row row : excel.getDataRows()) {
-                if (excel.isEmpty(row)) {
+                if (!debeGenerarReciboXml(row, excel, inicioPeriodo, finPeriodo)) {
                     continue;
                 }
 
                 LocalDate fechaAlta = excel.getDate(row, ExcelColumn.FECHA_ALTA);
                 LocalDate fechaBaja = excel.getDate(row, ExcelColumn.FECHA_BAJA);
 
-                if (fechaAlta == null || fechaAlta.isAfter(finPeriodo)) {
-                    continue;
-                }
-
-                if (fechaBaja != null && fechaBaja.isBefore(inicioPeriodo)) {
-                    continue;
-                }
-
                 BigDecimal baseImponible = BigDecimal.ZERO;
                 BigDecimal iva = BigDecimal.ZERO;
 
                 String exentoStr = excel.getString(row, ExcelColumn.EXENCION);
                 char exento = (exentoStr != null && !exentoStr.isBlank())
-                        ? exentoStr.toLowerCase().charAt(0) : 'n';
+                        ? Character.toUpperCase(exentoStr.trim().charAt(0)) : 'N';
 
                 Integer kgObj = excel.getInt(row, ExcelColumn.KG_GENERADOS);
                 int kgGenerados = kgObj != null ? kgObj : 0;
@@ -164,14 +135,14 @@ public class Prac3 {
                 System.out.println("================================================================================");
                 System.out.printf("Contribuyente: %s %s %s, NIF: %s, IBAN: %s, Fecha alta: %s, Exención: %c%n",
                         nombre, apellido1, apellido2, nif, iban, fechaAlta, exento);
-                System.out.printf("Fecha del recibo: %s | Fecha del padron: %s%n", LocalDate.now(), inicioPeriodo);
+                System.out.printf("Fecha del recibo: %s | Fecha del padrón: %s%n", LocalDate.now(), fechaPadronXml);
                 System.out.printf("Lectura de los kg de basura generados: %d%n", kgGenerados);
                 System.out.println("Líneas del recibo:");
 
                 PDFGenerator.ReciboData pdfData = new PDFGenerator.ReciboData();
                 pdfData.codigoRecibo = "REC-" + String.format("%05d", idrecibo + 1);
                 pdfData.fechaGeneracionRecibo = LocalDate.now().format(DF);
-                pdfData.fechaAlta = fechaAlta.format(DF);
+                pdfData.fechaAlta = fechaAlta != null ? fechaAlta.format(DF) : "";
                 pdfData.iban = iban;
                 pdfData.nombreDestinatario = (nombre + " " + apellido1 + " " + apellido2).trim();
                 pdfData.dniDestinatario = nif;
@@ -180,7 +151,7 @@ public class Prac3 {
                 pdfData.lecturaAnterior = 0;
                 pdfData.kgGenerados = kgGenerados;
                 pdfData.tituloRecibo = "Recibo basura: " + ordinalTrimestre(trimestre) + " trimestre de " + year;
-                pdfData.situacionContribuyente = (exento == 's')
+                pdfData.situacionContribuyente = (exento == 'S')
                         ? "Contribuyente con exención"
                         : "Contribuyente sin exención";
                 pdfData.textoBonificacion = (bonificacion > 0)
@@ -189,7 +160,8 @@ public class Prac3 {
 
                 String conceptosRaw = excel.getString(row, ExcelColumn.CONCEPTOS_A_COBRAR);
                 String[] conceptos = (conceptosRaw == null || conceptosRaw.isBlank())
-                        ? new String[0] : conceptosRaw.trim().split("\\s+");
+                        ? new String[0]
+                        : conceptosRaw.trim().split("\\s+");
 
                 String puebloPdf = "";
                 String tipoCalculoPdf = "Ordinario";
@@ -220,74 +192,80 @@ public class Prac3 {
                         }
                     }
 
-                    if (exento == 'n') {
+                    if (exento == 'N') {
                         BigDecimal baseLineaConcepto = bd(ordmanager.calculate(bonificacion, kgGenerados, idConcepto));
                         BigDecimal ivaLineaConcepto = bd(ordmanager.calculateIva(bonificacion, kgGenerados, idConcepto));
                         double porcentajeIva = ordmanager.getIva(idConcepto);
 
-                        baseImponible = baseImponible.add(baseLineaConcepto);
-                        iva = iva.add(ivaLineaConcepto);
+                        baseImponible = baseImponible.add(baseLineaConcepto).setScale(2, RoundingMode.HALF_UP);
+                        iva = iva.add(ivaLineaConcepto).setScale(2, RoundingMode.HALF_UP);
 
-                        System.out.printf(" -> Concepto ID: %d | Base imp: %.2f € | IVA: %.2f%% | Imp. IVA: %.2f € | Bonific: %d%%%n",
+                        System.out.printf(
+                                " -> Concepto ID: %d | Base imp: %.2f € | IVA: %.2f%% | Imp. IVA: %.2f € | Bonific: %d%%%n",
                                 idConcepto,
                                 baseLineaConcepto.doubleValue(),
                                 porcentajeIva,
                                 ivaLineaConcepto.doubleValue(),
-                                bonificacion);
+                                bonificacion
+                        );
 
-                        pdfData.lineas.addAll(buildPdfLineas(idConcepto, aplicables, kgGenerados, bonificacion));
+                        pdfData.lineas.addAll(ordmanager.buildPdfLineas(bonificacion, kgGenerados, idConcepto));
                     }
                 }
 
-                if (exento == 's') {
+                if (exento == 'S') {
                     System.out.println(" -> Contribuyente EXENTO de pago.");
                 }
+
+                baseImponible = baseImponible.setScale(2, RoundingMode.HALF_UP);
+                iva = iva.setScale(2, RoundingMode.HALF_UP);
+                BigDecimal totalRecibo = baseImponible.add(iva).setScale(2, RoundingMode.HALF_UP);
+
+                totalBasePadron = totalBasePadron.add(baseImponible).setScale(2, RoundingMode.HALF_UP);
+                totalIvaPadron = totalIvaPadron.add(iva).setScale(2, RoundingMode.HALF_UP);
 
                 pdfData.entidadEmisora = puebloPdf.isBlank() ? "Ayuntamiento" : puebloPdf;
                 pdfData.direccionEmisorLinea1 = "";
                 pdfData.direccionEmisorLinea2 = puebloPdf;
                 pdfData.tipoCalculo = tipoCalculoPdf;
                 pdfData.poblacionDestinatario = puebloPdf;
+                pdfData.totalBase = baseImponible;
+                pdfData.totalIva = iva;
+                pdfData.totalRecibo = totalRecibo;
+
+                System.out.printf(
+                        "Tipo calculo: %s | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€%n",
+                        tipoCalculoPdf,
+                        baseImponible.doubleValue(),
+                        iva.doubleValue(),
+                        totalRecibo.doubleValue()
+                );
+                System.out.println("================================================================================\n");
+
+                String nifParaNombre = nif.isBlank() ? "SIN_NIF" : nif;
+                String nombrePdf = sanitizeFileName(
+                        nifParaNombre + "_" + nombre + "_" + apellido1 + "_" + apellido2 + "_T" + trimestre + "_" + year + ".pdf"
+                );
+
+                PDFGenerator.generatePdf(recibosDir.resolve(nombrePdf).toString(), pdfData);
+
+                Recibo recibo = new Recibo();
+                recibo.setBaseImponibleRecibo(toXmlDouble(baseImponible));
+                recibo.setExencion(Character.toString(exento));
+                recibo.setIban(iban);
+                recibo.setIdFilaExcel(excel.getExcelRowId(row));
+                recibo.setIdRecibo(idrecibo);
+                recibo.setIvaRecibo(toXmlDouble(iva));
+                recibo.setKgGenerados(kgGenerados);
+                recibo.setNif(nif);
+                recibo.setNombre(nombre);
+                recibo.setPrimerApellido(apellido1);
+                recibo.setSegundoApellido(apellido2);
+                recibo.setTotalRecibo(toXmlDouble(totalRecibo));
+
+                recibos.add(recibo);
+
                 if (esAptoParaBD(excel, row, nifVistosBd)) {
-
-                    BigDecimal totalRecibo = baseImponible.add(iva);
-                    totalBasePadron = totalBasePadron.add(baseImponible);
-                    totalIvaPadron = totalIvaPadron.add(iva);
-
-                    pdfData.totalBase = baseImponible;
-                    pdfData.totalIva = iva;
-                    pdfData.totalRecibo = totalRecibo;
-
-                    System.out.printf("Tipo calculo: %s | Total Base Imponible: %.2f€ | Total IVA: %.2f€ | TOTAL RECIBO: %.2f€%n",
-                            tipoCalculoPdf,
-                            baseImponible.doubleValue(),
-                            iva.doubleValue(),
-                            totalRecibo.doubleValue());
-                    System.out.println("================================================================================\n");
-
-                    String nifParaNombre = nif.isBlank() ? "SIN_NIF" : nif;
-                    String nombrePdf = sanitizeFileName(
-                            nifParaNombre + "_" + nombre + "_" + apellido1 + "_" + apellido2 + "_T" + trimestre + "_" + year + ".pdf"
-                    );
-
-                    PDFGenerator.generatePdf(recibosDir.resolve(nombrePdf).toString(), pdfData);
-
-                    Recibo recibo = new Recibo();
-                    recibo.setBaseImponibleRecibo(baseImponible.doubleValue());
-                    recibo.setExencion(Character.toString(exento));
-                    recibo.setIban(iban);
-                    recibo.setIdFilaExcel(excel.getExcelRowId(row));
-                    recibo.setIdRecibo(idrecibo);
-                    recibo.setIvaRecibo(iva.doubleValue());
-                    recibo.setKgGenerados(kgGenerados);
-                    recibo.setNif(nif);
-                    recibo.setNombre(nombre);
-                    recibo.setPrimerApellido(apellido1);
-                    recibo.setSegundoApellido(apellido2);
-                    recibo.setTotalRecibo(totalRecibo.doubleValue());
-
-                    recibos.add(recibo);
-
                     RegistroBD reg = new RegistroBD();
                     reg.numeroReciboTemporal = idrecibo;
                     reg.trimestre = trimestre;
@@ -310,6 +288,7 @@ public class Prac3 {
                     reg.fechaAlta = fechaAlta;
                     reg.fechaPadron = inicioPeriodo;
                     reg.fechaRecibo = LocalDate.now();
+                    reg.fechaBaja = fechaBaja;
 
                     reg.baseImponible = baseImponible;
                     reg.iva = iva;
@@ -317,31 +296,34 @@ public class Prac3 {
 
                     reg.idsConcepto.addAll(idsConceptoRecibo);
                     reg.lineas.addAll(copiarLineas(pdfData.lineas));
+
                     reg.numero = numero;
                     reg.paisCCC = paisCCC;
                     reg.ccc = ccc;
-                    reg.fechaBaja = fechaBaja;
 
                     registrosBD.add(reg);
-
-                    idrecibo++;
-                    numeroTotalRecibos++;
                 }
 
+                idrecibo++;
+                numeroTotalRecibos++;
             }
+
+            BigDecimal totalPadron = totalBasePadron
+                    .add(totalIvaPadron)
+                    .setScale(2, RoundingMode.HALF_UP);
 
             Path xmlPath = resourcesDir.resolve("Recibos.xml");
             XmlManager.escribirRecibos(
                     xmlPath,
-                    periodo,
-                    totalBasePadron.add(totalIvaPadron).doubleValue(),
+                    fechaPadronXml,
+                    totalPadron.doubleValue(),
                     numeroTotalRecibos,
                     recibos
             );
 
             PDFGenerator.generateResumenPdf(
                     recibosDir.resolve("resumen.pdf").toString(),
-                    periodo,
+                    fechaPadronXml,
                     totalBasePadron,
                     totalIvaPadron,
                     numeroTotalRecibos
@@ -353,34 +335,141 @@ public class Prac3 {
         }
     }
 
+    private void cargarOrdenanzas(ExcelManager ordenanzas, Map<Integer, List<Ordenanza>> ordenanzasPorId) {
+        for (Row row : ordenanzas.getDataRows()) {
+            if (ordenanzas.isEmpty(row)) {
+                continue;
+            }
+
+            Integer idObj = ordenanzas.getInt(row, ExcelColumn.ID_ORDENANZA);
+            if (idObj == null) {
+                continue;
+            }
+
+            int id = idObj;
+            String concepto = ordenanzas.getString(row, ExcelColumn.CONCEPTO);
+            String subconcepto = ordenanzas.getString(row, ExcelColumn.SUBCONCEPTO);
+            String descripcion = ordenanzas.getString(row, ExcelColumn.DESCRIPCION);
+            String pueblo = ordenanzas.getString(row, ExcelColumn.PUEBLO);
+            String tipoCalculo = ordenanzas.getString(row, ExcelColumn.TIPO_CALCULO);
+            String acumulable = ordenanzas.getString(row, ExcelColumn.ACUMULABLE);
+
+            Integer pfObj = ordenanzas.getInt(row, ExcelColumn.PRECIO_FIJO);
+            int precioFijo = pfObj != null ? pfObj : 0;
+
+            Integer kgIncObj = ordenanzas.getInt(row, ExcelColumn.KG_INCLUIDOS);
+            int kgIncluidos = kgIncObj != null ? kgIncObj : 0;
+
+            Double pKgObj = ordenanzas.getDouble(row, ExcelColumn.PRECIO_KG);
+            double precioKg = pKgObj != null ? pKgObj : 0.0;
+
+            Double porcObj = ordenanzas.getDouble(row, ExcelColumn.PORCENTAJE_SOBRE_OTRO_CONCEPTO);
+            double porcentajeSobreOtroConcepto = porcObj != null ? porcObj : 0.0;
+
+            Integer sqcObj = ordenanzas.getInt(row, ExcelColumn.SOBRE_QUE_CONCEPTO);
+            int sobreQueConcepto = sqcObj != null ? sqcObj : 0;
+
+            Double ivaObj = ordenanzas.getDouble(row, ExcelColumn.IVA);
+            double iva = ivaObj != null ? ivaObj : 0.0;
+
+            Ordenanza ord = new Ordenanza();
+            ord.setIdOrdenanza(id);
+            ord.setConcepto(concepto);
+            ord.setSubconcepto(subconcepto);
+            ord.setDescripcion(descripcion);
+            ord.setPueblo(pueblo);
+            ord.setTipoCalculo(tipoCalculo);
+            ord.setAcumulable(acumulable);
+            ord.setPrecioFijo(precioFijo);
+            ord.setKgincluidos(kgIncluidos);
+            ord.setPreciokg(precioKg);
+            ord.setPorcentaje(porcentajeSobreOtroConcepto);
+            ord.setConceptoRelacionado(sobreQueConcepto);
+            ord.setIva(iva);
+
+            ordmanager.add(ord);
+            ordenanzasPorId.computeIfAbsent(id, k -> new ArrayList<>()).add(ord);
+        }
+    }
+
+    private boolean debeGenerarRecibo(Row row, ExcelManager excel, LocalDate inicioPeriodo, LocalDate finPeriodo) {
+        if (row == null || excel.isEmpty(row)) {
+            return false;
+        }
+
+        LocalDate fechaAlta = excel.getDate(row, ExcelColumn.FECHA_ALTA);
+        LocalDate fechaBaja = excel.getDate(row, ExcelColumn.FECHA_BAJA);
+
+        if (!estaActivoEnPeriodo(fechaAlta, fechaBaja, inicioPeriodo, finPeriodo)) {
+            return false;
+        }
+
+        String nombre = safe(excel.getString(row, ExcelColumn.NOMBRE));
+        String nif = safe(excel.getString(row, ExcelColumn.NIFNIE));
+        String conceptosRaw = safe(excel.getString(row, ExcelColumn.CONCEPTOS_A_COBRAR));
+        String iban = safe(resolveIban(excel, row));
+
+        if (nombre.isBlank()) {
+            return false;
+        }
+
+        if (nif.isBlank()) {
+            return false;
+        }
+
+        if (conceptosRaw.isBlank()) {
+            return false;
+        }
+
+        if (iban.isBlank()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean estaActivoEnPeriodo(
+            LocalDate fechaAlta,
+            LocalDate fechaBaja,
+            LocalDate inicioPeriodo,
+            LocalDate finPeriodo
+    ) {
+        if (fechaAlta == null || inicioPeriodo == null || finPeriodo == null) {
+            return false;
+        }
+
+        if (finPeriodo.isBefore(inicioPeriodo)) {
+            throw new IllegalArgumentException("El periodo es inválido: la fecha fin es anterior a la fecha inicio.");
+        }
+
+        if (fechaBaja != null && fechaBaja.isBefore(fechaAlta)) {
+            return false;
+        }
+
+        boolean altaDentroOAntesDelFin = !fechaAlta.isAfter(finPeriodo);
+        boolean bajaNulaODentroODespuesDelInicio = fechaBaja == null || !fechaBaja.isBefore(inicioPeriodo);
+
+        return altaDentroOAntesDelFin && bajaNulaODentroODespuesDelInicio;
+    }
+
     private boolean esAptoParaBD(ExcelManager excel, Row row, Set<String> nifVistosBd) {
         String nifOriginal = excel.getString(row, ExcelColumn.NIFNIE);
-        String paisCCC = excel.getString(row, ExcelColumn.PAIS_CCC);
-        String cccOriginal = excel.getString(row, ExcelColumn.CCC);
 
         NifUtils.Resultado nifResultado = NifUtils.validar(nifOriginal);
+
         if (nifResultado.getEstado() == NifUtils.Estado.BLANCO) {
             return false;
         }
-        if (nifResultado.getEstado() == NifUtils.Estado.ERRONEO) {
-            return false;
+
+        String nifFinal = safe(nifResultado.getValorFinal());
+
+        if (!nifFinal.isBlank()) {
+            if (nifVistosBd.contains(nifFinal)) {
+                return false;
+            }
+            nifVistosBd.add(nifFinal);
         }
 
-        String nifFinal = normalizeNif(nifOriginal);
-        if (nifFinal.isBlank()) {
-            return false;
-        }
-
-        if (nifVistosBd.contains(nifFinal)) {
-            return false;
-        }
-
-        CCCUtils.Resultado cccResultado = CCCUtils.validarYCorregir(cccOriginal, paisCCC);
-        if (cccResultado.getEstado() == CCCUtils.Estado.ERRONEO) {
-            return false;
-        }
-
-        nifVistosBd.add(nifFinal);
         return true;
     }
 
@@ -425,7 +514,6 @@ public class Prac3 {
         em.getTransaction().begin();
         try {
             Set<String> ordenanzasPersistidas = new HashSet<>();
-
             Set<String> contribuyentesProcesados = new HashSet<>();
 
             for (RegistroBD r : registros) {
@@ -450,19 +538,15 @@ public class Prac3 {
 
                 int numeroReciboReal = upsertRecibo(r);
                 upsertLineasRecibo(numeroReciboReal, r.lineas, r.bonificacion);
+
                 if (r.idContribuyente != null && !r.idContribuyente.isBlank()) {
-                    //Integer idContribuyente = Integer.valueOf(r.idContribuyente);
+                    Integer idContribuyente = Integer.valueOf(r.idContribuyente);
 
-                    if (r.idContribuyente != null && !r.idContribuyente.isBlank()) {
-                        Integer idContribuyente = Integer.valueOf(r.idContribuyente);
-
-                        for (Integer idConcepto : r.idsConcepto) {
-                            List<Ordenanza> lista = ordenanzasPorId.getOrDefault(idConcepto, List.of());
-
-                            for (Ordenanza ord : lista) {
-                                Integer idOrdenanzaBd = obtenerIdOrdenanzaBD(ord);
-                                upsertRelContribuyenteOrdenanza(idContribuyente, idOrdenanzaBd);
-                            }
+                    for (Integer idConcepto : r.idsConcepto) {
+                        List<Ordenanza> lista = ordenanzasPorId.getOrDefault(idConcepto, List.of());
+                        for (Ordenanza ord : lista) {
+                            Integer idOrdenanzaBd = obtenerIdOrdenanzaBD(ord);
+                            upsertRelContribuyenteOrdenanza(idContribuyente, idOrdenanzaBd);
                         }
                     }
                 }
@@ -537,7 +621,7 @@ public class Prac3 {
             insert.setParameter(8, emptyToNull(r.ccc));
             insert.setParameter(9, emptyToNull(r.iban));
             insert.setParameter(10, emptyToNull(r.email));
-            insert.setParameter(11, Date.valueOf(r.fechaAlta));
+            insert.setParameter(11, r.fechaAlta != null ? Date.valueOf(r.fechaAlta) : null);
             insert.setParameter(12, r.fechaBaja != null ? Date.valueOf(r.fechaBaja) : null);
             insert.setParameter(13, charOrNull(r.exencion));
             insert.setParameter(14, bonificacionOrNull(r.bonificacion));
@@ -661,7 +745,7 @@ public class Prac3 {
 
         List<?> resultados = q.getResultList();
 
-        String apellidos = (safe(r.apellido1) + " " + safe(r.apellido2)).trim();
+        String apellidos = unirApellidos(r.apellido1, r.apellido2);
         String direccionCompleta = safe(r.direccion);
 
         if (!resultados.isEmpty()) {
@@ -787,161 +871,6 @@ public class Prac3 {
         return importeBonif.doubleValue();
     }
 
-    private List<PDFGenerator.LineaConcepto> buildPdfLineas(int idConcepto, List<Ordenanza> aplicables,
-            int kgGenerados, int bonificacion) {
-        List<PDFGenerator.LineaConcepto> out = new ArrayList<>();
-        if (aplicables == null || aplicables.isEmpty()) {
-            return out;
-        }
-
-        List<Ordenanza> ordenadas = new ArrayList<>(aplicables);
-        ordenadas.sort(Comparator
-                .comparing((Ordenanza o) -> o.getPrecioFijo() > 0 ? 0 : 1)
-                .thenComparing(o -> normalizarKg(o.getKgincluidos())));
-
-        Ordenanza cabecera = ordenadas.get(0);
-        BigDecimal ivaPct = bd(cabecera.getIva());
-        BigDecimal factorBonif = BigDecimal.ONE.subtract(
-                BigDecimal.valueOf(bonificacion).divide(BigDecimal.valueOf(100), 10, RoundingMode.HALF_UP)
-        );
-
-        if (cabecera.getConceptoRelacionado() != 0) {
-            BigDecimal base = bd(ordmanager.calculate(bonificacion, kgGenerados, idConcepto));
-            out.add(linea(cabecera.getConcepto(),
-                    decorateSubconcepto(cabecera.getSubconcepto(), bonificacion),
-                    BigDecimal.ZERO, base, ivaPct));
-            return out;
-        }
-
-        int kgMinIncluido = 0;
-        for (Ordenanza ord : ordenadas) {
-            if (ord.getPrecioFijo() > 0) {
-                kgMinIncluido = Math.max(0, ord.getKgincluidos());
-                BigDecimal baseFija = bd(ord.getPrecioFijo()).multiply(factorBonif).setScale(2, RoundingMode.HALF_UP);
-                out.add(linea(ord.getConcepto(),
-                        decorateSubconcepto(ord.getSubconcepto(), bonificacion),
-                        BigDecimal.ZERO, baseFija, ivaPct));
-                break;
-            }
-        }
-
-        List<Ordenanza> tramos = new ArrayList<>();
-        for (Ordenanza ord : ordenadas) {
-            if (ord.getPreciokg() > 0) {
-                tramos.add(ord);
-            }
-        }
-
-        if (tramos.isEmpty()) {
-            return out;
-        }
-
-        int exceso = Math.max(0, kgGenerados - kgMinIncluido);
-        if (exceso == 0) {
-            return out;
-        }
-
-        boolean tramoUnico = false;
-        for (Ordenanza ord : ordenadas) {
-            if (ord.getAcumulable() != null && !ord.getAcumulable().isBlank()) {
-                tramoUnico = "s".equalsIgnoreCase(ord.getAcumulable().trim());
-                break;
-            }
-        }
-
-        if (tramoUnico) {
-            int pendiente = exceso;
-            Ordenanza seleccionada = tramos.get(tramos.size() - 1);
-
-            for (Ordenanza tramo : tramos) {
-                int ancho = normalizarKg(tramo.getKgincluidos());
-                if (ancho == Integer.MAX_VALUE || pendiente <= ancho) {
-                    seleccionada = tramo;
-                    break;
-                }
-                pendiente -= ancho;
-            }
-
-            BigDecimal base = bd(seleccionada.getPreciokg())
-                    .multiply(BigDecimal.valueOf(kgGenerados))
-                    .multiply(factorBonif)
-                    .setScale(2, RoundingMode.HALF_UP);
-
-            out.add(linea(seleccionada.getConcepto(),
-                    decorateSubconcepto(seleccionada.getSubconcepto(), bonificacion),
-                    BigDecimal.valueOf(kgGenerados), base, ivaPct));
-            return out;
-        }
-
-        int restante = exceso;
-        BigDecimal ultimoPrecio = BigDecimal.ZERO;
-        Ordenanza ultimoTramo = tramos.get(tramos.size() - 1);
-
-        for (Ordenanza tramo : tramos) {
-            if (restante <= 0) {
-                break;
-            }
-
-            int ancho = normalizarKg(tramo.getKgincluidos());
-            int kgEnTramo = (ancho == Integer.MAX_VALUE) ? restante : Math.min(restante, ancho);
-            if (kgEnTramo <= 0) {
-                continue;
-            }
-
-            BigDecimal precioKg = bd(tramo.getPreciokg());
-            BigDecimal base = precioKg.multiply(BigDecimal.valueOf(kgEnTramo))
-                    .multiply(factorBonif)
-                    .setScale(2, RoundingMode.HALF_UP);
-
-            out.add(linea(tramo.getConcepto(),
-                    decorateSubconcepto(tramo.getSubconcepto(), bonificacion),
-                    BigDecimal.valueOf(kgEnTramo), base, ivaPct));
-
-            restante -= kgEnTramo;
-            ultimoPrecio = precioKg;
-            ultimoTramo = tramo;
-        }
-
-        if (restante > 0) {
-            BigDecimal baseExtra = ultimoPrecio.multiply(BigDecimal.valueOf(restante))
-                    .multiply(factorBonif)
-                    .setScale(2, RoundingMode.HALF_UP);
-
-            out.add(linea(ultimoTramo.getConcepto(),
-                    decorateSubconcepto(ultimoTramo.getSubconcepto(), bonificacion),
-                    BigDecimal.valueOf(restante), baseExtra, ivaPct));
-        }
-
-        return out;
-    }
-
-    private PDFGenerator.LineaConcepto linea(String concepto, String subconcepto,
-            BigDecimal kg, BigDecimal base, BigDecimal ivaPct) {
-        PDFGenerator.LineaConcepto l = new PDFGenerator.LineaConcepto();
-        l.concepto = safe(concepto);
-        l.subconcepto = safe(subconcepto);
-        l.kgIncluidos = kg == null ? BigDecimal.ZERO : kg.setScale(2, RoundingMode.HALF_UP);
-        l.baseImponible = base == null ? BigDecimal.ZERO : base.setScale(2, RoundingMode.HALF_UP);
-        l.porcentajeIva = ivaPct == null ? BigDecimal.ZERO : ivaPct.setScale(2, RoundingMode.HALF_UP);
-        l.importeIva = l.baseImponible.multiply(l.porcentajeIva)
-                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-        return l;
-    }
-
-    private int normalizarKg(Integer kg) {
-        if (kg == null || kg <= 0) {
-            return Integer.MAX_VALUE;
-        }
-        return kg;
-    }
-
-    private String decorateSubconcepto(String subconcepto, int bonificacion) {
-        if (bonificacion > 0) {
-            return safe(subconcepto) + " (Bonif. " + bonificacion + "%)";
-        }
-        return safe(subconcepto);
-    }
-
     private String ordinalTrimestre(int trimestre) {
         return switch (trimestre) {
             case 1 ->
@@ -961,6 +890,14 @@ public class Prac3 {
         return BigDecimal.valueOf(valor).setScale(2, RoundingMode.HALF_UP);
     }
 
+    private double toXmlDouble(BigDecimal valor) {
+        if (valor == null) {
+            return 0.0;
+        }
+        BigDecimal normalizado = valor.setScale(2, RoundingMode.HALF_UP).stripTrailingZeros();
+        return Double.parseDouble(normalizado.toPlainString());
+    }
+
     private String safe(String v) {
         return v == null ? "" : v.trim();
     }
@@ -973,42 +910,6 @@ public class Prac3 {
 
     private String sanitizeFileName(String s) {
         return s.replaceAll("[\\\\/:*?\"<>|]", "_").replaceAll("\\s+", "_");
-    }
-
-    private static class RegistroBD {
-
-        int numeroReciboTemporal;
-        int trimestre;
-        int anio;
-
-        String nif;
-        String nombre;
-        String apellido1;
-        String apellido2;
-        String direccion;
-        String numero;       // AÑADIR
-        String ayuntamiento;
-        String iban;
-        String paisCCC;      // AÑADIR
-        String ccc;          // AÑADIR
-        String exencion;
-        String email;
-        String idContribuyente;
-
-        int bonificacion;
-        int kgGenerados;
-
-        LocalDate fechaAlta;
-        LocalDate fechaBaja; // AÑADIR
-        LocalDate fechaPadron;
-        LocalDate fechaRecibo;
-
-        BigDecimal baseImponible;
-        BigDecimal iva;
-        BigDecimal totalRecibo;
-
-        List<Integer> idsConcepto = new ArrayList<>();
-        List<PDFGenerator.LineaConcepto> lineas = new ArrayList<>();
     }
 
     private String emptyToNull(String s) {
@@ -1070,5 +971,41 @@ public class Prac3 {
             return null;
         }
         return ((Number) res.get(0)).intValue();
+    }
+
+    private static class RegistroBD {
+
+        int numeroReciboTemporal;
+        int trimestre;
+        int anio;
+
+        String nif;
+        String nombre;
+        String apellido1;
+        String apellido2;
+        String direccion;
+        String numero;
+        String ayuntamiento;
+        String iban;
+        String paisCCC;
+        String ccc;
+        String exencion;
+        String email;
+        String idContribuyente;
+
+        int bonificacion;
+        int kgGenerados;
+
+        LocalDate fechaAlta;
+        LocalDate fechaBaja;
+        LocalDate fechaPadron;
+        LocalDate fechaRecibo;
+
+        BigDecimal baseImponible;
+        BigDecimal iva;
+        BigDecimal totalRecibo;
+
+        List<Integer> idsConcepto = new ArrayList<>();
+        List<PDFGenerator.LineaConcepto> lineas = new ArrayList<>();
     }
 }

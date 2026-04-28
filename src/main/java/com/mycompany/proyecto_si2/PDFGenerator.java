@@ -429,4 +429,20 @@ public class PDFGenerator {
             this.importeIva = importeIva;
         }
     }
+    
+    public static void generateResumenPdf(
+        String destino,
+        PeriodoImpositivo periodo,
+        BigDecimal totalBase,
+        BigDecimal totalIva,
+        int numeroRecibos
+) throws IOException {
+    generateResumenPdf(
+            destino,
+            periodo == null ? "" : periodo.toString(),
+            totalBase,
+            totalIva,
+            numeroRecibos
+    );
+}
 }

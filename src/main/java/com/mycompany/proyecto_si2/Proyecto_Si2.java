@@ -77,8 +77,8 @@ public class Proyecto_Si2 {
          *
          */
         //INICIO PRÁCTICA 2
-        try {
-            vaciarTablas(em);
+        /*try {
+            //vaciarTablas(em);
             Path resources = Paths.get("resources");
             Path excel = resources.resolve("SistemasBasura.xlsx");
 
@@ -96,7 +96,9 @@ public class Proyecto_Si2 {
             System.out.println("Practica completada correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+        
+        new ProyectoSi2App().run();
 
     }
 

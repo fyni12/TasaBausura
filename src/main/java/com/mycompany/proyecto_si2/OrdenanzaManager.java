@@ -4,6 +4,7 @@ import POJOS.Ordenanza;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -259,4 +260,169 @@ public class OrdenanzaManager {
     private BigDecimal redondear(BigDecimal valor) {
         return valor.setScale(2, RoundingMode.HALF_UP);
     }
+
+    public List<PDFGenerator.LineaConcepto> buildPdfLineas(int bonificacion, int kgGen, int id) {
+        List<Ordenanza> aplicables = getOrdenanzasById(id);
+
+        if (aplicables.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<PDFGenerator.LineaConcepto> out = new ArrayList<>();
+        Ordenanza cabecera = aplicables.get(0);
+        BigDecimal ivaPct = bd(cabecera.getIva());
+        BigDecimal factorBonif = BigDecimal.ONE.subtract(porcentaje(bonificacion));
+
+        BigDecimal precioFijo = obtenerPrecioFijo(aplicables);
+        if (precioFijo.compareTo(BigDecimal.ZERO) > 0) {
+            BigDecimal baseFija = redondear(precioFijo.multiply(factorBonif));
+            out.add(linea(
+                    cabecera.getConcepto(),
+                    decorateSubconcepto(cabecera.getSubconcepto(), bonificacion),
+                    BigDecimal.ZERO,
+                    baseFija,
+                    ivaPct
+            ));
+        }
+
+        if (cabecera.getConceptoRelacionado() != 0) {
+            BigDecimal baseRelacionado = calcularBaseBonificada(cabecera.getConceptoRelacionado(), kgGen, bonificacion);
+            BigDecimal baseRelacionada = redondear(baseRelacionado.multiply(porcentaje(cabecera.getPorcentaje())));
+
+            out.add(linea(
+                    cabecera.getConcepto(),
+                    decorateSubconcepto(cabecera.getSubconcepto(), bonificacion),
+                    BigDecimal.ZERO,
+                    baseRelacionada,
+                    ivaPct
+            ));
+
+            return out;
+        }
+
+        List<Ordenanza> tramos = getTramos(aplicables);
+        if (tramos.isEmpty()) {
+            return out;
+        }
+
+        int kgMinimoIncluido = getKgMinimoIncluido(aplicables);
+        if (kgGen <= kgMinimoIncluido) {
+            return out;
+        }
+
+        boolean acumulable = esProgresivo(aplicables);
+        int exceso = kgGen - kgMinimoIncluido;
+
+        if (acumulable) {
+            int pendiente = exceso;
+            Ordenanza seleccionada = tramos.get(tramos.size() - 1);
+
+            for (Ordenanza tramo : tramos) {
+                int ancho = normalizarKgTramo(tramo.getKgincluidos());
+
+                if (ancho == Integer.MAX_VALUE || pendiente <= ancho) {
+                    seleccionada = tramo;
+                    break;
+                }
+
+                pendiente -= ancho;
+            }
+
+            BigDecimal base = redondear(
+                    bd(seleccionada.getPreciokg())
+                            .multiply(BigDecimal.valueOf(kgGen))
+                            .multiply(factorBonif)
+            );
+
+            out.add(linea(
+                    seleccionada.getConcepto(),
+                    decorateSubconcepto(seleccionada.getSubconcepto(), bonificacion),
+                    BigDecimal.valueOf(kgGen),
+                    base,
+                    ivaPct
+            ));
+
+            return out;
+        }
+
+        int restante = exceso;
+        BigDecimal ultimoPrecio = BigDecimal.ZERO;
+        Ordenanza ultimoTramo = tramos.get(tramos.size() - 1);
+
+        for (Ordenanza tramo : tramos) {
+            if (restante <= 0) {
+                break;
+            }
+
+            int ancho = normalizarKgTramo(tramo.getKgincluidos());
+            int kgEnTramo = (ancho == Integer.MAX_VALUE) ? restante : Math.min(restante, ancho);
+
+            if (kgEnTramo <= 0) {
+                continue;
+            }
+
+            BigDecimal precioKg = bd(tramo.getPreciokg());
+            BigDecimal base = redondear(
+                    precioKg.multiply(BigDecimal.valueOf(kgEnTramo)).multiply(factorBonif)
+            );
+
+            out.add(linea(
+                    tramo.getConcepto(),
+                    decorateSubconcepto(tramo.getSubconcepto(), bonificacion),
+                    BigDecimal.valueOf(kgEnTramo),
+                    base,
+                    ivaPct
+            ));
+
+            restante -= kgEnTramo;
+            ultimoPrecio = precioKg;
+            ultimoTramo = tramo;
+        }
+
+        if (restante > 0) {
+            BigDecimal baseExtra = redondear(
+                    ultimoPrecio.multiply(BigDecimal.valueOf(restante)).multiply(factorBonif)
+            );
+
+            out.add(linea(
+                    ultimoTramo.getConcepto(),
+                    decorateSubconcepto(ultimoTramo.getSubconcepto(), bonificacion),
+                    BigDecimal.valueOf(restante),
+                    baseExtra,
+                    ivaPct
+            ));
+        }
+
+        return out;
+    }
+
+   
+
+  
+
+    private PDFGenerator.LineaConcepto linea(String concepto, String subconcepto,
+                                             BigDecimal kg, BigDecimal base, BigDecimal ivaPct) {
+        PDFGenerator.LineaConcepto l = new PDFGenerator.LineaConcepto();
+        l.concepto = safe(concepto);
+        l.subconcepto = safe(subconcepto);
+        l.kgIncluidos = kg == null ? BigDecimal.ZERO : kg.setScale(2, RoundingMode.HALF_UP);
+        l.baseImponible = base == null ? BigDecimal.ZERO : base.setScale(2, RoundingMode.HALF_UP);
+        l.porcentajeIva = ivaPct == null ? BigDecimal.ZERO : ivaPct.setScale(2, RoundingMode.HALF_UP);
+        l.importeIva = l.baseImponible.multiply(l.porcentajeIva)
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        return l;
+    }
+
+    private String decorateSubconcepto(String subconcepto, int bonificacion) {
+        if (bonificacion > 0) {
+            return safe(subconcepto) + " (Bonif. " + bonificacion + "%)";
+        }
+        return safe(subconcepto);
+    }
+
+    private String safe(String value) {
+        return value == null ? "" : value.trim();
+    }
+
+    
 }
