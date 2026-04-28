@@ -103,25 +103,5 @@ public class Proyecto_Si2 {
 
     }
 
-    private static void vaciarTablas(EntityManager em) {
-        try {
-            em.getTransaction().begin();
-
-            em.createNativeQuery("DELETE FROM lineasrecibo").executeUpdate();
-            em.createNativeQuery("DELETE FROM lecturas").executeUpdate();
-            em.createNativeQuery("DELETE FROM recibos").executeUpdate();
-            em.createNativeQuery("DELETE FROM ordenanza").executeUpdate();
-            em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
-            em.createNativeQuery("DELETE FROM rel_contribuyente_ordenanza").executeUpdate();
-
-
-            em.getTransaction().commit();
-            System.out.println("Tablas vaciadas correctamente.");
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-        }
-    }
+    
 }
