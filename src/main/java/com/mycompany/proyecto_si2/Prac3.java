@@ -438,18 +438,19 @@ public class Prac3 {
             return false;
         }
 
-        if (finPeriodo.isBefore(inicioPeriodo)) {
-            throw new IllegalArgumentException("El periodo es inválido: la fecha fin es anterior a la fecha inicio.");
-        }
-
+        // Si la fecha de baja es anterior a la de alta, es un error de datos. La anulamos.
         if (fechaBaja != null && fechaBaja.isBefore(fechaAlta)) {
-            return false;
+            fechaBaja = null;
         }
+        // ---------------------------------------
 
-        boolean altaDentroOAntesDelFin = !fechaAlta.isAfter(finPeriodo);
-        boolean bajaNulaODentroODespuesDelInicio = fechaBaja == null || !fechaBaja.isBefore(inicioPeriodo);
+        // ALTA: Debe ser el mismo día o antes de que acabe el periodo
+        boolean altaValida = !fechaAlta.isAfter(finPeriodo);
 
-        return altaDentroOAntesDelFin && bajaNulaODentroODespuesDelInicio;
+        // BAJA: Si no hay baja, está activo. Si hay, debe ser el mismo día o después de que empiece el periodo
+        boolean bajaValida = (fechaBaja == null) || !fechaBaja.isBefore(inicioPeriodo);
+
+        return altaValida && bajaValida;
     }
 
     private boolean esAptoParaBD(ExcelManager excel, Row row, Set<String> nifVistosBd) {

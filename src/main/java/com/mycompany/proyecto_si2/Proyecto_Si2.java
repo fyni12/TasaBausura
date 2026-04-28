@@ -77,11 +77,8 @@ public class Proyecto_Si2 {
          *
          */
         //INICIO PRÁCTICA 2
-<<<<<<< HEAD
         /*try {
-=======
         try {
->>>>>>> de627b140c8b946d5ab404310fc1ac9c487af334
             //vaciarTablas(em);
             Path resources = Paths.get("resources");
             Path excel = resources.resolve("SistemasBasura.xlsx");
