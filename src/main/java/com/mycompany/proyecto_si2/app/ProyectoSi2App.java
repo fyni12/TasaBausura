@@ -1,5 +1,8 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.app;
 
+import com.mycompany.proyecto_si2.cli.ConsolaPeriodoReader;
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
+import com.mycompany.proyecto_si2.cli.Prac3;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -23,7 +26,7 @@ public final class ProyectoSi2App {
             emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
             em = emf.createEntityManager();
             
-            //vaciarTablas(em);
+           // vaciarTablas(em);
 
             PracticaBasuraService service = new PracticaBasuraService(excel, resources);
             service.procesar();

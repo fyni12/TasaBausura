@@ -1,6 +1,7 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.domain.service;
 
 import POJOS.Ordenanza;
+import com.mycompany.proyecto_si2.infra.pdf.PDFGenerator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;

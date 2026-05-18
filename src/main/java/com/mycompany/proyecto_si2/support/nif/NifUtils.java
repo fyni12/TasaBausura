@@ -1,4 +1,4 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.support.nif;
 
 import java.util.Locale;
 

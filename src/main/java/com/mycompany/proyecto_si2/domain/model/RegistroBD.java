@@ -1,0 +1,43 @@
+package com.mycompany.proyecto_si2.domain.model;
+
+import com.mycompany.proyecto_si2.infra.pdf.PDFGenerator;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RegistroBD {
+
+    public int numeroReciboTemporal;
+    public int trimestre;
+    public int anio;
+
+    public String nif;
+    public String nombre;
+    public String apellido1;
+    public String apellido2;
+    public String direccion;
+    public String numero;
+    public String ayuntamiento;
+    public String iban;
+    public String paisCCC;
+    public String ccc;
+    public String exencion;
+    public String email;
+    public String idContribuyente;
+
+    public int bonificacion;
+    public int kgGenerados;
+
+    public LocalDate fechaAlta;
+    public LocalDate fechaBaja;
+    public LocalDate fechaPadron;
+    public LocalDate fechaRecibo;
+
+    public BigDecimal baseImponible;
+    public BigDecimal iva;
+    public BigDecimal totalRecibo;
+
+    public List<Integer> idsConcepto = new ArrayList<>();
+    public List<PDFGenerator.LineaConcepto> lineas = new ArrayList<>();
+}

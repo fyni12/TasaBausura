@@ -1,4 +1,4 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.infra.excel;
 
 import java.io.IOException;
 import java.io.InputStream;

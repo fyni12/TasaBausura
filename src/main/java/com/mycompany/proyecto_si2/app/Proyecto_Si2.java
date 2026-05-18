@@ -1,8 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.app;
 
+import com.mycompany.proyecto_si2.app.ProyectoSi2App;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;

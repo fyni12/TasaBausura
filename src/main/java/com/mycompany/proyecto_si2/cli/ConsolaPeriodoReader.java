@@ -1,5 +1,7 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.cli;
 
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
+import com.mycompany.proyecto_si2.domain.service.PeriodoImpositivoParser;
 import java.util.Scanner;
 
 public final class ConsolaPeriodoReader {

@@ -1,5 +1,6 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.infra.pdf;
 
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;

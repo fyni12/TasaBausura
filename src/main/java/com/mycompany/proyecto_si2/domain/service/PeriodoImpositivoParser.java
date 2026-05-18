@@ -1,4 +1,6 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.domain.service;
+
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
 
 public final class PeriodoImpositivoParser {
 

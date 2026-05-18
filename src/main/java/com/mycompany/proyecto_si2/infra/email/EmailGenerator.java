@@ -1,4 +1,4 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.infra.email;
 
 import java.text.Normalizer;
 import java.util.HashSet;

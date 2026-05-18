@@ -1,5 +1,9 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.infra.xml;
 
+import com.mycompany.proyecto_si2.domain.model.Recibo;
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
+import com.mycompany.proyecto_si2.domain.model.NifIncidencia;
+import com.mycompany.proyecto_si2.domain.model.CCCIncidencia;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;

@@ -1,5 +1,13 @@
-package com.mycompany.proyecto_si2;
+package com.mycompany.proyecto_si2.app;
 
+import com.mycompany.proyecto_si2.domain.model.CCCIncidencia;
+import com.mycompany.proyecto_si2.support.ccc.CCCUtils;
+import com.mycompany.proyecto_si2.infra.email.EmailGenerator;
+import com.mycompany.proyecto_si2.infra.excel.ExcelColumn;
+import com.mycompany.proyecto_si2.infra.excel.ExcelManager;
+import com.mycompany.proyecto_si2.domain.model.NifIncidencia;
+import com.mycompany.proyecto_si2.support.nif.NifUtils;
+import com.mycompany.proyecto_si2.infra.xml.XmlManager;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
