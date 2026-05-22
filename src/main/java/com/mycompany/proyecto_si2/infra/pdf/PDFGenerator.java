@@ -91,7 +91,10 @@ public class PDFGenerator {
                 .setPadding(10)
                 .setTextAlignment(TextAlignment.CENTER);
 
-        emisor.add(p(data.entidadEmisora, false, 15, TextAlignment.CENTER));
+        //emisor.add(p(data.entidadEmisora, false, 15, TextAlignment.CENTER));        
+        emisor.add(p("David 71718236G\n Sahira 71473039X", false, 15, TextAlignment.CENTER));
+
+        
         emisor.add(p(data.codigoRecibo, false, 12, TextAlignment.CENTER));
         emisor.add(p("Fecha Generación Recibo: " + safe(data.fechaGeneracionRecibo), false, 11, TextAlignment.CENTER));
         emisor.add(p(safe(data.direccionEmisorLinea1), false, 11, TextAlignment.CENTER));
