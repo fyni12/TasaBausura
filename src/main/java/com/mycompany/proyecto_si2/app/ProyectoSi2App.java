@@ -1,8 +1,8 @@
 package com.mycompany.proyecto_si2.app;
 
 import com.mycompany.proyecto_si2.cli.ConsolaPeriodoReader;
-import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
 import com.mycompany.proyecto_si2.cli.Prac3;
+import com.mycompany.proyecto_si2.domain.model.PeriodoImpositivo;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -25,16 +25,18 @@ public final class ProyectoSi2App {
         try (Scanner scanner = new Scanner(System.in)) {
             emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
             em = emf.createEntityManager();
-            
-           // vaciarTablas(em);
+
+            // vaciarTablas(em);
 
             PracticaBasuraService service = new PracticaBasuraService(excel, resources);
             service.procesar();
 
-            PeriodoImpositivo periodo = ConsolaPeriodoReader.leer(scanner);
+            //PeriodoImpositivo periodo = ConsolaPeriodoReader.leer(scanner);
 
             Prac3 prac3 = new Prac3(excel, resources, em);
-            prac3.procesar(periodo);
+            //prac3.procesar(periodo);
+
+            InformeFinalRunner.generar(em, String.format("%s/recibos",resources.toString()));
 
             System.out.println("Práctica completada correctamente.");
         } catch (Exception e) {
@@ -48,7 +50,7 @@ public final class ProyectoSi2App {
             }
         }
     }
-    
+
     private static void vaciarTablas(EntityManager em) {
         try {
             em.getTransaction().begin();
@@ -59,7 +61,6 @@ public final class ProyectoSi2App {
             em.createNativeQuery("DELETE FROM ordenanza").executeUpdate();
             em.createNativeQuery("DELETE FROM contribuyente").executeUpdate();
             em.createNativeQuery("DELETE FROM rel_contribuyente_ordenanza").executeUpdate();
-
 
             em.getTransaction().commit();
             System.out.println("Tablas vaciadas correctamente.");
