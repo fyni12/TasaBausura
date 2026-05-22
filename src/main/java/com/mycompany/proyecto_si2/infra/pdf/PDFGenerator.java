@@ -92,7 +92,7 @@ public class PDFGenerator {
                 .setTextAlignment(TextAlignment.CENTER);
 
         //emisor.add(p(data.entidadEmisora, false, 15, TextAlignment.CENTER));        
-        emisor.add(p("David 71718236G\n Sahira 71473039X", false, 15, TextAlignment.CENTER));
+        emisor.add(p("David 71718236G\n Sahira 71473039X", false, 15, TextAlignment.CENTER)); //CAMBIO NOMBRES
 
         
         emisor.add(p(data.codigoRecibo, false, 12, TextAlignment.CENTER));
