@@ -4,12 +4,16 @@
 package com.mycompany.proyecto_si2.app;
 
 import com.mycompany.proyecto_si2.app.ProyectoSi2App;
+import com.mycompany.proyecto_si2.app.InformeFinalRunner;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+
 
 /**
  *
@@ -101,6 +105,8 @@ public class Proyecto_Si2 {
         }*/
         
         new ProyectoSi2App().run();
+        
+        
 
     }
 
