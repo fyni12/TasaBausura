@@ -26,7 +26,7 @@ public final class ProyectoSi2App {
             emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
             em = emf.createEntityManager();
             
-           // vaciarTablas(em);
+           vaciarTablas(em);
 
             PracticaBasuraService service = new PracticaBasuraService(excel, resources);
             service.procesar();

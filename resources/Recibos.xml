@@ -1,1303 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Recibos fechaPadron="1T 2025" totalPadron="59879,74" numeroTotalRecibos="100">
+<Recibos fechaPadron="1T 2024" totalPadron="2797,32" numeroTotalRecibos="13">
   <Recibo idRecibo="0">
     <Exencion>N</Exencion>
-    <idFilaExcel>21</idFilaExcel>
-    <nombre>Clementina</nombre>
-    <primerApellido>Iglesias</primerApellido>
-    <segundoApellido>Sánchez</segundoApellido>
-    <NIF>71393354C</NIF>
-    <IBAN>DK2300750184390702511111</IBAN>
-    <kgGenerados>122</kgGenerados>
-    <baseImponibleRecibo>1419,00</baseImponibleRecibo>
-    <ivaRecibo>279,56</ivaRecibo>
-    <totalRecibo>1698,56</totalRecibo>
+    <idFilaExcel>2</idFilaExcel>
+    <nombre>Juan</nombre>
+    <primerApellido>Martinez</primerApellido>
+    <segundoApellido>Dominguez</segundoApellido>
+    <NIF>12345678Z</NIF>
+    <IBAN>DK6231645124443461205121</IBAN>
+    <kgGenerados>251</kgGenerados>
+    <baseImponibleRecibo>863,60</baseImponibleRecibo>
+    <ivaRecibo>27,46</ivaRecibo>
+    <totalRecibo>891,06</totalRecibo>
   </Recibo>
   <Recibo idRecibo="1">
     <Exencion>N</Exencion>
-    <idFilaExcel>22</idFilaExcel>
-    <nombre>Miguel Ángel</nombre>
-    <primerApellido>Quintanilla</primerApellido>
-    <segundoApellido />
-    <NIF>09611066X</NIF>
-    <IBAN>ES7823455254913263211111</IBAN>
-    <kgGenerados>74</kgGenerados>
-    <baseImponibleRecibo>363,00</baseImponibleRecibo>
-    <ivaRecibo>69,42</ivaRecibo>
-    <totalRecibo>432,42</totalRecibo>
+    <idFilaExcel>17</idFilaExcel>
+    <nombre>Saaida</nombre>
+    <primerApellido>Boughaza</primerApellido>
+    <segundoApellido>Robles</segundoApellido>
+    <NIF>X1563258V</NIF>
+    <IBAN>ES0396431245188150005111</IBAN>
+    <kgGenerados>51</kgGenerados>
+    <baseImponibleRecibo>103,72</baseImponibleRecibo>
+    <ivaRecibo>10,29</ivaRecibo>
+    <totalRecibo>114,01</totalRecibo>
   </Recibo>
   <Recibo idRecibo="2">
-    <Exencion>N</Exencion>
-    <idFilaExcel>24</idFilaExcel>
-    <nombre>Pedro</nombre>
-    <primerApellido>Portugues</primerApellido>
-    <segundoApellido />
-    <NIF>71404625K</NIF>
-    <IBAN>ES8820960043012159011111</IBAN>
-    <kgGenerados>177</kgGenerados>
-    <baseImponibleRecibo>3971,00</baseImponibleRecibo>
-    <ivaRecibo>789,96</ivaRecibo>
-    <totalRecibo>4760,96</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="3">
-    <Exencion>N</Exencion>
-    <idFilaExcel>25</idFilaExcel>
-    <nombre>Paulina</nombre>
-    <primerApellido>Cepin</primerApellido>
-    <segundoApellido />
-    <NIF>01234567L</NIF>
-    <IBAN>DE6112669681115112111111</IBAN>
-    <kgGenerados>42</kgGenerados>
-    <baseImponibleRecibo>127,05</baseImponibleRecibo>
-    <ivaRecibo>22,24</ivaRecibo>
-    <totalRecibo>149,29</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="4">
-    <Exencion>N</Exencion>
-    <idFilaExcel>27</idFilaExcel>
-    <nombre>Gerardo</nombre>
-    <primerApellido>Martinez</primerApellido>
-    <segundoApellido>Molina</segundoApellido>
-    <NIF>09724050H</NIF>
-    <IBAN>ES8956187775375550011111</IBAN>
-    <kgGenerados>88</kgGenerados>
-    <baseImponibleRecibo>561,00</baseImponibleRecibo>
-    <ivaRecibo>107,96</ivaRecibo>
-    <totalRecibo>668,96</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="5">
-    <Exencion>N</Exencion>
-    <idFilaExcel>28</idFilaExcel>
-    <nombre>Cecilia</nombre>
-    <primerApellido>García</primerApellido>
-    <segundoApellido>Montiel</segundoApellido>
-    <NIF>09689676Y</NIF>
-    <IBAN>ES8125516848011156111111</IBAN>
-    <kgGenerados>101</kgGenerados>
-    <baseImponibleRecibo>474,38</baseImponibleRecibo>
-    <ivaRecibo>91,69</ivaRecibo>
-    <totalRecibo>566,07</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="6">
-    <Exencion>N</Exencion>
-    <idFilaExcel>29</idFilaExcel>
-    <nombre>Genaro</nombre>
-    <primerApellido>Moncada</primerApellido>
-    <segundoApellido>Morala</segundoApellido>
-    <NIF>09570285P</NIF>
-    <IBAN>PT3864578946700051511111</IBAN>
-    <kgGenerados>10</kgGenerados>
-    <baseImponibleRecibo>77,00</baseImponibleRecibo>
-    <ivaRecibo>11,16</ivaRecibo>
-    <totalRecibo>88,16</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="7">
-    <Exencion>N</Exencion>
-    <idFilaExcel>30</idFilaExcel>
-    <nombre>Clara</nombre>
-    <primerApellido>Sánchez</primerApellido>
-    <segundoApellido>Nuñez</segundoApellido>
-    <NIF>09570262P</NIF>
-    <IBAN>ES0634698752714600511111</IBAN>
-    <kgGenerados>78</kgGenerados>
-    <baseImponibleRecibo>506,00</baseImponibleRecibo>
-    <ivaRecibo>96,96</ivaRecibo>
-    <totalRecibo>602,96</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="8">
-    <Exencion>N</Exencion>
-    <idFilaExcel>31</idFilaExcel>
-    <nombre>Ana Belén</nombre>
-    <primerApellido>Lombás</primerApellido>
-    <segundoApellido>Olle</segundoApellido>
-    <NIF>09548827D</NIF>
-    <IBAN>ES2266649444182310011111</IBAN>
-    <kgGenerados>71</kgGenerados>
-    <baseImponibleRecibo>467,50</baseImponibleRecibo>
-    <ivaRecibo>89,26</ivaRecibo>
-    <totalRecibo>556,76</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="9">
-    <Exencion>N</Exencion>
-    <idFilaExcel>32</idFilaExcel>
-    <nombre>Generoso</nombre>
-    <primerApellido>Martin</primerApellido>
-    <segundoApellido>Martin</segundoApellido>
-    <NIF>09548486J</NIF>
-    <IBAN>FR7123185484445641611111</IBAN>
-    <kgGenerados>113</kgGenerados>
-    <baseImponibleRecibo>1320,00</baseImponibleRecibo>
-    <ivaRecibo>259,76</ivaRecibo>
-    <totalRecibo>1579,76</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="10">
     <Exencion>N</Exencion>
     <idFilaExcel>36</idFilaExcel>
     <nombre>Tomás</nombre>
     <primerApellido>Cedron</primerApellido>
     <segundoApellido>Pérez</segundoApellido>
-    <NIF>95236547X</NIF>
-    <IBAN>DE9221508149195421311111</IBAN>
-    <kgGenerados>10</kgGenerados>
-    <baseImponibleRecibo>57,75</baseImponibleRecibo>
-    <ivaRecibo>8,38</ivaRecibo>
-    <totalRecibo>66,13</totalRecibo>
+    <NIF>24304263W</NIF>
+    <IBAN>DE5021508149175421346497</IBAN>
+    <kgGenerados>101</kgGenerados>
+    <baseImponibleRecibo>0,00</baseImponibleRecibo>
+    <ivaRecibo>0,00</ivaRecibo>
+    <totalRecibo>0,00</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="11">
+  <Recibo idRecibo="3">
     <Exencion>N</Exencion>
-    <idFilaExcel>37</idFilaExcel>
-    <nombre>Clotilde</nombre>
-    <primerApellido>Castro</primerApellido>
-    <segundoApellido>Presa</segundoApellido>
-    <NIF>15975328B</NIF>
-    <IBAN>DE5221346154523164911111</IBAN>
-    <kgGenerados>50</kgGenerados>
-    <baseImponibleRecibo>187,00</baseImponibleRecibo>
-    <ivaRecibo>33,16</ivaRecibo>
-    <totalRecibo>220,16</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="12">
-    <Exencion>N</Exencion>
-    <idFilaExcel>39</idFilaExcel>
-    <nombre>Sara</nombre>
-    <primerApellido>Flórez</primerApellido>
-    <segundoApellido>Prieto</segundoApellido>
-    <NIF>X7523694A</NIF>
-    <IBAN>ES8523164897682213011111</IBAN>
-    <kgGenerados>500</kgGenerados>
-    <baseImponibleRecibo>11077,00</baseImponibleRecibo>
-    <ivaRecibo>2211,16</ivaRecibo>
-    <totalRecibo>13288,16</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="13">
-    <Exencion>N</Exencion>
-    <idFilaExcel>40</idFilaExcel>
-    <nombre>Encarnación</nombre>
-    <primerApellido>López</primerApellido>
-    <segundoApellido>Riverto</segundoApellido>
-    <NIF>Y2563248G</NIF>
-    <IBAN>ES4796536214855214511111</IBAN>
-    <kgGenerados>120</kgGenerados>
-    <baseImponibleRecibo>1397,00</baseImponibleRecibo>
-    <ivaRecibo>275,16</ivaRecibo>
-    <totalRecibo>1672,16</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="14">
-    <Exencion>N</Exencion>
-    <idFilaExcel>41</idFilaExcel>
-    <nombre>Dolores</nombre>
-    <primerApellido>López</primerApellido>
-    <segundoApellido>Robles</segundoApellido>
-    <NIF>09256324C</NIF>
-    <IBAN>ES2285461325261978711111</IBAN>
-    <kgGenerados>30</kgGenerados>
-    <baseImponibleRecibo>55,00</baseImponibleRecibo>
-    <ivaRecibo>8,88</ivaRecibo>
-    <totalRecibo>63,88</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="15">
-    <Exencion>N</Exencion>
-    <idFilaExcel>42</idFilaExcel>
-    <nombre>Herminia</nombre>
-    <primerApellido>Almanzar</primerApellido>
-    <segundoApellido>Robles</segundoApellido>
-    <NIF>09785530L</NIF>
-    <IBAN>FI6024587946002003111111</IBAN>
-    <kgGenerados>118</kgGenerados>
-    <baseImponibleRecibo>1375,00</baseImponibleRecibo>
-    <ivaRecibo>270,76</ivaRecibo>
-    <totalRecibo>1645,76</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="16">
-    <Exencion>N</Exencion>
-    <idFilaExcel>43</idFilaExcel>
-    <nombre>Sonia</nombre>
-    <primerApellido>Pisabarro</primerApellido>
-    <segundoApellido>Rodríguez</segundoApellido>
-    <NIF>71393396Q</NIF>
-    <IBAN>ES0420960043053071411111</IBAN>
-    <kgGenerados>154</kgGenerados>
-    <baseImponibleRecibo>1771,00</baseImponibleRecibo>
-    <ivaRecibo>349,96</ivaRecibo>
-    <totalRecibo>2120,96</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="17">
-    <Exencion>N</Exencion>
-    <idFilaExcel>44</idFilaExcel>
-    <nombre>Generoso</nombre>
-    <primerApellido>Pisabarro</primerApellido>
-    <segundoApellido>Rodríguez</segundoApellido>
-    <NIF>71406027C</NIF>
-    <IBAN>ES3620960043022158811111</IBAN>
-    <kgGenerados>57</kgGenerados>
-    <baseImponibleRecibo>202,40</baseImponibleRecibo>
-    <ivaRecibo>36,24</ivaRecibo>
-    <totalRecibo>238,64</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="18">
-    <Exencion>N</Exencion>
-    <idFilaExcel>45</idFilaExcel>
-    <nombre>Sergio</nombre>
-    <primerApellido>Alaiz</primerApellido>
-    <segundoApellido>Salas</segundoApellido>
-    <NIF>09548451R</NIF>
-    <IBAN>ES6521654587925156411111</IBAN>
-    <kgGenerados>99</kgGenerados>
-    <baseImponibleRecibo>621,50</baseImponibleRecibo>
-    <ivaRecibo>120,06</ivaRecibo>
-    <totalRecibo>741,56</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="19">
-    <Exencion>N</Exencion>
-    <idFilaExcel>46</idFilaExcel>
-    <nombre>Bonifacio</nombre>
-    <primerApellido>Fresco</primerApellido>
-    <segundoApellido>Sánchez</segundoApellido>
+    <idFilaExcel>60</idFilaExcel>
+    <nombre>Adolfo</nombre>
+    <primerApellido>Puerto</primerApellido>
+    <segundoApellido>Márquez</segundoApellido>
     <NIF>71597570L</NIF>
-    <IBAN>ES0851651681931210611111</IBAN>
-    <kgGenerados>65</kgGenerados>
-    <baseImponibleRecibo>434,50</baseImponibleRecibo>
-    <ivaRecibo>82,66</ivaRecibo>
-    <totalRecibo>517,16</totalRecibo>
+    <IBAN>ES8020960043033000100000</IBAN>
+    <kgGenerados>75</kgGenerados>
+    <baseImponibleRecibo>124,60</baseImponibleRecibo>
+    <ivaRecibo>11,11</ivaRecibo>
+    <totalRecibo>135,71</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="20">
+  <Recibo idRecibo="4">
     <Exencion>N</Exencion>
-    <idFilaExcel>47</idFilaExcel>
-    <nombre>Demetrio</nombre>
-    <primerApellido>Fernández</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>09611100K</NIF>
-    <IBAN>ES4966552211198855311111</IBAN>
-    <kgGenerados>94</kgGenerados>
-    <baseImponibleRecibo>594,00</baseImponibleRecibo>
-    <ivaRecibo>114,56</ivaRecibo>
-    <totalRecibo>708,56</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="21">
-    <Exencion>N</Exencion>
-    <idFilaExcel>48</idFilaExcel>
-    <nombre>Germán</nombre>
-    <primerApellido>Martínez</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>09769669M</NIF>
-    <IBAN>GB5120910936563000011111</IBAN>
-    <kgGenerados>41</kgGenerados>
-    <baseImponibleRecibo>125,40</baseImponibleRecibo>
-    <ivaRecibo>21,90</ivaRecibo>
-    <totalRecibo>147,30</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="22">
-    <Exencion>N</Exencion>
-    <idFilaExcel>49</idFilaExcel>
-    <nombre>Marta</nombre>
-    <primerApellido>López</primerApellido>
-    <segundoApellido>Getino</segundoApellido>
-    <NIF>09548317M</NIF>
-    <IBAN>DE0301821135960205511111</IBAN>
-    <kgGenerados>192</kgGenerados>
-    <baseImponibleRecibo>4301,00</baseImponibleRecibo>
-    <ivaRecibo>855,96</ivaRecibo>
-    <totalRecibo>5156,96</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="23">
-    <Exencion>N</Exencion>
-    <idFilaExcel>51</idFilaExcel>
-    <nombre>Israel</nombre>
-    <primerApellido>Amo</primerApellido>
-    <segundoApellido>González</segundoApellido>
-    <NIF>09758365V</NIF>
-    <IBAN>ES7220960043023075711111</IBAN>
-    <kgGenerados>157</kgGenerados>
-    <baseImponibleRecibo>1353,00</baseImponibleRecibo>
-    <ivaRecibo>267,42</ivaRecibo>
-    <totalRecibo>1620,42</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="24">
-    <Exencion>N</Exencion>
-    <idFilaExcel>52</idFilaExcel>
-    <nombre>Gabriel</nombre>
-    <primerApellido>Prieto</primerApellido>
-    <segundoApellido>González</segundoApellido>
-    <NIF>02614035Q</NIF>
-    <IBAN>SM2725635478301002511111</IBAN>
-    <kgGenerados>126</kgGenerados>
-    <baseImponibleRecibo>1463,00</baseImponibleRecibo>
-    <ivaRecibo>288,36</ivaRecibo>
-    <totalRecibo>1751,36</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="25">
-    <Exencion>N</Exencion>
-    <idFilaExcel>53</idFilaExcel>
-    <nombre>Rubén Darío</nombre>
-    <primerApellido>García</primerApellido>
-    <segundoApellido>Gracia</segundoApellido>
-    <NIF>09570242B</NIF>
-    <IBAN>ES1432154697135423111111</IBAN>
-    <kgGenerados>184</kgGenerados>
-    <baseImponibleRecibo>4125,00</baseImponibleRecibo>
-    <ivaRecibo>820,76</ivaRecibo>
-    <totalRecibo>4945,76</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="26">
-    <Exencion>N</Exencion>
-    <idFilaExcel>55</idFilaExcel>
-    <nombre>Alencar</nombre>
-    <primerApellido>Fresco</primerApellido>
-    <segundoApellido>Gutierrez</segundoApellido>
-    <NIF>09548501M</NIF>
-    <IBAN>GB2420008521528775111111</IBAN>
-    <kgGenerados>44</kgGenerados>
-    <baseImponibleRecibo>173,80</baseImponibleRecibo>
-    <ivaRecibo>30,52</ivaRecibo>
-    <totalRecibo>204,32</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="27">
-    <Exencion>N</Exencion>
-    <idFilaExcel>176</idFilaExcel>
-    <nombre>Tomás</nombre>
-    <primerApellido>Pérez</primerApellido>
-    <segundoApellido>Cedron</segundoApellido>
-    <NIF>71256665C</NIF>
-    <IBAN>DE9221508149195421311111</IBAN>
-    <kgGenerados>10</kgGenerados>
-    <baseImponibleRecibo>18,32</baseImponibleRecibo>
-    <ivaRecibo>3,60</ivaRecibo>
-    <totalRecibo>21,92</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="28">
-    <Exencion>N</Exencion>
-    <idFilaExcel>177</idFilaExcel>
-    <nombre>Clotilde</nombre>
-    <primerApellido>Presa</primerApellido>
-    <segundoApellido>Castro</segundoApellido>
-    <NIF>71256675F</NIF>
-    <IBAN>DE1921346154543164911122</IBAN>
-    <kgGenerados>50</kgGenerados>
-    <baseImponibleRecibo>36,63</baseImponibleRecibo>
-    <ivaRecibo>7,19</ivaRecibo>
-    <totalRecibo>43,82</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="29">
-    <Exencion>N</Exencion>
-    <idFilaExcel>178</idFilaExcel>
-    <nombre>Cristina</nombre>
-    <primerApellido>Prieto</primerApellido>
-    <segundoApellido>Alonso</segundoApellido>
-    <NIF>71256685V</NIF>
-    <IBAN>ES1625187786321225411111</IBAN>
-    <kgGenerados>141</kgGenerados>
-    <baseImponibleRecibo>145,41</baseImponibleRecibo>
-    <ivaRecibo>28,56</ivaRecibo>
-    <totalRecibo>173,97</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="30">
-    <Exencion>N</Exencion>
-    <idFilaExcel>179</idFilaExcel>
-    <nombre>Sara</nombre>
-    <primerApellido>Prieto</primerApellido>
-    <segundoApellido>Flórez</segundoApellido>
-    <NIF>71256695G</NIF>
-    <IBAN>ES8523164897682213011111</IBAN>
-    <kgGenerados>500</kgGenerados>
-    <baseImponibleRecibo>1874,79</baseImponibleRecibo>
-    <ivaRecibo>368,20</ivaRecibo>
-    <totalRecibo>2242,99</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="31">
-    <Exencion>N</Exencion>
-    <idFilaExcel>180</idFilaExcel>
-    <nombre>Encarnación</nombre>
-    <primerApellido>Riverto</primerApellido>
-    <segundoApellido>López</segundoApellido>
-    <NIF>71256705Z</NIF>
-    <IBAN>ES4796536214855214511111</IBAN>
-    <kgGenerados>120</kgGenerados>
-    <baseImponibleRecibo>98,79</baseImponibleRecibo>
-    <ivaRecibo>19,40</ivaRecibo>
-    <totalRecibo>118,19</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="32">
-    <Exencion>N</Exencion>
-    <idFilaExcel>181</idFilaExcel>
-    <nombre>Dolores</nombre>
-    <primerApellido>Robles</primerApellido>
-    <segundoApellido>López</segundoApellido>
-    <NIF>71256715R</NIF>
-    <IBAN>ES2285461325261978711111</IBAN>
-    <kgGenerados>30</kgGenerados>
-    <baseImponibleRecibo>14,99</baseImponibleRecibo>
-    <ivaRecibo>2,95</ivaRecibo>
-    <totalRecibo>17,94</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="33">
-    <Exencion>N</Exencion>
-    <idFilaExcel>182</idFilaExcel>
-    <nombre>Herminia</nombre>
-    <primerApellido>Robles</primerApellido>
-    <segundoApellido>Almanzar</segundoApellido>
-    <NIF>71256725B</NIF>
-    <IBAN>FI2724587946022003111122</IBAN>
-    <kgGenerados>118</kgGenerados>
-    <baseImponibleRecibo>96,57</baseImponibleRecibo>
-    <ivaRecibo>18,97</ivaRecibo>
-    <totalRecibo>115,54</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="34">
-    <Exencion>N</Exencion>
-    <idFilaExcel>183</idFilaExcel>
-    <nombre>Sonia</nombre>
-    <primerApellido>Rodríguez</primerApellido>
-    <segundoApellido>Pisabarro</segundoApellido>
-    <NIF>71256735K</NIF>
-    <IBAN>ES0420960043053071411111</IBAN>
-    <kgGenerados>154</kgGenerados>
-    <baseImponibleRecibo>174,27</baseImponibleRecibo>
-    <ivaRecibo>34,23</ivaRecibo>
-    <totalRecibo>208,50</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="35">
-    <Exencion>N</Exencion>
-    <idFilaExcel>184</idFilaExcel>
-    <nombre>Generoso</nombre>
-    <primerApellido>Rodríguez</primerApellido>
-    <segundoApellido>Pisabarro</segundoApellido>
-    <NIF>71256745P</NIF>
-    <IBAN>ES3620960043022158811111</IBAN>
-    <kgGenerados>57</kgGenerados>
-    <baseImponibleRecibo>38,96</baseImponibleRecibo>
-    <ivaRecibo>7,65</ivaRecibo>
-    <totalRecibo>46,61</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="36">
-    <Exencion>N</Exencion>
-    <idFilaExcel>185</idFilaExcel>
-    <nombre>Sergio</nombre>
-    <primerApellido>Salas</primerApellido>
-    <segundoApellido>Alaiz</segundoApellido>
-    <NIF>71256755H</NIF>
-    <IBAN>ES6521654587925156411111</IBAN>
-    <kgGenerados>99</kgGenerados>
-    <baseImponibleRecibo>75,48</baseImponibleRecibo>
-    <ivaRecibo>14,82</ivaRecibo>
-    <totalRecibo>90,30</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="37">
-    <Exencion>N</Exencion>
-    <idFilaExcel>187</idFilaExcel>
-    <nombre>Demetrio</nombre>
-    <primerApellido>García</primerApellido>
-    <segundoApellido>Fernández</segundoApellido>
-    <NIF>71256775S</NIF>
-    <IBAN>ES4966552211198855311111</IBAN>
-    <kgGenerados>94</kgGenerados>
-    <baseImponibleRecibo>69,93</baseImponibleRecibo>
-    <ivaRecibo>13,73</ivaRecibo>
-    <totalRecibo>83,66</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="38">
-    <Exencion>N</Exencion>
-    <idFilaExcel>188</idFilaExcel>
-    <nombre>Germán</nombre>
-    <primerApellido>García</primerApellido>
+    <idFilaExcel>82</idFilaExcel>
+    <nombre>Emiliano</nombre>
+    <primerApellido>Alvarez</primerApellido>
     <segundoApellido>Martínez</segundoApellido>
-    <NIF>71256785W</NIF>
-    <IBAN>GB5120910936563000011111</IBAN>
-    <kgGenerados>41</kgGenerados>
-    <baseImponibleRecibo>25,23</baseImponibleRecibo>
-    <ivaRecibo>4,95</ivaRecibo>
-    <totalRecibo>30,18</totalRecibo>
+    <NIF>98765432M</NIF>
+    <IBAN>ES7223652365142254222000</IBAN>
+    <kgGenerados>0</kgGenerados>
+    <baseImponibleRecibo>71,50</baseImponibleRecibo>
+    <ivaRecibo>9,56</ivaRecibo>
+    <totalRecibo>81,06</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="39">
+  <Recibo idRecibo="5">
     <Exencion>N</Exencion>
-    <idFilaExcel>189</idFilaExcel>
-    <nombre>Marta</nombre>
-    <primerApellido>Getino</primerApellido>
-    <segundoApellido>López</segundoApellido>
-    <NIF>71256795N</NIF>
-    <IBAN>DE0301821135960205511111</IBAN>
-    <kgGenerados>192</kgGenerados>
-    <baseImponibleRecibo>258,63</baseImponibleRecibo>
-    <ivaRecibo>50,79</ivaRecibo>
-    <totalRecibo>309,42</totalRecibo>
+    <idFilaExcel>104</idFilaExcel>
+    <nombre>María</nombre>
+    <primerApellido>Fernández</primerApellido>
+    <segundoApellido>Del amo</segundoApellido>
+    <NIF>71609083D</NIF>
+    <IBAN>HU2399558741836555551120</IBAN>
+    <kgGenerados>135</kgGenerados>
+    <baseImponibleRecibo>302,35</baseImponibleRecibo>
+    <ivaRecibo>15,86</ivaRecibo>
+    <totalRecibo>318,21</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="40">
+  <Recibo idRecibo="6">
     <Exencion>N</Exencion>
-    <idFilaExcel>190</idFilaExcel>
-    <nombre>Israel</nombre>
-    <primerApellido>Gomara</primerApellido>
-    <segundoApellido>Amo</segundoApellido>
-    <NIF>71256805E</NIF>
-    <IBAN>DE2922631245516916411111</IBAN>
-    <kgGenerados>88</kgGenerados>
-    <baseImponibleRecibo>63,27</baseImponibleRecibo>
-    <ivaRecibo>12,43</ivaRecibo>
-    <totalRecibo>75,70</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="41">
-    <Exencion>N</Exencion>
-    <idFilaExcel>191</idFilaExcel>
-    <nombre>Israel</nombre>
-    <primerApellido>González</primerApellido>
-    <segundoApellido>Amo</segundoApellido>
-    <NIF>71256815D</NIF>
-    <IBAN>ES3920960043043075711122</IBAN>
-    <kgGenerados>157</kgGenerados>
-    <baseImponibleRecibo>135,70</baseImponibleRecibo>
-    <ivaRecibo>26,65</ivaRecibo>
-    <totalRecibo>162,35</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="42">
-    <Exencion>N</Exencion>
-    <idFilaExcel>192</idFilaExcel>
-    <nombre>Gabriel</nombre>
-    <primerApellido>González</primerApellido>
-    <segundoApellido>Prieto</segundoApellido>
-    <NIF>71256825L</NIF>
-    <IBAN>SM2725635478301002511111</IBAN>
-    <kgGenerados>126</kgGenerados>
-    <baseImponibleRecibo>112,11</baseImponibleRecibo>
-    <ivaRecibo>22,02</ivaRecibo>
-    <totalRecibo>134,13</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="43">
-    <Exencion>N</Exencion>
-    <idFilaExcel>267</idFilaExcel>
-    <nombre>Ismael</nombre>
-    <primerApellido>Quintanilla</primerApellido>
-    <segundoApellido>Vara</segundoApellido>
-    <NIF>71257575X</NIF>
-    <IBAN>DK9832541112871220011111</IBAN>
-    <kgGenerados>95</kgGenerados>
-    <baseImponibleRecibo>71,04</baseImponibleRecibo>
-    <ivaRecibo>13,95</ivaRecibo>
-    <totalRecibo>84,99</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="44">
-    <Exencion>N</Exencion>
-    <idFilaExcel>268</idFilaExcel>
+    <idFilaExcel>128</idFilaExcel>
     <nombre>Diana</nombre>
-    <primerApellido>Vega</primerApellido>
-    <segundoApellido>Martínes</segundoApellido>
-    <NIF>71257585C</NIF>
-    <IBAN>LT8562541122401110111188</IBAN>
+    <primerApellido>Martínes</primerApellido>
+    <segundoApellido>Centeno</segundoApellido>
+    <NIF>09611076C</NIF>
+    <IBAN>LT2962541122401110105600</IBAN>
     <kgGenerados>195</kgGenerados>
-    <baseImponibleRecibo>265,29</baseImponibleRecibo>
-    <ivaRecibo>52,10</ivaRecibo>
-    <totalRecibo>317,39</totalRecibo>
+    <baseImponibleRecibo>443,35</baseImponibleRecibo>
+    <ivaRecibo>21,86</ivaRecibo>
+    <totalRecibo>465,21</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="45">
+  <Recibo idRecibo="7">
     <Exencion>N</Exencion>
-    <idFilaExcel>269</idFilaExcel>
+    <idFilaExcel>129</idFilaExcel>
     <nombre>Elisa</nombre>
-    <primerApellido>Portugues</primerApellido>
-    <segundoApellido>Bernal</segundoApellido>
-    <NIF>71257595F</NIF>
-    <IBAN>ES3555065688721051011111</IBAN>
+    <primerApellido>Bernal</primerApellido>
+    <segundoApellido>Cerro</segundoApellido>
+    <NIF>Y0806930N</NIF>
+    <IBAN>ES9855065688731051056100</IBAN>
     <kgGenerados>117</kgGenerados>
-    <baseImponibleRecibo>95,46</baseImponibleRecibo>
-    <ivaRecibo>18,75</ivaRecibo>
-    <totalRecibo>114,21</totalRecibo>
+    <baseImponibleRecibo>260,05</baseImponibleRecibo>
+    <ivaRecibo>14,06</ivaRecibo>
+    <totalRecibo>274,11</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="46">
+  <Recibo idRecibo="8">
     <Exencion>N</Exencion>
-    <idFilaExcel>271</idFilaExcel>
+    <idFilaExcel>131</idFilaExcel>
     <nombre>Marisa</nombre>
-    <primerApellido>Rey</primerApellido>
-    <segundoApellido>Sutil</segundoApellido>
-    <NIF>71257615G</NIF>
-    <IBAN>ES2612548521558742111111</IBAN>
+    <primerApellido>Sutil</primerApellido>
+    <segundoApellido>Charro</segundoApellido>
+    <NIF>09714235R</NIF>
+    <IBAN>ES1612548521538742146600</IBAN>
     <kgGenerados>54</kgGenerados>
-    <baseImponibleRecibo>37,96</baseImponibleRecibo>
-    <ivaRecibo>7,45</ivaRecibo>
-    <totalRecibo>45,41</totalRecibo>
+    <baseImponibleRecibo>106,18</baseImponibleRecibo>
+    <ivaRecibo>10,38</ivaRecibo>
+    <totalRecibo>116,56</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="47">
+  <Recibo idRecibo="9">
     <Exencion>S</Exencion>
-    <idFilaExcel>272</idFilaExcel>
+    <idFilaExcel>132</idFilaExcel>
     <nombre>Marta</nombre>
-    <primerApellido>Martinez</primerApellido>
-    <segundoApellido>Díez</segundoApellido>
-    <NIF>71257625Z</NIF>
-    <IBAN>ES2801826530150201511111</IBAN>
+    <primerApellido>Díez</primerApellido>
+    <segundoApellido>Chen</segundoApellido>
+    <NIF>09806572Q</NIF>
+    <IBAN>ES5701826530140201560011</IBAN>
     <kgGenerados>76</kgGenerados>
     <baseImponibleRecibo>0,00</baseImponibleRecibo>
     <ivaRecibo>0,00</ivaRecibo>
     <totalRecibo>0,00</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="48">
+  <Recibo idRecibo="10">
     <Exencion>N</Exencion>
-    <idFilaExcel>273</idFilaExcel>
+    <idFilaExcel>133</idFilaExcel>
     <nombre>Miguel</nombre>
-    <primerApellido>García</primerApellido>
-    <segundoApellido>Fernández</segundoApellido>
-    <NIF>71257635R</NIF>
-    <IBAN>ES1221651651852511111188</IBAN>
+    <primerApellido>Fernández</primerApellido>
+    <segundoApellido>Coello</segundoApellido>
+    <NIF>02031127C</NIF>
+    <IBAN>ES7421651651802511133500</IBAN>
     <kgGenerados>67</kgGenerados>
-    <baseImponibleRecibo>42,29</baseImponibleRecibo>
-    <ivaRecibo>8,30</ivaRecibo>
-    <totalRecibo>50,59</totalRecibo>
+    <baseImponibleRecibo>116,84</baseImponibleRecibo>
+    <ivaRecibo>10,77</ivaRecibo>
+    <totalRecibo>127,61</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="49">
+  <Recibo idRecibo="11">
     <Exencion>N</Exencion>
-    <idFilaExcel>274</idFilaExcel>
+    <idFilaExcel>134</idFilaExcel>
     <nombre>Cruz</nombre>
-    <primerApellido>Moncada</primerApellido>
-    <segundoApellido>De la fuente</segundoApellido>
-    <NIF>71257645B</NIF>
-    <IBAN>ES2751651487980005111111</IBAN>
+    <primerApellido>De la fuente</primerApellido>
+    <segundoApellido>De la puente</segundoApellido>
+    <NIF>09548215H</NIF>
+    <IBAN>ES2451651487990005118100</IBAN>
     <kgGenerados>110</kgGenerados>
-    <baseImponibleRecibo>65,77</baseImponibleRecibo>
-    <ivaRecibo>12,91</ivaRecibo>
-    <totalRecibo>78,68</totalRecibo>
+    <baseImponibleRecibo>182,70</baseImponibleRecibo>
+    <ivaRecibo>10,02</ivaRecibo>
+    <totalRecibo>192,72</totalRecibo>
   </Recibo>
-  <Recibo idRecibo="50">
+  <Recibo idRecibo="12">
     <Exencion>N</Exencion>
-    <idFilaExcel>276</idFilaExcel>
+    <idFilaExcel>136</idFilaExcel>
     <nombre>Hugo</nombre>
-    <primerApellido>Lombás</primerApellido>
-    <segundoApellido>Pérez</segundoApellido>
-    <NIF>71257665P</NIF>
-    <IBAN>AT8222515651995640011111</IBAN>
+    <primerApellido>Pérez</primerApellido>
+    <segundoApellido>Diez</segundoApellido>
+    <NIF>09548505D</NIF>
+    <IBAN>AT8922515651935640081022</IBAN>
     <kgGenerados>17</kgGenerados>
-    <baseImponibleRecibo>25,97</baseImponibleRecibo>
-    <ivaRecibo>5,10</ivaRecibo>
-    <totalRecibo>31,07</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="51">
-    <Exencion>N</Exencion>
-    <idFilaExcel>325</idFilaExcel>
-    <nombre>Cedron</nombre>
-    <primerApellido>Tomás</primerApellido>
-    <segundoApellido>Pérez</segundoApellido>
-    <NIF>71258155S</NIF>
-    <IBAN>DE9221508149195421311111</IBAN>
-    <kgGenerados>10</kgGenerados>
-    <baseImponibleRecibo>46,13</baseImponibleRecibo>
-    <ivaRecibo>4,81</ivaRecibo>
-    <totalRecibo>50,94</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="52">
-    <Exencion>N</Exencion>
-    <idFilaExcel>326</idFilaExcel>
-    <nombre>Castro</nombre>
-    <primerApellido>Clotilde</primerApellido>
-    <segundoApellido>Presa</segundoApellido>
-    <NIF>71258165W</NIF>
-    <IBAN>DE5221346154523164911111</IBAN>
-    <kgGenerados>50</kgGenerados>
-    <baseImponibleRecibo>105,50</baseImponibleRecibo>
-    <ivaRecibo>15,14</ivaRecibo>
-    <totalRecibo>120,64</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="53">
-    <Exencion>N</Exencion>
-    <idFilaExcel>327</idFilaExcel>
-    <nombre>Alonso</nombre>
-    <primerApellido>Cristina</primerApellido>
-    <segundoApellido>Prieto</segundoApellido>
-    <NIF>71258175N</NIF>
-    <IBAN>ES5425187786311225411155</IBAN>
-    <kgGenerados>141</kgGenerados>
-    <baseImponibleRecibo>205,60</baseImponibleRecibo>
-    <ivaRecibo>34,98</ivaRecibo>
-    <totalRecibo>240,58</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="54">
-    <Exencion>N</Exencion>
-    <idFilaExcel>328</idFilaExcel>
-    <nombre>Flórez</nombre>
-    <primerApellido>Sara</primerApellido>
-    <segundoApellido>Prieto</segundoApellido>
-    <NIF>71258185E</NIF>
-    <IBAN>ES8523164897682213011111</IBAN>
-    <kgGenerados>500</kgGenerados>
-    <baseImponibleRecibo>600,50</baseImponibleRecibo>
-    <ivaRecibo>113,24</ivaRecibo>
-    <totalRecibo>713,74</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="55">
-    <Exencion>N</Exencion>
-    <idFilaExcel>329</idFilaExcel>
-    <nombre>López</nombre>
-    <primerApellido>Encarnación</primerApellido>
-    <segundoApellido>Riverto</segundoApellido>
-    <NIF>71258195D</NIF>
-    <IBAN>ES4796536214855214511111</IBAN>
-    <kgGenerados>120</kgGenerados>
-    <baseImponibleRecibo>182,50</baseImponibleRecibo>
-    <ivaRecibo>30,40</ivaRecibo>
-    <totalRecibo>212,90</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="56">
-    <Exencion>N</Exencion>
-    <idFilaExcel>330</idFilaExcel>
-    <nombre>López</nombre>
-    <primerApellido>Dolores</primerApellido>
-    <segundoApellido>Robles</segundoApellido>
-    <NIF>71258205L</NIF>
-    <IBAN>ES2285461325261978711111</IBAN>
-    <kgGenerados>30</kgGenerados>
-    <baseImponibleRecibo>41,75</baseImponibleRecibo>
-    <ivaRecibo>5,40</ivaRecibo>
-    <totalRecibo>47,15</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="57">
-    <Exencion>N</Exencion>
-    <idFilaExcel>331</idFilaExcel>
-    <nombre>Almanzar</nombre>
-    <primerApellido>Herminia</primerApellido>
-    <segundoApellido>Robles</segundoApellido>
-    <NIF>71258215Y</NIF>
-    <IBAN>FI2524587946082003111155</IBAN>
-    <kgGenerados>118</kgGenerados>
-    <baseImponibleRecibo>180,30</baseImponibleRecibo>
-    <ivaRecibo>29,96</ivaRecibo>
-    <totalRecibo>210,26</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="58">
-    <Exencion>N</Exencion>
-    <idFilaExcel>332</idFilaExcel>
-    <nombre>Pisabarro</nombre>
-    <primerApellido>Sonia</primerApellido>
-    <segundoApellido>Rodríguez</segundoApellido>
-    <NIF>71258225Q</NIF>
-    <IBAN>ES0420960043053071411111</IBAN>
-    <kgGenerados>154</kgGenerados>
-    <baseImponibleRecibo>219,90</baseImponibleRecibo>
-    <ivaRecibo>37,81</ivaRecibo>
-    <totalRecibo>257,71</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="59">
-    <Exencion>N</Exencion>
-    <idFilaExcel>333</idFilaExcel>
-    <nombre>Pisabarro</nombre>
-    <primerApellido>Generoso</primerApellido>
-    <segundoApellido>Rodríguez</segundoApellido>
-    <NIF>71258235A</NIF>
-    <IBAN>ES3620960043022158811111</IBAN>
-    <kgGenerados>57</kgGenerados>
-    <baseImponibleRecibo>113,20</baseImponibleRecibo>
-    <ivaRecibo>16,67</ivaRecibo>
-    <totalRecibo>129,87</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="60">
-    <Exencion>N</Exencion>
-    <idFilaExcel>334</idFilaExcel>
-    <nombre>Alaiz</nombre>
-    <primerApellido>Sergio</primerApellido>
-    <segundoApellido>Salas</segundoApellido>
-    <NIF>71258245J</NIF>
-    <IBAN>ES6521654587925156411111</IBAN>
-    <kgGenerados>99</kgGenerados>
-    <baseImponibleRecibo>159,40</baseImponibleRecibo>
-    <ivaRecibo>25,82</ivaRecibo>
-    <totalRecibo>185,22</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="61">
-    <Exencion>N</Exencion>
-    <idFilaExcel>335</idFilaExcel>
-    <nombre>Fresco</nombre>
-    <primerApellido>Bonifacio</primerApellido>
-    <segundoApellido>Sánchez</segundoApellido>
-    <NIF>71258255T</NIF>
-    <IBAN>ES4051651681921210611166</IBAN>
-    <kgGenerados>65</kgGenerados>
-    <baseImponibleRecibo>122,00</baseImponibleRecibo>
-    <ivaRecibo>18,41</ivaRecibo>
-    <totalRecibo>140,41</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="62">
-    <Exencion>N</Exencion>
-    <idFilaExcel>336</idFilaExcel>
-    <nombre>Fernández</nombre>
-    <primerApellido>Demetrio</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>71258265X</NIF>
-    <IBAN>ES4966552211198855311111</IBAN>
-    <kgGenerados>94</kgGenerados>
-    <baseImponibleRecibo>153,90</baseImponibleRecibo>
-    <ivaRecibo>24,73</ivaRecibo>
-    <totalRecibo>178,63</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="63">
-    <Exencion>N</Exencion>
-    <idFilaExcel>337</idFilaExcel>
-    <nombre>Martínez</nombre>
-    <primerApellido>Germán</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>71258275C</NIF>
-    <IBAN>GB5120910936563000011111</IBAN>
-    <kgGenerados>41</kgGenerados>
-    <baseImponibleRecibo>71,70</baseImponibleRecibo>
-    <ivaRecibo>9,89</ivaRecibo>
-    <totalRecibo>81,59</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="64">
-    <Exencion>N</Exencion>
-    <idFilaExcel>338</idFilaExcel>
-    <nombre>López</nombre>
-    <primerApellido>Marta</primerApellido>
-    <segundoApellido>Getino</segundoApellido>
-    <NIF>71258285F</NIF>
-    <IBAN>DE0301821135960205511111</IBAN>
-    <kgGenerados>192</kgGenerados>
-    <baseImponibleRecibo>261,70</baseImponibleRecibo>
-    <ivaRecibo>46,10</ivaRecibo>
-    <totalRecibo>307,80</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="65">
-    <Exencion>N</Exencion>
-    <idFilaExcel>339</idFilaExcel>
-    <nombre>Amo</nombre>
-    <primerApellido>Israel</primerApellido>
-    <segundoApellido>Gomara</segundoApellido>
-    <NIF>71258295V</NIF>
-    <IBAN>DE2922631245516916411111</IBAN>
-    <kgGenerados>88</kgGenerados>
-    <baseImponibleRecibo>147,30</baseImponibleRecibo>
-    <ivaRecibo>23,42</ivaRecibo>
-    <totalRecibo>170,72</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="66">
-    <Exencion>N</Exencion>
-    <idFilaExcel>340</idFilaExcel>
-    <nombre>Amo</nombre>
-    <primerApellido>Israel</primerApellido>
-    <segundoApellido>González</segundoApellido>
-    <NIF>71258305G</NIF>
-    <IBAN>ES7220960043023075711111</IBAN>
-    <kgGenerados>157</kgGenerados>
-    <baseImponibleRecibo>167,40</baseImponibleRecibo>
-    <ivaRecibo>28,85</ivaRecibo>
-    <totalRecibo>196,25</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="67">
-    <Exencion>N</Exencion>
-    <idFilaExcel>342</idFilaExcel>
-    <nombre>García</nombre>
-    <primerApellido>Rubén Darío</primerApellido>
-    <segundoApellido>Gracia</segundoApellido>
-    <NIF>71258325R</NIF>
-    <IBAN>ES1432154697135423111111</IBAN>
-    <kgGenerados>184</kgGenerados>
-    <baseImponibleRecibo>252,90</baseImponibleRecibo>
-    <ivaRecibo>44,35</ivaRecibo>
-    <totalRecibo>297,25</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="68">
-    <Exencion>N</Exencion>
-    <idFilaExcel>343</idFilaExcel>
-    <nombre>Pasado</nombre>
-    <primerApellido>Alencar</primerApellido>
-    <segundoApellido>Guerra</segundoApellido>
-    <NIF>71258335B</NIF>
-    <IBAN>GR4036521452776500611111</IBAN>
-    <kgGenerados>76</kgGenerados>
-    <baseImponibleRecibo>100,58</baseImponibleRecibo>
-    <ivaRecibo>15,61</ivaRecibo>
-    <totalRecibo>116,19</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="69">
-    <Exencion>N</Exencion>
-    <idFilaExcel>349</idFilaExcel>
-    <nombre>Puerto</nombre>
-    <primerApellido>Adolfo</primerApellido>
-    <segundoApellido>Márquez</segundoApellido>
-    <NIF>71258395W</NIF>
-    <IBAN>ES3420960043013000111111</IBAN>
-    <kgGenerados>27</kgGenerados>
-    <baseImponibleRecibo>80,20</baseImponibleRecibo>
-    <ivaRecibo>10,13</ivaRecibo>
-    <totalRecibo>90,33</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="70">
-    <Exencion>N</Exencion>
-    <idFilaExcel>350</idFilaExcel>
-    <nombre>Morán</nombre>
-    <primerApellido>Giovani</primerApellido>
-    <segundoApellido>Martinez</segundoApellido>
-    <NIF>71258405N</NIF>
-    <IBAN>GB3136585214270025411111</IBAN>
-    <kgGenerados>167</kgGenerados>
-    <baseImponibleRecibo>234,20</baseImponibleRecibo>
-    <ivaRecibo>40,65</ivaRecibo>
-    <totalRecibo>274,85</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="71">
-    <Exencion>N</Exencion>
-    <idFilaExcel>351</idFilaExcel>
-    <nombre>López</nombre>
-    <primerApellido>Agustín</primerApellido>
-    <segundoApellido>Martínez</segundoApellido>
-    <NIF>71258415E</NIF>
-    <IBAN>ES1712548523455214511111</IBAN>
-    <kgGenerados>82</kgGenerados>
-    <baseImponibleRecibo>105,53</baseImponibleRecibo>
-    <ivaRecibo>16,58</ivaRecibo>
-    <totalRecibo>122,11</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="72">
-    <Exencion>N</Exencion>
-    <idFilaExcel>352</idFilaExcel>
-    <nombre>Domingo</nombre>
-    <primerApellido>Luis</primerApellido>
-    <segundoApellido>Melcón</segundoApellido>
-    <NIF>71258425D</NIF>
-    <IBAN>ES0631624561072546911100</IBAN>
-    <kgGenerados>122</kgGenerados>
-    <baseImponibleRecibo>184,70</baseImponibleRecibo>
-    <ivaRecibo>30,84</ivaRecibo>
-    <totalRecibo>215,54</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="73">
-    <Exencion>N</Exencion>
-    <idFilaExcel>353</idFilaExcel>
-    <nombre>Domínguez</nombre>
-    <primerApellido>Armando</primerApellido>
-    <segundoApellido />
-    <NIF>71258435L</NIF>
-    <IBAN>ES2236154231742500311111</IBAN>
-    <kgGenerados>92</kgGenerados>
-    <baseImponibleRecibo>151,70</baseImponibleRecibo>
-    <ivaRecibo>24,30</ivaRecibo>
-    <totalRecibo>176,00</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="74">
-    <Exencion>N</Exencion>
-    <idFilaExcel>354</idFilaExcel>
-    <nombre>Ramos</nombre>
-    <primerApellido>Latifa</primerApellido>
-    <segundoApellido />
-    <NIF>71258445Y</NIF>
-    <IBAN>ES8244875664137231611111</IBAN>
-    <kgGenerados>28</kgGenerados>
-    <baseImponibleRecibo>81,30</baseImponibleRecibo>
-    <ivaRecibo>10,34</ivaRecibo>
-    <totalRecibo>91,64</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="75">
-    <Exencion>N</Exencion>
-    <idFilaExcel>355</idFilaExcel>
-    <nombre>Cadenas</nombre>
-    <primerApellido>Latifa Epfouad Erre</primerApellido>
-    <segundoApellido />
-    <NIF>71258455Q</NIF>
-    <IBAN>ES3320960031422124811111</IBAN>
-    <kgGenerados>6</kgGenerados>
-    <baseImponibleRecibo>61,50</baseImponibleRecibo>
-    <ivaRecibo>6,42</ivaRecibo>
-    <totalRecibo>67,92</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="76">
-    <Exencion>N</Exencion>
-    <idFilaExcel>356</idFilaExcel>
-    <nombre>Blanco</nombre>
-    <primerApellido>Saaida</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>71258465A</NIF>
-    <IBAN>ES5733620012907852111111</IBAN>
-    <kgGenerados>200</kgGenerados>
-    <baseImponibleRecibo>270,50</baseImponibleRecibo>
-    <ivaRecibo>47,84</ivaRecibo>
-    <totalRecibo>318,34</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="77">
-    <Exencion>N</Exencion>
-    <idFilaExcel>357</idFilaExcel>
-    <nombre>Fernandez</nombre>
-    <primerApellido>Antonio</primerApellido>
-    <segundoApellido>García</segundoApellido>
-    <NIF>71258475J</NIF>
-    <IBAN>ES6133218885431445111100</IBAN>
-    <kgGenerados>23</kgGenerados>
-    <baseImponibleRecibo>75,80</baseImponibleRecibo>
-    <ivaRecibo>9,25</ivaRecibo>
-    <totalRecibo>85,05</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="78">
-    <Exencion>N</Exencion>
-    <idFilaExcel>358</idFilaExcel>
-    <nombre>García</nombre>
-    <primerApellido>Dorina</primerApellido>
-    <segundoApellido>Getino</segundoApellido>
-    <NIF>71258485T</NIF>
-    <IBAN>ES2962581542723690011111</IBAN>
-    <kgGenerados>183</kgGenerados>
-    <baseImponibleRecibo>188,85</baseImponibleRecibo>
-    <ivaRecibo>33,10</ivaRecibo>
-    <totalRecibo>221,95</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="79">
-    <Exencion>N</Exencion>
-    <idFilaExcel>359</idFilaExcel>
-    <nombre>Otero</nombre>
-    <primerApellido>Rocío</primerApellido>
-    <segundoApellido>Gomara</segundoApellido>
-    <NIF>71258495X</NIF>
-    <IBAN>ES2625165151118666311111</IBAN>
-    <kgGenerados>73</kgGenerados>
-    <baseImponibleRecibo>130,80</baseImponibleRecibo>
-    <ivaRecibo>20,15</ivaRecibo>
-    <totalRecibo>150,95</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="80">
-    <Exencion>N</Exencion>
-    <idFilaExcel>360</idFilaExcel>
-    <nombre>Otero</nombre>
-    <primerApellido>Soledad</primerApellido>
-    <segundoApellido>González</segundoApellido>
-    <NIF>71258505C</NIF>
-    <IBAN>ES3420960043013000111111</IBAN>
-    <kgGenerados>180</kgGenerados>
-    <baseImponibleRecibo>248,50</baseImponibleRecibo>
-    <ivaRecibo>43,48</ivaRecibo>
-    <totalRecibo>291,98</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="81">
-    <Exencion>N</Exencion>
-    <idFilaExcel>361</idFilaExcel>
-    <nombre>Vara</nombre>
-    <primerApellido>Vittorio</primerApellido>
-    <segundoApellido>González</segundoApellido>
-    <NIF>71258515F</NIF>
-    <IBAN>PT2336952365080014411111</IBAN>
-    <kgGenerados>187</kgGenerados>
-    <baseImponibleRecibo>256,20</baseImponibleRecibo>
-    <ivaRecibo>45,01</ivaRecibo>
-    <totalRecibo>301,21</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="82">
-    <Exencion>N</Exencion>
-    <idFilaExcel>362</idFilaExcel>
-    <nombre>Martínes</nombre>
-    <primerApellido>Vittorio</primerApellido>
-    <segundoApellido>Gracia</segundoApellido>
-    <NIF>71258525V</NIF>
-    <IBAN>ES8465168874671561511111</IBAN>
-    <kgGenerados>18</kgGenerados>
-    <baseImponibleRecibo>70,30</baseImponibleRecibo>
-    <ivaRecibo>8,16</ivaRecibo>
-    <totalRecibo>78,46</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="83">
-    <Exencion>N</Exencion>
-    <idFilaExcel>363</idFilaExcel>
-    <nombre>Bernal</nombre>
-    <primerApellido>Mario</primerApellido>
-    <segundoApellido>Guerra</segundoApellido>
-    <NIF>71258535G</NIF>
-    <IBAN>ES8920960583811234511100</IBAN>
-    <kgGenerados>109</kgGenerados>
-    <baseImponibleRecibo>127,80</baseImponibleRecibo>
-    <ivaRecibo>21,00</ivaRecibo>
-    <totalRecibo>148,80</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="84">
-    <Exencion>N</Exencion>
-    <idFilaExcel>364</idFilaExcel>
-    <nombre>Blanco</nombre>
-    <primerApellido>Concepción</primerApellido>
-    <segundoApellido>Gutierrez</segundoApellido>
-    <NIF>71258545Z</NIF>
-    <IBAN>ES2521416325851510011111</IBAN>
-    <kgGenerados>12</kgGenerados>
-    <baseImponibleRecibo>63,70</baseImponibleRecibo>
-    <ivaRecibo>6,86</ivaRecibo>
-    <totalRecibo>70,56</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="85">
-    <Exencion>N</Exencion>
-    <idFilaExcel>365</idFilaExcel>
-    <nombre>Sutil</nombre>
-    <primerApellido>María</primerApellido>
-    <segundoApellido>Herreras</segundoApellido>
-    <NIF>71258555R</NIF>
-    <IBAN>LU4632628484594115111111</IBAN>
-    <kgGenerados>174</kgGenerados>
-    <baseImponibleRecibo>241,90</baseImponibleRecibo>
-    <ivaRecibo>42,17</ivaRecibo>
-    <totalRecibo>284,07</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="86">
-    <Exencion>N</Exencion>
-    <idFilaExcel>368</idFilaExcel>
-    <nombre>De la fuente</nombre>
-    <primerApellido>Serafín</primerApellido>
-    <segundoApellido>Manzanares</segundoApellido>
-    <NIF>71258585P</NIF>
-    <IBAN>ES6063516541818944011111</IBAN>
-    <kgGenerados>121</kgGenerados>
-    <baseImponibleRecibo>183,60</baseImponibleRecibo>
-    <ivaRecibo>30,62</ivaRecibo>
-    <totalRecibo>214,22</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="87">
-    <Exencion>N</Exencion>
-    <idFilaExcel>370</idFilaExcel>
-    <nombre>Pérez</nombre>
-    <primerApellido>Gonzalo</primerApellido>
-    <segundoApellido>Martinez</segundoApellido>
-    <NIF>71258605M</NIF>
-    <IBAN>FI1532658012397712511111</IBAN>
-    <kgGenerados>139</kgGenerados>
-    <baseImponibleRecibo>203,40</baseImponibleRecibo>
-    <ivaRecibo>34,54</ivaRecibo>
-    <totalRecibo>237,94</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="88">
-    <Exencion>N</Exencion>
-    <idFilaExcel>371</idFilaExcel>
-    <nombre>Alvarez</nombre>
-    <primerApellido>Emiliano</primerApellido>
-    <segundoApellido>Martínez</segundoApellido>
-    <NIF>71258615S</NIF>
-    <IBAN>ES7623652365172254211111</IBAN>
-    <kgGenerados>6</kgGenerados>
-    <baseImponibleRecibo>61,50</baseImponibleRecibo>
-    <ivaRecibo>6,42</ivaRecibo>
-    <totalRecibo>67,92</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="89">
-    <Exencion>N</Exencion>
-    <idFilaExcel>372</idFilaExcel>
-    <nombre>Marín</nombre>
-    <primerApellido>Melisa</primerApellido>
-    <segundoApellido>Melcón</segundoApellido>
-    <NIF>71258625W</NIF>
-    <IBAN>FR6320012541110023311144</IBAN>
-    <kgGenerados>63</kgGenerados>
-    <baseImponibleRecibo>119,80</baseImponibleRecibo>
-    <ivaRecibo>17,97</ivaRecibo>
-    <totalRecibo>137,77</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="90">
-    <Exencion>N</Exencion>
-    <idFilaExcel>375</idFilaExcel>
-    <nombre>Alonso</nombre>
-    <primerApellido>José Antonio</primerApellido>
-    <segundoApellido>Cabero</segundoApellido>
-    <NIF>71258655D</NIF>
-    <IBAN>ES3895485212395484011111</IBAN>
-    <kgGenerados>170</kgGenerados>
-    <baseImponibleRecibo>178,13</baseImponibleRecibo>
-    <ivaRecibo>30,97</ivaRecibo>
-    <totalRecibo>209,10</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="91">
-    <Exencion>N</Exencion>
-    <idFilaExcel>376</idFilaExcel>
-    <nombre>Dominguez</nombre>
-    <primerApellido>Bernardo</primerApellido>
-    <segundoApellido>Cabeza</segundoApellido>
-    <NIF>71258665L</NIF>
-    <IBAN>LT6421856333196985511111</IBAN>
-    <kgGenerados>171</kgGenerados>
-    <baseImponibleRecibo>238,60</baseImponibleRecibo>
-    <ivaRecibo>41,52</ivaRecibo>
-    <totalRecibo>280,12</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="92">
-    <Exencion>N</Exencion>
-    <idFilaExcel>377</idFilaExcel>
-    <nombre>García</nombre>
-    <primerApellido>Nelida</primerApellido>
-    <segundoApellido>Calleja</segundoApellido>
-    <NIF>71258675Y</NIF>
-    <IBAN>ES8736245978113245611144</IBAN>
-    <kgGenerados>93</kgGenerados>
-    <baseImponibleRecibo>152,80</baseImponibleRecibo>
-    <ivaRecibo>24,51</ivaRecibo>
-    <totalRecibo>177,31</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="93">
-    <Exencion>N</Exencion>
-    <idFilaExcel>378</idFilaExcel>
-    <nombre>Labarga</nombre>
-    <primerApellido>Marisa</primerApellido>
-    <segundoApellido>Candanedo</segundoApellido>
-    <NIF>71258685Q</NIF>
-    <IBAN>ES9331245164146597811111</IBAN>
-    <kgGenerados>40</kgGenerados>
-    <baseImponibleRecibo>94,50</baseImponibleRecibo>
-    <ivaRecibo>12,96</ivaRecibo>
-    <totalRecibo>107,46</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="94">
-    <Exencion>N</Exencion>
-    <idFilaExcel>379</idFilaExcel>
-    <nombre>Herrero</nombre>
-    <primerApellido>Marta</primerApellido>
-    <segundoApellido />
-    <NIF>71258695A</NIF>
-    <IBAN>SM4223221158292545411111</IBAN>
-    <kgGenerados>118</kgGenerados>
-    <baseImponibleRecibo>180,30</baseImponibleRecibo>
-    <ivaRecibo>29,96</ivaRecibo>
-    <totalRecibo>210,26</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="95">
-    <Exencion>N</Exencion>
-    <idFilaExcel>380</idFilaExcel>
-    <nombre>López</nombre>
-    <primerApellido>Miguel</primerApellido>
-    <segundoApellido>Carro</segundoApellido>
-    <NIF>71258705J</NIF>
-    <IBAN>SE8832574512065411011111</IBAN>
-    <kgGenerados>125</kgGenerados>
-    <baseImponibleRecibo>188,00</baseImponibleRecibo>
-    <ivaRecibo>31,49</ivaRecibo>
-    <totalRecibo>219,49</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="96">
-    <Exencion>N</Exencion>
-    <idFilaExcel>381</idFilaExcel>
-    <nombre>Fernández</nombre>
-    <primerApellido>Cruz</primerApellido>
-    <segundoApellido>Cascallana</segundoApellido>
-    <NIF>71258715T</NIF>
-    <IBAN>ES5620960043013468911133</IBAN>
-    <kgGenerados>56</kgGenerados>
-    <baseImponibleRecibo>112,10</baseImponibleRecibo>
-    <ivaRecibo>16,45</ivaRecibo>
-    <totalRecibo>128,55</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="97">
-    <Exencion>N</Exencion>
-    <idFilaExcel>382</idFilaExcel>
-    <nombre>Gomez</nombre>
-    <primerApellido>Carmen</primerApellido>
-    <segundoApellido>Castañeda</segundoApellido>
-    <NIF>71258725X</NIF>
-    <IBAN>ES6931215643835060211111</IBAN>
-    <kgGenerados>88</kgGenerados>
-    <baseImponibleRecibo>110,48</baseImponibleRecibo>
-    <ivaRecibo>17,57</ivaRecibo>
-    <totalRecibo>128,05</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="98">
-    <Exencion>N</Exencion>
-    <idFilaExcel>383</idFilaExcel>
-    <nombre>Sánchez</nombre>
-    <primerApellido>Hugo</primerApellido>
-    <segundoApellido>Castro</segundoApellido>
-    <NIF>71258735C</NIF>
-    <IBAN>AT6585550564796165111111</IBAN>
-    <kgGenerados>116</kgGenerados>
-    <baseImponibleRecibo>178,10</baseImponibleRecibo>
-    <ivaRecibo>29,53</ivaRecibo>
-    <totalRecibo>207,63</totalRecibo>
-  </Recibo>
-  <Recibo idRecibo="99">
-    <Exencion>N</Exencion>
-    <idFilaExcel>384</idFilaExcel>
-    <nombre>Sánchez</nombre>
-    <primerApellido>Khadouj</primerApellido>
-    <segundoApellido>Castro</segundoApellido>
-    <NIF>71258745F</NIF>
-    <IBAN>ES8265165654988886011133</IBAN>
-    <kgGenerados>31</kgGenerados>
-    <baseImponibleRecibo>84,60</baseImponibleRecibo>
-    <ivaRecibo>11,00</ivaRecibo>
-    <totalRecibo>95,60</totalRecibo>
+    <baseImponibleRecibo>71,50</baseImponibleRecibo>
+    <ivaRecibo>9,56</ivaRecibo>
+    <totalRecibo>81,06</totalRecibo>
   </Recibo>
 </Recibos>
