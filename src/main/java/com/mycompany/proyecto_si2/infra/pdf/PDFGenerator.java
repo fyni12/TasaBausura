@@ -27,7 +27,107 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * Clase de utilidad encargada de generar documentos PDF relacionados con los recibos y con el resumen
+ * del padrón. Su función principal es construir el contenido visual de los documentos, formatear los
+ * importes económicos y organizar la información en tablas y bloques preparados para su impresión o
+ * almacenamiento.
+ *
+ * Funciones de la clase:
+ *
+ * - generateResumenPdf(String destino, String periodo, BigDecimal totalBase, BigDecimal totalIva, int numeroRecibos):
+ *   Genera un PDF de resumen del padrón para un período concreto expresado como texto. El documento
+ *   incluye el período, la base imponible total, el total de IVA, el número de recibos y el importe
+ *   total del padrón.
+ *
+ * - generatePdf(String destino, ReciboData data):
+ *   Genera el PDF completo de un recibo individual a partir de una estructura de datos con toda la
+ *   información necesaria. Compone el documento añadiendo la cabecera, los datos del destinatario,
+ *   las lecturas, el título, la tabla de conceptos y el resumen final de importes.
+ *
+ * - addCabecera(Document document, ReciboData data):
+ *   Método auxiliar privado que construye la parte superior del recibo con los datos de la entidad
+ *   emisora, el código del recibo, la fecha de generación, la dirección del emisor y varios datos
+ *   informativos del contribuyente.
+ *
+ * - addBloqueDestinatarioYLogo(Document document, ReciboData data):
+ *   Método auxiliar privado que añade el bloque con el logotipo de la entidad y los datos del
+ *   destinatario del recibo.
+ *
+ * - addLecturas(Document document, ReciboData data):
+ *   Método auxiliar privado que inserta un bloque con la lectura actual, la lectura anterior y
+ *   los kilogramos generados.
+ *
+ * - addTitulo(Document document, ReciboData data):
+ *   Método auxiliar privado que añade el título principal del recibo centrado y con formato destacado.
+ *
+ * - addTablaConceptos(Document document, ReciboData data):
+ *   Método auxiliar privado que construye la tabla de conceptos del recibo, mostrando para cada línea
+ *   el concepto, subconcepto, kilos incluidos, base imponible, porcentaje de IVA e importe de IVA.
+ *   También añade una fila final con los totales acumulados.
+ *
+ * - addResumenTotales(Document document, ReciboData data):
+ *   Método auxiliar privado que genera el bloque final de resumen con el total de base imponible,
+ *   el total de IVA y el total completo del recibo.
+ *
+ * - simpleBoxCell(String text, TextAlignment alignment):
+ *   Método auxiliar privado que crea una celda sencilla con borde y texto alineado, utilizada en
+ *   distintos bloques del PDF.
+ *
+ * - headerCell(String text):
+ *   Método auxiliar privado que crea una celda de cabecera para la tabla de conceptos, con formato
+ *   específico de borde y alineación.
+ *
+ * - bodyCell(String text, TextAlignment alignment):
+ *   Método auxiliar privado que crea una celda de contenido normal para la tabla de conceptos.
+ *
+ * - resumenLabelCell(String text, boolean topBorder):
+ *   Método auxiliar privado que crea una celda de etiqueta dentro del bloque de resumen de importes.
+ *
+ * - resumenValueCell(String text, boolean topBorder):
+ *   Método auxiliar privado que crea una celda de valor numérico dentro del bloque de resumen final.
+ *
+ * - p(String text, boolean bold, float size, TextAlignment alignment):
+ *   Método auxiliar privado que construye un párrafo con texto seguro, tamaño configurable, alineación
+ *   y opción de resaltado en negrita.
+ *
+ * - calculateTotalBase(List<LineaConcepto> lineas):
+ *   Método auxiliar privado que suma las bases imponibles de todas las líneas de concepto y devuelve
+ *   el total redondeado a dos decimales.
+ *
+ * - calculateTotalIva(List<LineaConcepto> lineas):
+ *   Método auxiliar privado que suma los importes de IVA de todas las líneas de concepto y devuelve
+ *   el total redondeado a dos decimales.
+ *
+ * - calculateIva(LineaConcepto linea):
+ *   Método auxiliar privado que calcula el IVA de una línea de concepto. Si el importe de IVA ya está
+ *   informado, lo reutiliza; en caso contrario, lo calcula a partir de la base imponible y del porcentaje.
+ *
+ * - nvl(BigDecimal value):
+ *   Método auxiliar privado que devuelve cero cuando el valor recibido es nulo, evitando problemas en
+ *   las operaciones con importes.
+ *
+ * - format(BigDecimal value):
+ *   Método auxiliar privado que convierte un valor numérico a texto con formato decimal adaptado a la
+ *   configuración española.
+ *
+ * - safe(String value):
+ *   Método auxiliar privado que devuelve una cadena vacía cuando el texto recibido es nulo.
+ *
+ * - generateResumenPdf(String destino, PeriodoImpositivo periodo, BigDecimal totalBase, BigDecimal totalIva, int numeroRecibos):
+ *   Sobrecarga del método de generación de resumen que recibe directamente un objeto PeriodoImpositivo
+ *   y utiliza su representación textual para construir el PDF resumen.
+ *
+ * Clases internas:
+ *
+ * - ReciboData:
+ *   Clase contenedora de datos utilizada para reunir toda la información necesaria para generar un PDF
+ *   de recibo, incluyendo datos del emisor, destinatario, lecturas, importes y líneas de concepto.
+ *
+ * - LineaConcepto:
+ *   Clase contenedora que representa una línea individual dentro del detalle del recibo, almacenando
+ *   el concepto, subconcepto, kilogramos, base imponible, porcentaje de IVA e importe de IVA.
+ */
 public class PDFGenerator {
 
     private static final String imgPath = Paths.get("resources").resolve("logo.png").toString();

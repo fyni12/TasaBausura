@@ -9,6 +9,25 @@ import java.util.List;
 import java.util.Map;
 import org.apache.poi.ss.usermodel.Row;
 
+/**
+ * Clase encargada de cargar las ordenanzas desde la hoja correspondiente del fichero Excel.
+ * Su función principal es recorrer las filas de datos, leer los valores de cada columna, construir
+ * objetos de tipo Ordenanza con esa información y almacenarlos tanto en el gestor de ordenanzas
+ * como en una estructura agrupada por identificador.
+ *
+ * Funciones de la clase:
+ *
+ * - Prac3OrdenanzaLoader(OrdenanzaManager ordmanager):
+ *   Constructor que recibe el gestor de ordenanzas donde se irán registrando las ordenanzas
+ *   cargadas desde el Excel.
+ *
+ * - cargarOrdenanzas(ExcelManager ordenanzas, Map<Integer, List<Ordenanza>> ordenanzasPorId):
+ *   Método principal que recorre todas las filas de la hoja de ordenanzas del Excel. Ignora las
+ *   filas vacías y aquellas que no tienen identificador de ordenanza, lee el resto de columnas,
+ *   asigna valores por defecto cuando algún dato numérico no está informado, crea un objeto Ordenanza
+ *   con los datos obtenidos y lo añade tanto al gestor interno como al mapa agrupado por id.
+ */
+
 public class Prac3OrdenanzaLoader {
 
     private final OrdenanzaManager ordmanager;

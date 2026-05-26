@@ -18,7 +18,67 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-
+/**
+ * Clase de utilidad encargada de generar distintos ficheros XML del proyecto.
+ * Su función principal es construir documentos XML con incidencias de NIF/NIE, incidencias de CCC
+ * y recibos procesados, formateando correctamente la información y escribiéndola en disco mediante
+ * JDOM. [tutorialspoint](https://www.tutorialspoint.com/java_xml/java_jdom_create_document.htm)
+ *
+ * Funciones de la clase:
+ *
+ * - XmlManager():
+ *   Constructor privado que impide crear instancias de la clase, ya que está diseñada exclusivamente
+ *   como clase de utilidad con métodos estáticos. [docs.vultr](https://docs.vultr.com/java/examples/implement-private-constructors)
+ *
+ * - escribirErroresNifNie(Path path, List<NifIncidencia> incidencias):
+ *   Genera un documento XML con la lista de incidencias detectadas en NIF/NIE. Para cada incidencia
+ *   crea un nodo de contribuyente con su identificador de fila, datos personales, valor de NIF/NIE
+ *   y tipo de error, y después escribe el documento en la ruta indicada. [mkyong](https://mkyong.com/java/how-to-create-xml-file-in-java-jdom-parser/)
+ *
+ * - escribirErroresCCC(Path path, List<CCCIncidencia> incidencias):
+ *   Genera un documento XML con las incidencias detectadas en cuentas bancarias. Para cada incidencia
+ *   crea un nodo de cuenta con los datos del titular, el CCC erróneo, el IBAN correcto si existe y
+ *   el tipo de error asociado, y guarda el documento en la ruta especificada. [examples.javacodegeeks](https://examples.javacodegeeks.com/java-development/core-java/xml/jdom/create-xml-file-in-java-using-jdom-parser-example/)
+ *
+ * - escribirRecibos(Path path, PeriodoImpositivo periodo, BigDecimal totalPadron, int numeroTotalRecibos, List<Recibo> recibos):
+ *   Sobrecarga que genera el XML de recibos recibiendo el período impositivo como objeto y el total
+ *   del padrón como BigDecimal. Convierte el período a texto y delega en otra versión del método
+ *   para construir el documento XML. [tutorialspoint](https://www.tutorialspoint.com/java_xml/java_jdom_create_document.htm)
+ *
+ * - escribirRecibos(Path path, PeriodoImpositivo periodo, double totalPadron, int numeroTotalRecibos, List<Recibo> recibos):
+ *   Sobrecarga que genera el XML de recibos recibiendo el período impositivo como objeto y el total
+ *   del padrón como double. Convierte ambos valores al formato adecuado y delega en otra versión
+ *   del método. [mkyong](https://mkyong.com/java/how-to-create-xml-file-in-java-jdom-parser/)
+ *
+ * - escribirRecibos(Path path, String fechaPadron, BigDecimal totalPadron, int numeroTotalRecibos, List<Recibo> recibos):
+ *   Método principal de generación del XML de recibos. Crea el elemento raíz con los atributos del
+ *   padrón, recorre la lista de recibos y construye un nodo XML para cada uno con sus datos personales,
+ *   identificativos y económicos, para finalmente escribir el documento en disco. [en.wikipedia](https://en.wikipedia.org/wiki/JDOM)
+ *
+ * - escribirRecibos(Path path, String fechaPadron, double totalPadron, int numeroTotalRecibos, List<Recibo> recibos):
+ *   Sobrecarga que recibe el total del padrón como double, lo convierte a BigDecimal y reutiliza
+ *   la lógica del método principal de escritura de recibos. [tutorialspoint](https://www.tutorialspoint.com/java_xml/java_jdom_create_document.htm)
+ *
+ * - write(Path path, Document doc):
+ *   Método auxiliar privado que crea los directorios necesarios si no existen y escribe el documento
+ *   XML en la ruta indicada utilizando un XMLOutputter con formato legible. [examples.javacodegeeks](https://examples.javacodegeeks.com/java-development/core-java/xml/jdom/create-xml-file-in-java-using-jdom-parser-example/)
+ *
+ * - nullToEmpty(String text):
+ *   Método auxiliar privado que sustituye valores nulos por una cadena vacía para evitar errores
+ *   al construir el contenido XML.
+ *
+ * - trimOrEmpty(String text):
+ *   Método auxiliar privado que devuelve una cadena vacía si el texto es nulo o, en caso contrario,
+ *   lo devuelve recortando espacios sobrantes.
+ *
+ * - formatDecimal(double value):
+ *   Método auxiliar privado que convierte un valor decimal de tipo double en texto con formato
+ *   numérico controlado y dos decimales.
+ *
+ * - formatDecimal(BigDecimal value):
+ *   Método auxiliar privado que formatea un BigDecimal con dos decimales y estilo numérico español,
+ *   devolviendo cero cuando el valor recibido es nulo.
+ */
 public final class XmlManager {
 
     private static final DecimalFormat DF;

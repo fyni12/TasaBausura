@@ -12,7 +12,116 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-
+/**
+ * Clase de servicio encargada de gestionar las ordenanzas y de calcular los importes económicos
+ * asociados a un concepto de recibo. Su función principal es almacenar las ordenanzas cargadas,
+ * organizarlas por identificador y aplicar la lógica necesaria para obtener la base imponible,
+ * el IVA, el total y el detalle de líneas que aparecerán en el PDF del recibo.
+ *
+ * Funciones de la clase:
+ *
+ * - OrdenanzaManager():
+ *   Constructor vacío que crea una instancia preparada para almacenar y gestionar ordenanzas.
+ *
+ * - add(Ordenanza ordenanza):
+ *   Añade una ordenanza a la colección interna y marca el índice como no actualizado para que
+ *   vuelva a generarse cuando sea necesario.
+ *
+ * - calculate(int bonificacion, int kgGen, int id):
+ *   Calcula la base imponible final de una ordenanza aplicando, si corresponde, la bonificación
+ *   indicada sobre los kilogramos generados y el identificador del concepto.
+ *
+ * - calculateIva(int bonificacion, int kgGen, int id):
+ *   Calcula el importe del IVA correspondiente a una ordenanza a partir de la base bonificada
+ *   y del porcentaje de IVA asociado al identificador indicado.
+ *
+ * - calculateTotal(int bonificacion, int kgGen, int id):
+ *   Calcula el importe total del concepto sumando la base imponible bonificada y el IVA resultante.
+ *
+ * - getIva(int id):
+ *   Devuelve el porcentaje de IVA asociado a las ordenanzas de un identificador concreto. Si no
+ *   existen ordenanzas para ese identificador, devuelve cero.
+ *
+ * - calcularBaseBonificada(int id, int kgGen, int bonificacion):
+ *   Método auxiliar privado que calcula la base imponible final aplicando la bonificación
+ *   correspondiente sobre la base sin bonificar.
+ *
+ * - calcularBaseSinBonificar(int id, int kgGen):
+ *   Método auxiliar privado que calcula la base imponible sin descuentos. Tiene en cuenta el precio
+ *   fijo, los posibles conceptos relacionados y el importe variable en función de los kilogramos.
+ *
+ * - calcularImportePorKg(List<Ordenanza> aplicables, int kgGenerados):
+ *   Calcula la parte variable del importe según los tramos de kilos definidos en las ordenanzas.
+ *   Determina si el cálculo debe hacerse por tramo único o de forma progresiva.
+ *
+ * - calcularTramosProgresivos(List<Ordenanza> tramos, int exceso):
+ *   Reparte el exceso de kilogramos entre los distintos tramos acumulables y suma el importe
+ *   correspondiente a cada uno de ellos.
+ *
+ * - calcularTramoUnico(List<Ordenanza> tramos, int kgGenerados, int exceso):
+ *   Selecciona el tramo que corresponde según el exceso de kilogramos y aplica un único precio
+ *   por kilogramo al total de kilos generados.
+ *
+ * - getOrdenanzasById(int id):
+ *   Recupera la lista de ordenanzas asociadas a un identificador concreto, reindexando previamente
+ *   la colección si fuera necesario.
+ *
+ * - reindexar():
+ *   Reconstruye el índice interno agrupando las ordenanzas por su identificador y ordenándolas
+ *   para que las que tengan precio fijo queden en primer lugar.
+ *
+ * - getTramos(List<Ordenanza> aplicables):
+ *   Devuelve únicamente las ordenanzas que representan tramos variables por precio por kilogramo.
+ *
+ * - getKgMinimoIncluido(List<Ordenanza> aplicables):
+ *   Obtiene la cantidad mínima de kilogramos incluidos en el precio fijo de una ordenanza.
+ *
+ * - obtenerPrecioFijo(List<Ordenanza> aplicables):
+ *   Devuelve el precio fijo definido para un conjunto de ordenanzas, o cero si no existe.
+ *
+ * - esProgresivo(List<Ordenanza> aplicables):
+ *   Determina si una ordenanza debe calcularse de forma acumulable o progresiva en función
+ *   de su configuración.
+ *
+ * - isAcumulable(String acu):
+ *   Interpreta el valor textual del campo acumulable y devuelve si indica que la ordenanza
+ *   debe tratarse como acumulable.
+ *
+ * - normalizarKgTramo(Integer kg):
+ *   Normaliza el valor de kilos de un tramo, devolviendo un valor máximo cuando no exista
+ *   límite definido o el dato no sea válido.
+ *
+ * - normalizarKgOrdenacion(Integer kg):
+ *   Normaliza el valor de kilos pensado para ordenación interna de tramos, usando la misma
+ *   lógica de control de límites.
+ *
+ * - porcentaje(double valor):
+ *   Convierte un valor porcentual decimal a su equivalente en formato BigDecimal.
+ *
+ * - porcentaje(int valor):
+ *   Convierte un valor porcentual entero a su equivalente en formato BigDecimal.
+ *
+ * - bd(double valor):
+ *   Convierte un valor numérico de tipo double a BigDecimal.
+ *
+ * - redondear(BigDecimal valor):
+ *   Redondea un valor BigDecimal a dos decimales usando el modo HALF_UP.
+ *
+ * - buildPdfLineas(int bonificacion, int kgGen, int id):
+ *   Genera la lista de líneas de concepto que se incluirán en el PDF del recibo. Construye
+ *   el detalle económico teniendo en cuenta el precio fijo, los conceptos relacionados, la
+ *   bonificación y la parte variable por kilogramos.
+ *
+ * - linea(String concepto, String subconcepto, BigDecimal kg, BigDecimal base, BigDecimal ivaPct):
+ *   Crea y rellena una línea de concepto para el PDF con su descripción, kilos, base imponible,
+ *   porcentaje de IVA e importe de IVA calculado.
+ *
+ * - decorateSubconcepto(String subconcepto, int bonificacion):
+ *   Añade al subconcepto una indicación textual de la bonificación aplicada cuando exista.
+ *
+ * - safe(String value):
+ *   Devuelve una cadena segura, evitando valores nulos y eliminando espacios sobrantes.
+ */
 public class OrdenanzaManager {
 
     private final List<Ordenanza> ordenanzas = new ArrayList<>();

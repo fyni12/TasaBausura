@@ -20,7 +20,69 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
+/**
+ * Clase de infraestructura encargada de gestionar la lectura, escritura y guardado de datos en un fichero Excel.
+ * Su función principal es abrir una hoja concreta de un libro, localizar sus columnas mediante las cabeceras
+ * y proporcionar métodos de utilidad para obtener y modificar valores de distintos tipos en las filas del Excel.
+ *
+ * Funciones de la clase:
+ *
+ * - ExcelManager(Path excelPath, String sheetName):
+ *   Constructor que abre el fichero Excel indicado, carga el libro en memoria, selecciona la hoja
+ *   especificada por nombre y construye el mapa interno de cabeceras para facilitar el acceso a las columnas.
+ *   Si el fichero no puede abrirse o la hoja no existe, lanza la excepción correspondiente.
+ *
+ * - readHeaders(Row headerRow):
+ *   Método auxiliar privado que recorre la fila de cabeceras de la hoja y genera un mapa que asocia
+ *   cada nombre de columna normalizado con su índice dentro de la hoja.
+ *
+ * - normalizeHeader(String text):
+ *   Método auxiliar privado que normaliza el texto de una cabecera eliminando espacios sobrantes,
+ *   convirtiéndolo a minúsculas y suprimiendo separaciones internas para facilitar las búsquedas.
+ *
+ * - columnIndex(ExcelColumn column):
+ *   Método auxiliar privado que obtiene el índice de la columna asociada a un valor del enumerado
+ *   ExcelColumn. Si la cabecera no existe en la hoja, lanza una excepción.
+ *
+ * - getDataRows():
+ *   Devuelve una lista con todas las filas de datos de la hoja, excluyendo la fila de cabeceras.
+ *
+ * - isEmpty(Row row):
+ *   Comprueba si una fila está vacía. Para ello revisa todas sus celdas y determina si alguna contiene
+ *   información no vacía.
+ *
+ * - getExcelRowId(Row row):
+ *   Devuelve el número de fila tal y como se identifica en Excel, ajustando el índice interno para que
+ *   coincida con la numeración habitual del usuario.
+ *
+ * - getString(Row row, ExcelColumn column):
+ *   Obtiene el valor de una celda como texto a partir de una fila y una columna concreta. Si la celda
+ *   no existe o está vacía, devuelve null.
+ *
+ * - getDate(Row row, ExcelColumn column):
+ *   Obtiene el valor de una celda como LocalDate. Soporta tanto celdas de tipo fecha en Excel como
+ *   fechas expresadas en texto, devolviendo null si no hay contenido.
+ *
+ * - getInt(Row row, ExcelColumn column):
+ *   Obtiene el valor de una celda como entero. Puede leer tanto celdas numéricas como texto convertible
+ *   a entero, devolviendo null si no hay dato.
+ *
+ * - getDouble(Row row, ExcelColumn column):
+ *   Obtiene el valor de una celda como número decimal de tipo Double. Puede leer tanto celdas numéricas
+ *   como texto convertible a decimal, devolviendo null si el contenido está vacío.
+ *
+ * - setString(Row row, ExcelColumn column, String value):
+ *   Escribe un valor de texto en la celda correspondiente a la fila y columna indicadas. Si la celda
+ *   no existe, la crea automáticamente.
+ *
+ * - save(Path outputPath):
+ *   Guarda en disco el libro Excel con los cambios realizados. Si el directorio de destino no existe,
+ *   lo crea antes de escribir el fichero.
+ *
+ * - close():
+ *   Cierra el libro Excel liberando los recursos asociados. Este método permite usar la clase dentro
+ *   de estructuras try-with-resources.
+ */
 public final class ExcelManager implements AutoCloseable {
 
     private final Workbook workbook;

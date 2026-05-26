@@ -20,7 +20,79 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.poi.ss.usermodel.Row;
-
+/**
+ * Clase encargada de procesar una fila individual del Excel de contribuyentes durante la práctica 3.
+ * Su función principal es comprobar si una fila debe generar recibo, calcular los importes asociados,
+ * construir los datos necesarios para el PDF, preparar el objeto Recibo para el XML y, cuando procede,
+ * generar también el registro que se persistirá en base de datos.
+ *
+ * Funciones de la clase:
+ *
+ * - Prac3RowProcessor(Path recibosDir, OrdenanzaManager ordmanager, Map<Integer, List<Ordenanza>> ordenanzasPorId, int trimestre, int year, LocalDate inicioPeriodo, LocalDate finPeriodo, String fechaPadronXml):
+ *   Constructor que inicializa el procesador con el directorio de salida de los PDF, el gestor de
+ *   ordenanzas, las ordenanzas agrupadas por identificador y toda la información temporal necesaria
+ *   para generar los recibos del período impositivo correspondiente.
+ *
+ * - procesarFila(Row row, ExcelManager excel):
+ *   Método principal que procesa una fila concreta del Excel. Primero comprueba si la fila debe generar
+ *   recibo XML según su estado y fechas, obtiene los datos del contribuyente y del período, calcula los
+ *   importes de base imponible e IVA en función de los conceptos aplicables, prepara la información del
+ *   PDF, genera el fichero del recibo en disco, construye el objeto Recibo para exportación XML y, si el
+ *   contribuyente es apto para persistencia, crea también el objeto RegistroBD con todos los datos
+ *   necesarios para la base de datos. Finalmente, devuelve un objeto Resultado con toda la información
+ *   calculada para esa fila.
+ *
+ * - esAptoParaXML(ExcelManager excel, Row row, Set<String> nifVistosXml):
+ *   Método auxiliar privado que comprueba si una fila es apta para formar parte del XML según la presencia
+ *   y unicidad del NIF normalizado. Evita incluir registros sin NIF o con NIF duplicado.
+ *
+ * - debeGenerarReciboXml(Row row, ExcelManager excel, LocalDate inicioPeriodo, LocalDate finPeriodo):
+ *   Método auxiliar privado que determina si una fila debe generar recibo para el XML. Verifica que la fila
+ *   no esté vacía, que el contribuyente esté activo dentro del período y que disponga de correo electrónico.
+ *
+ * - debeGenerarRecibo(Row row, ExcelManager excel, LocalDate inicioPeriodo, LocalDate finPeriodo):
+ *   Método auxiliar privado que evalúa si una fila tiene todos los datos mínimos necesarios para generar
+ *   un recibo completo, comprobando la validez temporal y la existencia de nombre, NIF, conceptos e IBAN.
+ *
+ * - estaActivoEnPeriodo(LocalDate fechaAlta, LocalDate fechaBaja, LocalDate inicioPeriodo, LocalDate finPeriodo):
+ *   Método auxiliar privado que determina si un contribuyente está activo dentro del período impositivo
+ *   indicado en función de sus fechas de alta y baja.
+ *
+ * - esAptoParaBD(ExcelManager excel, Row row, Set<String> nifVistosBd):
+ *   Método auxiliar privado que comprueba si una fila puede generar un registro válido para base de datos.
+ *   Valida el NIF/NIE, descarta registros en blanco y evita persistir contribuyentes con NIF duplicado.
+ *
+ * - normalizeNif(String nif):
+ *   Método auxiliar privado que valida y normaliza un NIF/NIE, devolviendo la versión corregida cuando
+ *   existe o el valor original cuando no puede corregirse.
+ *
+ * - resolveIban(ExcelManager excel, Row row):
+ *   Método auxiliar privado que obtiene el IBAN de una fila. Si puede recalcularlo correctamente a partir
+ *   del CCC y del país, utiliza ese valor; en caso contrario, conserva el IBAN ya presente en el Excel.
+ *
+ * Clase interna:
+ *
+ * - Resultado:
+ *   Clase contenedora utilizada para devolver el resultado del procesamiento de una fila. Agrupa el objeto
+ *   Recibo generado, el posible RegistroBD asociado y los importes de base imponible e IVA calculados.
+ *
+ *   Funciones de la clase Resultado:
+ *
+ *   - Resultado(Recibo recibo, RegistroBD registroBD, BigDecimal baseImponible, BigDecimal iva):
+ *     Constructor que inicializa todos los datos resultantes del procesamiento de una fila.
+ *
+ *   - getRecibo():
+ *     Devuelve el objeto Recibo generado para la fila procesada.
+ *
+ *   - getRegistroBD():
+ *     Devuelve el objeto RegistroBD generado para persistencia, o null si la fila no es apta para base de datos.
+ *
+ *   - getBaseImponible():
+ *     Devuelve la base imponible total calculada para la fila procesada.
+ *
+ *   - getIva():
+ *     Devuelve el importe total de IVA calculado para la fila procesada.
+ */
 public class Prac3RowProcessor {
 
     private final Path recibosDir;

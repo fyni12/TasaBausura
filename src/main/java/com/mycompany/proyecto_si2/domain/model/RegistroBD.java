@@ -5,7 +5,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase de datos que representa un registro intermedio con toda la información necesaria para persistir
+ * en base de datos y generar la documentación asociada a un recibo. Su función es agrupar en una sola
+ * estructura los datos identificativos del contribuyente, los datos del período, la información económica,
+ * las fechas relevantes y las colecciones de conceptos y líneas que intervienen en el procesamiento del
+ * recibo.
+ *
+ * Funciones de la clase:
+ *
+ * - RegistroBD():
+ *   Constructor por defecto implícito que permite crear una instancia vacía del registro.
+ *
+ * Esta clase no define métodos propios de comportamiento, sino que actúa como contenedor de datos
+ * tipo DTO o estructura de transporte, dejando sus atributos públicos para facilitar la carga, lectura
+ * y transferencia de la información entre distintas capas de la aplicación.
+ */
 public class RegistroBD {
 
     public int numeroReciboTemporal;

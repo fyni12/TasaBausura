@@ -9,7 +9,28 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+/**
+ * Clase principal de la aplicación encargada de coordinar la ejecución completa del proyecto.
+ * Su responsabilidad es preparar las rutas de trabajo, inicializar la conexión con la base de datos,
+ * ejecutar el procesamiento del Excel, solicitar al usuario el período impositivo y lanzar la segunda
+ * parte del tratamiento de datos. También se encarga de liberar correctamente los recursos al finalizar.
+ *
+ * Funciones de la clase:
+ *
+ * - run():
+ *   Método principal de ejecución de la aplicación. Define las rutas del directorio de recursos y del
+ *   fichero Excel de trabajo, crea el EntityManagerFactory y el EntityManager para acceder a la base
+ *   de datos, ejecuta el servicio que procesa y corrige el Excel, solicita por consola el período
+ *   impositivo al usuario y lanza el procesamiento posterior asociado a la práctica 3. Finalmente,
+ *   muestra un mensaje de finalización correcta y garantiza el cierre de los recursos de persistencia,
+ *   incluso si se produce una excepción.
+ *
+ * - vaciarTablas(EntityManager em):
+ *   Método auxiliar estático que elimina todos los registros de varias tablas de la base de datos.
+ *   Inicia una transacción, ejecuta sentencias SQL nativas de borrado sobre las tablas implicadas y
+ *   confirma los cambios si todo se realiza correctamente. Si ocurre algún error, revierte la transacción
+ *   para mantener la integridad de los datos y muestra la excepción por consola.
+ */
 public final class ProyectoSi2App {
 
     private static final String PERSISTENCE_UNIT =

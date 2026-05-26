@@ -7,6 +7,56 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de utilidad que agrupa métodos auxiliares comunes utilizados durante el procesamiento de la
+ * práctica 3. Su finalidad es centralizar conversiones, normalización de textos, formateo de datos,
+ * cálculo de bonificaciones y copia de estructuras relacionadas con los recibos.
+ *
+ * Funciones de la clase:
+ *
+ * - Prac3Support():
+ *   Constructor privado que impide la creación de instancias, ya que la clase está diseñada para
+ *   ofrecer únicamente métodos estáticos de apoyo.
+ *
+ * - bd(double valor):
+ *   Convierte un valor numérico de tipo double en un BigDecimal con dos decimales y redondeo HALF_UP.
+ *
+ * - toXmlDouble(BigDecimal valor):
+ *   Convierte un BigDecimal en un valor double normalizado para su escritura en XML, asegurando dos
+ *   decimales y eliminando ceros innecesarios al final.
+ *
+ * - safe(String v):
+ *   Devuelve una cadena segura, sustituyendo valores nulos por una cadena vacía y eliminando espacios
+ *   sobrantes al principio y al final.
+ *
+ * - unirApellidos(String apellido1, String apellido2):
+ *   Une los dos apellidos en una única cadena segura, evitando nulos y espacios sobrantes.
+ *
+ * - sanitizeFileName(String s):
+ *   Convierte una cadena en un nombre de fichero válido, sustituyendo caracteres no permitidos y
+ *   reemplazando espacios por guiones bajos.
+ *
+ * - emptyToNull(String s):
+ *   Devuelve null si una cadena está vacía tras normalizarla; en caso contrario, devuelve su contenido.
+ *
+ * - charOrNull(String s):
+ *   Devuelve el primer carácter de una cadena normalizada o null si no contiene información útil.
+ *
+ * - bonificacionOrNull(int bonificacion):
+ *   Devuelve el valor de bonificación como Double cuando es positivo, o null si no hay bonificación aplicable.
+ *
+ * - calcularImporteBonificacion(BigDecimal baseBonificada, int bonificacion):
+ *   Calcula el importe económico correspondiente a la bonificación aplicada sobre una base imponible
+ *   ya bonificada. Si la bonificación no es válida o no puede calcularse, devuelve null.
+ *
+ * - ordinalTrimestre(int trimestre):
+ *   Devuelve la representación textual ordinal de un trimestre, por ejemplo "Primer", "Segundo",
+ *   "Tercer" o "Cuarto".
+ *
+ * - copiarLineas(List<PDFGenerator.LineaConcepto> origen):
+ *   Crea y devuelve una copia de la lista de líneas de concepto utilizada en los recibos PDF, generando
+ *   nuevos objetos con los mismos valores para evitar compartir referencias con la lista original.
+ */
 final public class Prac3Support {
 
     public static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("dd/MM/yyyy");

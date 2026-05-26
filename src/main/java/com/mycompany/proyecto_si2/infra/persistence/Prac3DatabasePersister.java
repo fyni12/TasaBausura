@@ -13,6 +13,57 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+/**
+ * Clase encargada de persistir en la base de datos toda la información generada durante el procesamiento
+ * de la práctica 3. Su función principal es recorrer los registros calculados, insertar o actualizar
+ * contribuyentes, lecturas, ordenanzas, recibos, líneas de recibo y relaciones entre contribuyentes
+ * y ordenanzas, todo ello dentro de una transacción controlada.
+ *
+ * Funciones de la clase:
+ *
+ * - Prac3DatabasePersister(EntityManager em):
+ *   Constructor que recibe y almacena el EntityManager que se utilizará para ejecutar todas las
+ *   operaciones de persistencia contra la base de datos.
+ *
+ * - persistirRegistrosBD(List<RegistroBD> registros, Map<Integer, List<Ordenanza>> ordenanzasPorId):
+ *   Método principal que persiste en base de datos la colección completa de registros procesados.
+ *   Inicia una transacción, evita repetir inserciones innecesarias de contribuyentes y ordenanzas,
+ *   realiza las operaciones de inserción o actualización necesarias para cada registro y confirma la
+ *   transacción al finalizar correctamente. Si ocurre un error, revierte todos los cambios.
+ *
+ * - upsertContribuyente(RegistroBD r):
+ *   Método auxiliar privado que inserta un nuevo contribuyente o actualiza uno existente en función
+ *   de su nombre, NIF y fecha de alta. También actualiza el resto de datos personales y administrativos
+ *   cuando el contribuyente ya existe en la base de datos.
+ *
+ * - upsertLectura(RegistroBD r):
+ *   Método auxiliar privado que inserta o actualiza la lectura de kilogramos generados de un contribuyente
+ *   para un ejercicio y trimestre concretos.
+ *
+ * - upsertOrdenanza(Ordenanza ord):
+ *   Método auxiliar privado que inserta o actualiza una ordenanza en la base de datos, identificándola
+ *   por su id de ordenanza, concepto y subconcepto.
+ *
+ * - upsertRecibo(RegistroBD r):
+ *   Método auxiliar privado que inserta o actualiza un recibo en función del NIF del contribuyente y
+ *   del período del padrón. Devuelve el número real del recibo almacenado en la base de datos.
+ *
+ * - upsertLineasRecibo(int numeroRecibo, List<PDFGenerator.LineaConcepto> lineas, int bonificacion):
+ *   Método auxiliar privado que inserta o actualiza todas las líneas de detalle asociadas a un recibo,
+ *   incluyendo base imponible, IVA, kilos incluidos y bonificación aplicada.
+ *
+ * - obtenerIdContribuyenteBD(String nombre, String nif, LocalDate fechaAlta):
+ *   Busca en la base de datos el identificador de un contribuyente a partir de su nombre, NIF y fecha
+ *   de alta, devolviendo dicho identificador en formato texto o null si no existe.
+ *
+ * - upsertRelContribuyenteOrdenanza(Integer idContribuyente, Integer idOrdenanzaBd):
+ *   Método auxiliar privado que crea la relación entre un contribuyente y una ordenanza si dicha relación
+ *   todavía no existe en la tabla intermedia correspondiente.
+ *
+ * - obtenerIdOrdenanzaBD(Ordenanza ord):
+ *   Método auxiliar privado que recupera el identificador interno en base de datos de una ordenanza
+ *   concreta a partir de su id lógico, concepto y subconcepto.
+ */
 public class Prac3DatabasePersister {
 
     private final EntityManager em;

@@ -15,6 +15,32 @@ import java.util.List;
 import java.util.Set;
 import org.apache.poi.ss.usermodel.Row;
 
+
+/**
+* Clase de servicio encargada de procesar los datos de la hoja "Contribuyente" de un fichero Excel.
+* Su función principal es validar y corregir, cuando sea posible, los campos NIF/NIE y CCC de cada fila,
+* registrar las incidencias detectadas, generar el IBAN a partir del CCC válido y completar el correo
+* electrónico cuando esté vacío. Finalmente, guarda un nuevo Excel con las correcciones aplicadas y
+* genera dos ficheros XML con los errores de NIF/NIE y de CCC.
+* * Funciones de la clase:
+* * - PracticaBasuraService(Path excelPath, Path resourcesDir):
+* Constructor que inicializa la ruta del fichero Excel de entrada y el directorio donde se guardarán
+* los resultados generados, como el Excel corregido y los XML de incidencias.
+* * - procesar():
+* Método principal que recorre las filas de la hoja Excel y aplica toda la lógica de tratamiento.
+* Primero recopila los correos ya existentes para evitar duplicados al generar nuevos emails.
+* Después, para cada fila no vacía:
+* valida el NIF/NIE, corrige su valor si es subsanable, detecta si está en blanco, es erróneo o está duplicado,
+* y registra la incidencia correspondiente;
+* valida el CCC independientemente del estado del NIF, intenta corregirlo si procede, genera el IBAN asociado
+* y registra incidencias si el CCC es erróneo o si ha sido subsanado;
+* si tanto el NIF como el CCC son aptos, escribe el IBAN en el Excel y genera un email si el campo estaba vacío.
+* Al finalizar, guarda el Excel modificado en el directorio de recursos y escribe los XML con las incidencias detectadas.
+* * - unirApellidos(String apellido1, String apellido2):
+* Método auxiliar que une los dos apellidos en una sola cadena, evitando valores nulos y eliminando
+* espacios sobrantes al principio o al final.
+*/
+
 public final class PracticaBasuraService {
 
     private final Path excelPath;

@@ -23,6 +23,38 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import org.apache.poi.ss.usermodel.Row;
 
+/**
+ * Clase encargada de procesar la información necesaria para generar los recibos de un período impositivo.
+ * Su responsabilidad principal es leer los datos del Excel, cargar las ordenanzas, procesar cada contribuyente,
+ * calcular los importes acumulados del padrón, generar los ficheros de salida y persistir en base de datos
+ * los registros obtenidos. [oracle](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html)
+ *
+ * Funciones de la clase:
+ *
+ * - Prac3(Path excelPath, Path resourcesDir, EntityManager em):
+ *   Constructor que inicializa la ruta del fichero Excel de trabajo, el directorio de recursos donde se
+ *   guardarán los resultados generados y el EntityManager necesario para las operaciones de persistencia
+ *   en base de datos. [users.csc.calpoly](http://users.csc.calpoly.edu/~jdalbey/SWE/Design/WritingJavadoc.html)
+ *
+ * - procesar(PeriodoImpositivo periodo):
+ *   Método principal que ejecuta el flujo completo de la práctica 3 para un período impositivo concreto.
+ *   Crea las colecciones de recibos y registros de base de datos, prepara los acumuladores de importes,
+ *   obtiene la información temporal del período y asegura la existencia del directorio donde se almacenarán
+ *   los recibos PDF. [oracle](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html)
+ *
+ *   A continuación, abre las hojas del Excel de contribuyentes y ordenanzas, carga las ordenanzas agrupadas
+ *   por identificador y crea el procesador encargado de tratar cada fila del padrón. Recorre todas las filas
+ *   del Excel de contribuyentes, procesa cada una de ellas y, si el resultado es válido, añade el recibo
+ *   generado, almacena el registro asociado para base de datos y acumula la base imponible, el IVA y el
+ *   número total de recibos. [users.csc.calpoly](http://users.csc.calpoly.edu/~jdalbey/SWE/Design/WritingJavadoc.html)
+ *
+ *   Una vez finalizado el recorrido, calcula el importe total del padrón, genera el fichero XML con todos
+ *   los recibos del período, crea un PDF resumen con los importes acumulados y el número de recibos, y
+ *   persiste en la base de datos los registros procesados junto con la relación de ordenanzas cargadas.
+ *   Finalmente, muestra por consola un mensaje indicando que el fichero de recibos se ha generado
+ *   correctamente. [oracle](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html)
+ */
+
 public class Prac3 {
 
     private final Path excelPath;

@@ -1,5 +1,20 @@
 package com.mycompany.proyecto_si2.infra.excel;
-
+/**
+ * Enumeración que define las columnas utilizadas en las hojas Excel del proyecto.
+ * Su objetivo es centralizar los nombres de cabecera asociados a cada campo para facilitar
+ * el acceso consistente a los datos del fichero Excel y evitar el uso de cadenas literales
+ * dispersas por el código.
+ *
+ * Funciones de la clase:
+ *
+ * - ExcelColumn(String header):
+ *   Constructor del enumerado que asocia a cada constante el nombre exacto de la cabecera
+ *   que debe utilizarse en el fichero Excel.
+ *
+ * - getHeader():
+ *   Devuelve el texto de la cabecera asociado a la columna concreta del enumerado, permitiendo
+ *   identificarla y utilizarla al leer o escribir datos en el Excel.
+ */
 public enum ExcelColumn {
     DIRECCION("Direccion"),
     NUMERO("Numero"),
